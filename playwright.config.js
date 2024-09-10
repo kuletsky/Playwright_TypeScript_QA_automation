@@ -1,6 +1,6 @@
 // @ts-check
 const { defineConfig, devices } = require('@playwright/test');
-const isCI = process.env.CI === 'true';
+// const isCI = process.env.CI === 'true';
 
 /**
  * Read environment variables from file.
@@ -17,8 +17,8 @@ module.exports = defineConfig({
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   
-  // forbidOnly: !!process.env.CI,
-  forbidOnly: isCI,
+  forbidOnly: !!process.env.CI,
+  // forbidOnly: isCI,
 
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
