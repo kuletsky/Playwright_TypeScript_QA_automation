@@ -4,7 +4,7 @@ const { test, expect } = require('@playwright/test');
 test('Verify title', async ({page}) => {
 
     const userName = page.locator('[data-qa="login-email"]');
-    const uderPSW = page.locator('[data-qa="login-password"]');
+    const userPSW = page.locator('[data-qa="login-password"]');
     const signIn = page.locator('[data-qa="login-button"]');
     const cardTitles = page.locator('.productinfo.text-center p');
 
@@ -15,7 +15,8 @@ test('Verify title', async ({page}) => {
     await userName.fill('trip27@lftjaguar.com1');
     await userPSW.fill('1234');
     await signIn.click();
-    await page.waitForLoadState('networkidle')
+    // await page.waitForLoadState('networkidle');
+    // await cardTitles.waitFor();
 
     let text1 = console.log(await page.locator('p[style*="color"]').textContent());
 
