@@ -15,8 +15,8 @@ test('Verify title', async ({page}) => {
     await userName.fill('trip27@lftjaguar.com1');
     await userPSW.fill('1234');
     await signIn.click();
-    // await page.waitForLoadState('networkidle');
-    // await cardTitles.waitFor();
+    await page.waitForLoadState('networkidle');
+    // await cardTitles.last().waitFor();
 
     let text1 = console.log(await page.locator('p[style*="color"]').textContent());
 
