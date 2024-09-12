@@ -1,13 +1,15 @@
 const { test, expect } = require('@playwright/test');
+const exp = require('constants');
+const { text } = require('stream/consumers');
 
 
-test('Verify title', async ({page}) => {
+test.only('Verify title', async ({page}) => {
 
     const userName = page.locator('[data-qa="login-email"]');
     const userPSW = page.locator('[data-qa="login-password"]');
     const signIn = page.locator('[data-qa="login-button"]');
     const cardTitles = page.locator('.productinfo.text-center p');
-
+    const Up = page.locator('.fa.fa-angle-up'); 
 
     await page.goto('https://automationexercise.com');
     await expect(page).toHaveTitle('Automation Exercise');     
@@ -15,7 +17,7 @@ test('Verify title', async ({page}) => {
     await userName.fill('trip27@lftjaguar.com1');
     await userPSW.fill('1234');
     await signIn.click();
-    await page.waitForLoadState('networkidle');
+    // await page.waitForLoadState('networkidle');
     // await cardTitles.last().waitFor();
 
     let text1 = console.log(await page.locator('p[style*="color"]').textContent());
@@ -31,5 +33,33 @@ test('Verify title', async ({page}) => {
 
     
     console.log(await cardTitles.allTextContents());
+
+    await expect(Up).toHaveAttribute('class', 'fa fa-angle-up');
+
+
+});
+
+test('Banner verify', async({browser}) =>{
+    const context = await browser.newContext();
+    const page = await context.newPage();
+
+    await page.goto('https://courses.datacumulus.com/');
+    const apacheLink = page.locator('a[href*="kafka.apache.org"]').first();
+    
+    const [newPage] = await Promise.all(
+    [
+        context.waitForEvent('page'),
+        apacheLink.click(),
+    ])
+    const text = await newPage.locator('.content-top-title').textContent();
+    console.log(text);
+
+    await expect(newPage.locator('.content-top-title')).toContainText('Apache Kafka');
+    
+    newPage.pause();
+
+
+    
+
 
 });
