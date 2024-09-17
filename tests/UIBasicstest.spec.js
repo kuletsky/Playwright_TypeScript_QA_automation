@@ -3,7 +3,7 @@ const exp = require('constants');
 const { text } = require('stream/consumers');
 
 
-test.only('Verify title', async ({page}) => {
+test('Verify title', async ({page}) => {
 
     const userName = page.locator('[data-qa="login-email"]');
     const userPSW = page.locator('[data-qa="login-password"]');
@@ -56,10 +56,8 @@ test('Banner verify', async({browser}) =>{
 
     await expect(newPage.locator('.content-top-title')).toContainText('Apache Kafka');
     
-    newPage.pause();
-
-
-    
+    // newPage.pause();
+   
 
 
 });
