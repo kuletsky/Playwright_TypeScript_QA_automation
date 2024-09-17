@@ -1,32 +1,30 @@
 const { test, expect } = require('@playwright/test');
 const exp = require('constants');
+const { execPath } = require('process');
 const { text } = require('stream/consumers');
 
 
-test('Verify title', async ({page}) => {
+test('Login User with correct email and password', async ({page}) => {
 
     const userName = page.locator('[data-qa="login-email"]');
     const userPSW = page.locator('[data-qa="login-password"]');
-    const signIn = page.locator('[data-qa="login-button"]');
+    const signUpMenu = page.locator('.fa.fa-lock');
+    const loginBTN = page.locator('[data-qa="login-button"]');
     const cardTitles = page.locator('.productinfo.text-center p');
-    const Up = page.locator('.fa.fa-angle-up'); 
+    
 
     await page.goto('https://automationexercise.com');
     await expect(page).toHaveTitle('Automation Exercise');     
-    await page.locator('.fa.fa-lock').click();
+    await signUpMenu.click();
     await userName.fill('trip27@lftjaguar.com1');
     await userPSW.fill('1234');
-    await signIn.click();
-    // await page.waitForLoadState('networkidle');
-    // await cardTitles.last().waitFor();
-
-    let text1 = console.log(await page.locator('p[style*="color"]').textContent());
-
+    await loginBTN.click();
+ 
     await expect(page.locator('p[style*="color"]')).toContainText('Your email or password is incorrect!');
 
     await userName.fill('');
     await userName.fill('trip27@lftjaguar.com');
-    await signIn.click();
+    await signInBTN.click();
 
     console.log(await page.locator('.features_items .title').textContent());
     await expect(page.locator('.features_items .title')).toContainText('Features Items');
@@ -39,10 +37,10 @@ test('Verify title', async ({page}) => {
 
 });
 
-test('Banner verify', async({browser}) =>{
+test('Verify Kafka', async({browser}) =>{
     const context = await browser.newContext();
     const page = await context.newPage();
-
+    
     await page.goto('https://courses.datacumulus.com/');
     const apacheLink = page.locator('a[href*="kafka.apache.org"]').first();
     
@@ -59,5 +57,47 @@ test('Banner verify', async({browser}) =>{
     // newPage.pause();
    
 
+
+});
+
+test.only('Add products in cart', async ({page}) => {
+
+    const userName = page.locator('[data-qa="login-email"]');
+    const userPSW = page.locator('[data-qa="login-password"]');
+    const signUpMenu = page.locator('.fa.fa-lock');
+    const loginBTN = page.locator('[data-qa="login-button"]');
+    const products = page.locator('.productinfo.text-center');
+    const productName = 'Men Tshirt'
+    const cart = page.locator('li a[href*="/view"]');
+    
+    await page.goto('https://automationexercise.com');
+    await expect(page).toHaveTitle('Automation Exercise');     
+    await signUpMenu.click();
+    await userName.fill('trip27@lftjaguar.com');
+    await userPSW.fill('1234');
+    await loginBTN.click();
+
+    // console.log(await products.locator('p').allTextContents());
+    const count = await products.count();
+    console.log(count)
+
+    // console.log(products.nth('2').locator('p').textContent())
+    
+    for(let i =0; i < count; ++i)
+    {
+        if(await products.nth(i).locator('h2').textContent() === productName)
+        {
+            console.log(await products.nth(i).locator('h2').textContent());
+            await products.nth(i).locator('a').click();
+            await page.locator('[data-dismiss="modal"]').click();
+            break;
+        }
+    }
+
+    await cart.click();
+    await page.locator('div table').waitFor();
+
+    await expect(page.locator('h4 a[href*="/product"]')).toContainText(productName);
+    // await page.pause();
 
 });
