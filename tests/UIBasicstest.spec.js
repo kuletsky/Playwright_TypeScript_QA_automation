@@ -98,6 +98,12 @@ test.only('Add products in cart', async ({page}) => {
     await page.locator('div table').waitFor();
 
     await expect(page.locator('h4 a[href*="/product"]')).toContainText(productName);
+    await page.locator('.btn.btn-default.check_out').click();
+    await expect(page.locator('h4 a[href*="/product"]')).toContainText(productName);
+    await page.locator('.btn.btn-default.check_out').click();
+    
+
+
     // await page.pause();
 
 });
