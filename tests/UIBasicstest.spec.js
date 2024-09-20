@@ -85,9 +85,9 @@ test.only('Add products in cart', async ({page}) => {
     
     for(let i =0; i < count; ++i)
     {
-        if(await products.nth(i).locator('h2').textContent() === productName)
+        if(await products.nth(i).locator('p').textContent() === productName)
         {
-            console.log(await products.nth(i).locator('h2').textContent());
+            console.log(await products.nth(i).locator('p').textContent());
             await products.nth(i).locator('a').click();
             await page.locator('[data-dismiss="modal"]').click();
             break;
@@ -95,14 +95,21 @@ test.only('Add products in cart', async ({page}) => {
     }
 
     await cart.click();
-    await page.locator('div table').waitFor();
+    // await page.locator('div table').waitFor();
 
     await expect(page.locator('h4 a[href*="/product"]')).toContainText(productName);
     await page.locator('.btn.btn-default.check_out').click();
     await expect(page.locator('h4 a[href*="/product"]')).toContainText(productName);
     await page.locator('.btn.btn-default.check_out').click();
+    await expect(page.locator('.heading')).toHaveText('Payment');
 
-
+    await page.locator('[data-qa=name-on-card]').fill('Awegweg Dwvsdg');
+    await page.locator('[data-qa=card-number]').fill('1244 1234 1244 1232');
+    await page.locator('[data-qa=cvc]').fill('231');
+    await page.locator('[data-qa="expiry-month"]').fill('12');
+    await page.locator('[data-qa="expiry-year"]').fill('2026');
+    await page.locator('[id = "submit"]').click();
+    await expect(page.locator('#success_message div')).toContainText('Your order has been placed successfully!');
 
     await page.pause();
 
