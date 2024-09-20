@@ -109,8 +109,9 @@ test.only('Add products in cart', async ({page}) => {
     await page.locator('[data-qa="expiry-month"]').fill('12');
     await page.locator('[data-qa="expiry-year"]').fill('2026');
     await page.locator('[id = "submit"]').click();
-    await expect(page.locator('#success_message div')).toContainText('Your order has been placed successfully!');
 
-    await page.pause();
+    await expect(page.locator('.col-sm-9 p')).toContainText('Congratulations! Your order has been confirmed!');
+
+    // await page.pause();
 
 });
