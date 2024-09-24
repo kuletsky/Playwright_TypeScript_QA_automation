@@ -77,11 +77,9 @@ test.only('Add products in cart', async ({page}) => {
     await userPSW.fill('1234');
     await loginBTN.click();
 
-    // console.log(await products.locator('p').allTextContents());
     const count = await products.count();
     console.log(count)
 
-    // console.log(products.nth('2').locator('p').textContent())
     
     for(let i =0; i < count; ++i)
     {
@@ -95,7 +93,6 @@ test.only('Add products in cart', async ({page}) => {
     }
 
     await cart.click();
-    // await page.locator('div table').waitFor();
 
     await expect(page.locator('h4 a[href*="/product"]')).toContainText(productName);
     await page.locator('.btn.btn-default.check_out').click();
@@ -120,8 +117,8 @@ test.only('Add products in cart', async ({page}) => {
     
     await expect(download).not.toBeNull();
     await page.locator('[data-qa="continue-button"]').click();
-    await expect(page.url()).toContain('automat');
+    await expect(page.url()).toContain('automat'); 
     
-    // await page.pause();
+    await page.pause();
 
 });
