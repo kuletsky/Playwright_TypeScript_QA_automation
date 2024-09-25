@@ -53,10 +53,6 @@ test('Verify Kafka', async({browser}) =>{
     console.log(text);
 
     await expect(newPage.locator('.content-top-title')).toContainText('Apache Kafka');
-    
-    // newPage.pause();
-   
-
 
 });
 
