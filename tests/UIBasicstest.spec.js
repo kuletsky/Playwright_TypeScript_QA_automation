@@ -113,8 +113,8 @@ test.only('Add products in cart', async ({page}) => {
     
     await expect(download).not.toBeNull();
     await page.locator('[data-qa="continue-button"]').click();
-    await expect(page.url()).toContain('automat'); 
-    
+    await expect(page.url()).toContain('automat');      
+
     await page.pause();
 
 });
