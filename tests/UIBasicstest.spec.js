@@ -37,7 +37,6 @@ test('Login User with correct email and password', async ({page}) => {
 
 });
 
-
 test('Verify Kafka', async({browser}) =>{
     const context = await browser.newContext();
     const page = await context.newPage();
