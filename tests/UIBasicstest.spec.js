@@ -26,7 +26,7 @@ test('Login User with correct email and password', async ({page}) => {
     await userName.fill('trip27@lftjaguar.com');
     await signInBTN.click();
 
-    console.log(await page.locator('.features_items .title').textContent());
+    console.log(await page.locator('.features_items .title').textContent());  
     await expect(page.locator('.features_items .title')).toContainText('Features Items');
 
     
