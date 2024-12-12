@@ -34,7 +34,7 @@ test.only('Login User with correct email and password', async ({page}) => {
     // await expect(page.locator('.features_items .title')).toContainText('Features Items');
 
     
-    // console.log(await cardTitles.allTextContents());
+    // console.log(await cardTitles.allTextContents()); 
 
     // await expect(Up).toHaveAttribute('class', 'fa fa-angle-up');
 
