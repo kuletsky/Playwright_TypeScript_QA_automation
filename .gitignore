@@ -2,8 +2,5 @@ node_modules/
 /test-results/
 /playwright-report/
 /blob-report/
-/playwright/.cache/
-<<<<<<< HEAD
+/playwright/.cache/<<<<<<< HEAD
 /test-examples/
-=======
->>>>>>> d5740918f8477371414db46b5e0cdbc2f55cb35c
