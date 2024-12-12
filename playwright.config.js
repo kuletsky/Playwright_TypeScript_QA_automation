@@ -1,9 +1,5 @@
 // @ts-check
 const { defineConfig, devices } = require('@playwright/test');
-<<<<<<< HEAD
-=======
-// const isCI = process.env.CI === 'true';
->>>>>>> d5740918f8477371414db46b5e0cdbc2f55cb35c
 
 /**
  * Read environment variables from file.
@@ -19,14 +15,7 @@ module.exports = defineConfig({
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
-<<<<<<< HEAD
   forbidOnly: !!process.env.CI,
-=======
-  
-  forbidOnly: !!process.env.CI,
-  // forbidOnly: isCI,
-
->>>>>>> d5740918f8477371414db46b5e0cdbc2f55cb35c
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
@@ -35,23 +24,11 @@ module.exports = defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-<<<<<<< HEAD
-=======
-
-    browserName : 'chromium',
-    headless : false,
-    screenshot : 'on',
->>>>>>> d5740918f8477371414db46b5e0cdbc2f55cb35c
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-<<<<<<< HEAD
     trace: 'on-first-retry',
-    headless: false,
-=======
-    trace : 'retain-on-failure',
->>>>>>> d5740918f8477371414db46b5e0cdbc2f55cb35c
   },
 
   /* Configure projects for major browsers */
@@ -59,22 +36,17 @@ module.exports = defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
-<<<<<<< HEAD
-    }
-
-=======
     },
 
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
 
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
->>>>>>> d5740918f8477371414db46b5e0cdbc2f55cb35c
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    },
 
     /* Test against mobile viewports. */
     // {
