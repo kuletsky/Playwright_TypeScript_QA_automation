@@ -4,3 +4,6 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /test-examples/
+
+# Ignore test data file
+test-data.json
