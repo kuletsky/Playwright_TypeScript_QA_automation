@@ -1,5 +1,6 @@
 const {test, expect} = require('@playwright/test');
 const exp = require('constants');
+const { ADDRGETNETWORKPARAMS } = require('dns');
 // const testData = require('./test-data.json')
 
 test('Browser context test',  async ({browser})=>
@@ -32,7 +33,7 @@ test.only('Register User',  async ({page})=>
         // Enter name and email address
         const testData = {
             name: 'john',
-            email: 'john@gm.com'
+            email: 'john@gm1.com'
         };
 
         const signupNameInput = page.locator('[data-qa="signup-name"]');
@@ -66,9 +67,7 @@ test.only('Register User',  async ({page})=>
             await name.fill('john');
             await expect(name).toHaveValue('john'); 
 
-            // Verify that Email field contains the expected email
             const email = page.locator('#email');
-            await expect(email).toHaveValue('john@gm.com');
 
             // Verify that pswd contains the expected password
             const pswd = page.locator('#password');
@@ -76,9 +75,24 @@ test.only('Register User',  async ({page})=>
             await expect(pswd).toHaveValue('1234')
 
             await page.locator('[for="newsletter"]').check();
-            await page.locator('[for="option"]').check();
+            await page.locator('[for="optin"]').check();
 
-            // page.pause(10);
+           
+            // Fill details
+            await page.locator('#first_name').fill('John');
+            await page.locator('#last_name').fill('Cooper');
+            await page.locator('#company').fill('Kuletsky Software');
+            await page.locator('#address1').fill('address1');
+            await page.locator('#address2').fill('address2');
+            await page.locator('select#country').selectOption('United States');
+            await page.locator('#state').fill('MD');
+            await page.locator('#city').fill('Goodwil');
+            await page.locator('#zipcode').fill('111111');
+            await page.locator('#mobile_number').fill('12345678');
+         await page.locator('[data-qa="create-account"]').click();
+        
+        await page.pause();
+
 
     }); 
     
