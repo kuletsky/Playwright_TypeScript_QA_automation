@@ -1,4 +1,5 @@
 const {test, expect} = require('@playwright/test');
+const { assert } = require('console');
 const exp = require('constants');
 const { ADDRGETNETWORKPARAMS } = require('dns');
 // const testData = require('./test-data.json')
@@ -33,7 +34,7 @@ test.only('Register User',  async ({page})=>
         // Enter name and email address
         const testData = {
             name: 'john',
-            email: 'john@gm1.com'
+            email: 'john@gm123456789012.com'
         };
 
         const signupNameInput = page.locator('[data-qa="signup-name"]');
@@ -89,10 +90,39 @@ test.only('Register User',  async ({page})=>
             await page.locator('#city').fill('Goodwil');
             await page.locator('#zipcode').fill('111111');
             await page.locator('#mobile_number').fill('12345678');
-         await page.locator('[data-qa="create-account"]').click();
+        await page.locator('[data-qa="create-account"]').click();
         
-        await page.pause();
+        // Verify that 'Account created!' is visible
+        const account_created = await page.locator('b').textContent();
+        await expect(account_created).toContain('Account Created!');
+        
+        // Click 'Continue' button
+        await page.locator('[data-qa="continue-button"]').click();
 
+        // Verify that 'Logged in as Username'
+        const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
+        await expect(logged).toContain('Logged in as');
+
+        // Click 'Delete account' button
+        await page.locator('a[href*="del"]').click();
+
+        // Verify that 'ACCOUNT DELETED!' is visible
+        const del = await page.locator('b').textContent();
+        await expect(del).toContain('Account Deleted!')
+
+        // Click 'Continue' button
+        await page.locator('[data-qa="continue-button"]').click();        
+
+        // Verify the page title
+        await expect(page).toHaveTitle('Automation Exercise');
+
+        // Verify the presence of a logo
+        await expect(page.locator(logo)).toBeVisible;
+
+        // Verify URL if applicable
+        await expect(page).toHaveURL('https://automationexercise.com/')
+
+        // await page.pause();
 
     }); 
     
