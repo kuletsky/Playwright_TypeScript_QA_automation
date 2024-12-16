@@ -1,30 +1,36 @@
 const {test, expect} = require('@playwright/test');
-const { assert } = require('console');
-const exp = require('constants');
-const { ADDRGETNETWORKPARAMS } = require('dns');
+const { log } = require('console');
+const { Agent } = require('http');
 // const testData = require('./test-data.json')
+
+test.beforeEach(async ({ page })=>
+{
+    await page.goto('https://automationexercise.com/')
+});
+
 
 test('Browser context test',  async ({browser})=>
 {
     const context = await browser.newContext();
     const page = await context.newPage();
-    await page.goto('https://automationexercise.com/'); 
+    // await page.goto('https://automationexercise.com/'); 
 
 }); 
 
-test.only('Register User',  async ({page})=>
+
+test('Verify that user can successfuly SignUp with valid credentials',  async ({page})=>
     {
-        await page.goto('https://automationexercise.com/');
+        // await page.goto('https://automationexercise.com/');
         
         // Verify the page title
         await expect(page).toHaveTitle('Automation Exercise');
 
         // Verify the presence of a logo
-        const logo = await page.locator('img[alt="Website for automation practice"]')
+        const logo = await page.locator('img[alt="Website for automation practice"]');
         await expect(page.locator(logo)).toBeVisible;
 
         // Verify URL if applicable
-        await expect(page).toHaveURL('https://automationexercise.com/')
+        await expect(page).toHaveURL('https://automationexercise.com/');
         
         // Verify the New user signUp is visible 
         await page.locator('.fa.fa-lock').click();
@@ -126,3 +132,38 @@ test.only('Register User',  async ({page})=>
 
     }); 
     
+
+    test.only('Verify that user can successfuly SignIn with valid credentials', async ({page})=>
+    {
+       
+        // Verify the page title
+        await expect(page).toHaveTitle('Automation Exercise');
+
+        // Verify the presence of a logo
+        const logo = await page.locator('img[alt="Website for automation practice"]');
+        await expect(page.locator(logo)).toBeVisible;
+
+        // Verify URL if applicable
+        await expect(page).toHaveURL('https://automationexercise.com/');
+
+        // Click the 'Signup/Login' button
+        page.locator('.fa.fa-lock').click();
+      
+        // Verify 'Login to your acount' is visible
+        const loginForm = await page.locator('.login-form h2').textContent();
+        await expect(loginForm).toContain('Login to your account');
+    
+        // Enter valid email amd password
+        await page.locator('[data-qa="login-email"]').fill('trip27@lftjaguar.com');
+        await page.locator('[data-qa="login-password"]').fill('1234');
+
+        // Click the 'Login' button
+        await page.locator('[data-qa="login-button"]').click();
+        
+        // Verify that 'Logged in as' is visible
+        const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
+        await expect(logged).toContain('Logged in as');
+
+
+        
+    })
