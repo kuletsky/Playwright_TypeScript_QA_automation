@@ -2,15 +2,16 @@ const { test, expect } = require('@playwright/test');
 
 test.beforeEach(async ({ page }) => {
     await page.goto('https://automationexercise.com/');
-        // Verify the page title
-        await expect(page).toHaveTitle('Automation Exercise');
-
-        // Verify the presence of a logo
-        const logo = await page.locator('img[alt="Website for automation practice"]');
-        await expect(page.locator(logo)).toBeVisible;
     
-        // Verify URL if applicable
-        await expect(page).toHaveURL('https://automationexercise.com/');
+    // Verify the page title
+    await expect(page).toHaveTitle('Automation Exercise');
+
+    // Verify the presence of a logo
+    const logo = await page.locator('img[alt="Website for automation practice"]');
+    await expect(page.locator(logo)).toBeVisible;
+    
+    // Verify URL if applicable
+    await expect(page).toHaveURL('https://automationexercise.com/');
 });
 
 const testData = {
@@ -18,7 +19,7 @@ const testData = {
     email: 'john@gm123456789012.com'
 };
 
-test.describe('Login tests', () => {
+test.describe('UI tests', () => {
     test('Verify that user can successfuly SignUp with valid credentials',  async ({ page }) => {
         // Verify the New user signUp is visible 
         await page.locator('.fa.fa-lock').click();
@@ -150,7 +151,7 @@ test.describe('Login tests', () => {
         await expect(error).toContain('Your email or password is incorrect!');
     });
     
-    test('Verify user can successfuly Logout', async( {page} ) => {
+    test('Verify user can successfuly Logout', async({ page }) => {
         // Click the 'Signup/Login' button
         page.locator('.fa.fa-lock').click();
           
@@ -176,7 +177,7 @@ test.describe('Login tests', () => {
         await expect(loginForm).toContain('Login to your account');
     });
     
-    test.only('Verify that User cannot signUp with existing email', async( {page} ) => {
+    test('Verify that User cannot signUp with existing email', async({ page }) => {
         // Verify the 'New user signUp' is visible 
         await page.locator('.fa.fa-lock').click();
         const signUp = await page.locator('.signup-form h2').textContent();
@@ -194,6 +195,48 @@ test.describe('Login tests', () => {
         // Verify error 'Email Adress already exist!' is visible
         const regError = await page.getByText('Email Address already exist!').textContent();
         expect(regError).toContain('Email Address already exist!');
-
     });
+
+test.only('', async({ page }) => {
+    // Click on "Contuct Us" button
+    await page.locator('a[href*="contact"]').click();
+
+    // Verify "Get in touch" is visible
+    const getinTouch = await page.locator('.contact-form h2').textContent();
+    await expect(getinTouch).toContain('Get In Touch');
+
+    // Fill the form
+    page.on('dialog', async (dialog) => {
+        console.log(dialog.message()); 
+        await dialog.accept();         
+      });
+
+    await page.locator('[data-qa="name"]').fill('John');
+    await page.locator('[data-qa="email"]').fill('wqfq@fvgf.com');
+    await page.locator('[data-qa="subject"]').fill('wef');
+    await page.locator('[data-qa="message"]').fill('qfwf');
+
+    // Upload a file
+    const fileInput = page.locator('input[type="file"]');
+    await fileInput.setInputFiles('test-data.json');
+
+    // Click "Submit" button
+    // page.on('dialog', async (dialog) => {
+    //     console.log(dialog.message()); 
+    //     await dialog.accept();         
+    //   });
+    // await page.locator('[data-qa="submit-button"]').click();
+    page.once('dialog', dialog => {
+        console.log(`Dialog message: ${dialog.message()}`);
+        dialog.accept().catch(() => {});
+      });
+      await page.getByRole('button', { name: 'Submit' }).click();
+    // await page.waitForSelector('.status.alert.alert-success')
+    // Verify success message "Success! Your details have been submitted successfully" is visible
+    // const msg = await page.locator('.status.alert.alert-success').textContent();
+    // await expect(msg).toContain('Success! Your details have been submitted successfully.');
+   
+    await page.pause();
+});
+
 });
