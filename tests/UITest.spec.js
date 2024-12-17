@@ -133,7 +133,7 @@ test('Verify that user can successfuly SignUp with valid credentials',  async ({
     }); 
     
 
-    test.only('Verify that user can successfuly SignIn with valid credentials', async ({page})=>
+    test('Verify that user can successfuly SignIn with valid credentials', async ({page})=>
     {
        
         // Verify the page title
@@ -164,6 +164,30 @@ test('Verify that user can successfuly SignUp with valid credentials',  async ({
         const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
         await expect(logged).toContain('Logged in as');
 
+    })
 
+    test.only('Verify that user cannot SignIn with invalid credentials', async ({page})=>
+    {
+        // Verify that home page is visible successfuly
+        await expect(page).toHaveTitle('Automation Exercise');
+
+        const logo = await page.locator('img[alt="Website for automation practice"]');
+        await expect(page.locator(logo)).toBeVisible;
+
+        await expect(page).toHaveURL('https://automationexercise.com/');
+
+        // Click the 'Signup/Login' button
+        page.locator('.fa.fa-lock').click();
+
+        // Enter invalid crdentials
+        await page.locator('[data-qa="login-email"]').fill('trip27@lftjaguar.com');
+        await page.locator('[data-qa="login-password"]').fill('1234r5');
+
+        // Click the 'Login' button
+        await page.locator('[data-qa="login-button"]').click();
+
+        // Verify error 'Your email or password is incorrect!' is vissible
+        const error = await page.getByText('Your email or password is incorrect!').textContent();
+        await expect(error).toContain('Your email or password is incorrect!');
         
     })
