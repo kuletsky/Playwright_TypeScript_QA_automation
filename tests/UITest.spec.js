@@ -1,5 +1,6 @@
 const {test, expect} = require('@playwright/test');
 const { log } = require('console');
+const exp = require('constants');
 const { Agent } = require('http');
 // const testData = require('./test-data.json')
 
@@ -166,7 +167,7 @@ test('Verify that user can successfuly SignUp with valid credentials',  async ({
 
     })
 
-    test.only('Verify that user cannot SignIn with invalid credentials', async ({page})=>
+    test('Verify that user cannot SignIn with invalid credentials', async ({page})=>
     {
         // Verify that home page is visible successfuly
         await expect(page).toHaveTitle('Automation Exercise');
@@ -190,4 +191,42 @@ test('Verify that user can successfuly SignUp with valid credentials',  async ({
         const error = await page.getByText('Your email or password is incorrect!').textContent();
         await expect(error).toContain('Your email or password is incorrect!');
         
-    })
+    });
+
+    test('Verify user can successfuly Logout', async({page})=>
+    {
+        // Verify the page title
+        await expect(page).toHaveTitle('Automation Exercise');
+
+        // Verify the presence of a logo
+        const logo = await page.locator('img[alt="Website for automation practice"]');
+        await expect(page.locator(logo)).toBeVisible;
+
+        // Verify URL if applicable
+        await expect(page).toHaveURL('https://automationexercise.com/');
+
+        // Click the 'Signup/Login' button
+        page.locator('.fa.fa-lock').click();
+      
+        // Verify 'Login to your acount' is visible
+        const loginForm = await page.locator('.login-form h2').textContent();
+        await expect(loginForm).toContain('Login to your account');
+    
+        // Enter valid email amd password
+        await page.locator('[data-qa="login-email"]').fill('trip27@lftjaguar.com');
+        await page.locator('[data-qa="login-password"]').fill('1234');
+
+        // Click the 'Login' button
+        await page.locator('[data-qa="login-button"]').click();
+        
+        // Verify that 'Logged in as' is visible
+        const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
+        await expect(logged).toContain('Logged in as');
+
+        // Click 'logout' button
+        await page.locator('a[href*="/logout"]').click();
+        
+        // Verify thet user navigated to gin page
+        await expect(loginForm).toContain('Login to your account');
+
+    });
