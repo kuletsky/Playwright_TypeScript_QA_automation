@@ -31,6 +31,10 @@ module.exports = defineConfig({
     trace: 'on-first-retry',
     browserName: 'chromium',
     headless: false,
+    viewport: null,
+    launchOptions: {
+      args: ['--start-maximized'], // Maximize the browser window on launch
+    },
   },
 
   /* Configure projects for major browsers */

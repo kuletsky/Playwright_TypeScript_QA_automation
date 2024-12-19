@@ -235,6 +235,7 @@ test.only('', async({ page }) => {
     // Verify success message "Success! Your details have been submitted successfully" is visible
     // const msg = await page.locator('.status.alert.alert-success').textContent();
     // await expect(msg).toContain('Success! Your details have been submitted successfully.');
+    //   await expect(page.locator('.status.alert.alert-success')).toHaveText('Success! Your details have been submitted successfully');
    
     await page.pause();
 });
