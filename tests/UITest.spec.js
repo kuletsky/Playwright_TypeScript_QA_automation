@@ -197,7 +197,7 @@ test.describe('UI tests', () => {
         expect(regError).toContain('Email Address already exist!');
     });
 
-test.only('', async({ page }) => {
+    test('Verify user can navigate to Contact Us Form', async ({ page }) => {
     // Click on "Contuct Us" button
     await page.locator('a[href*="contact"]').click();
 
@@ -238,6 +238,12 @@ test.only('', async({ page }) => {
     //   await expect(page.locator('.status.alert.alert-success')).toHaveText('Success! Your details have been submitted successfully');
    
     await page.pause();
-});
+    });
+
+    test.only('Verify that user can navigate to Test Cases Page', async ({ page }) => {
+        await page.locator('a[href*="test"]').first().click();
+        await expect(page.locator('h2 b')).toHaveText('Test Cases');
+
+    });
 
 });
