@@ -1,4 +1,5 @@
 const { test, expect } = require('@playwright/test');
+const exp = require('constants');
 
 test.beforeEach(async ({ page }) => {
     await page.goto('https://automationexercise.com/');
@@ -197,7 +198,7 @@ test.describe('UI tests', () => {
         expect(regError).toContain('Email Address already exist!');
     });
 
-    test('Verify user can navigate to Contact Us Form', async ({ page }) => {
+    test.only('Verify user can navigate to Contact Us Form', async ({ page }) => {
     // Click on "Contuct Us" button
     await page.locator('a[href*="contact"]').click();
 
@@ -236,14 +237,28 @@ test.describe('UI tests', () => {
     // const msg = await page.locator('.status.alert.alert-success').textContent();
     // await expect(msg).toContain('Success! Your details have been submitted successfully.');
     //   await expect(page.locator('.status.alert.alert-success')).toHaveText('Success! Your details have been submitted successfully');
-   
-    await page.pause();
+    // await page.pause();
     });
 
-    test.only('Verify that user can navigate to Test Cases Page', async ({ page }) => {
+    test('Verify that user can navigate to Test Cases Page', async ({ page }) => {
         await page.locator('a[href*="test"]').first().click();
         await expect(page.locator('h2 b')).toHaveText('Test Cases');
 
     });
 
+    test('Verify that user can navigate All products page and product detail page', async ({ page }) => {
+        await page.locator('a[href="/products"]').click();
+
+        // Verify that the page is navigated successfuly 
+        await expect(page.locator('.title.text-center')).toHaveText('All Products');
+
+        // Verify that all list of products is visible
+        const products = await page.locator('.col-sm-4');
+        for (let i = 0; i < await products.count(); i++) {
+            const productList = products.nth(i);
+            await console.log(productList.locator('.productinfo.text-center h2').textContent());
+            // await expect(productList.locator('.productinfo.text-center h2')).not.toHaveText('');
+            // await expect(productList.locator('.productinfo.text-center p')).not.toHaveText('');
+        };
+    });
 });
