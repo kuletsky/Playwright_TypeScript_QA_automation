@@ -257,8 +257,6 @@ test.describe('UI tests', () => {
         for (let i = 0; i < await products.count(); i++) {
             const productList = products.nth(i);
             await console.log(productList.locator('.productinfo.text-center h2').textContent());
-            // await expect(productList.locator('.productinfo.text-center h2')).not.toHaveText('');
-            // await expect(productList.locator('.productinfo.text-center p')).not.toHaveText('');
         };
     });
 });
