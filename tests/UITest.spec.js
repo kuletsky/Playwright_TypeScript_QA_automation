@@ -198,7 +198,7 @@ test.describe('UI tests', () => {
         expect(regError).toContain('Email Address already exist!');
     });
 
-    test.only('Verify user can navigate to Contact Us Form', async ({ page }) => {
+    test('Verify user can navigate to Contact Us Form', async ({ page }) => {
     // Click on "Contuct Us" button
     await page.locator('a[href*="contact"]').click();
 
@@ -246,17 +246,18 @@ test.describe('UI tests', () => {
 
     });
 
-    test('Verify that user can navigate All products page and product detail page', async ({ page }) => {
+    test.only('Verify that user can navigate All products page and product detail page', async ({ page }) => {
         await page.locator('a[href="/products"]').click();
 
         // Verify that the page is navigated successfuly 
         await expect(page.locator('.title.text-center')).toHaveText('All Products');
 
         // Verify that all list of products is visible
-        const products = await page.locator('.col-sm-4');
+        const products = await page.locator('.single-products');
+        console.log(await page.locator('.productinfo.text-center p').textContent());
         for (let i = 0; i < await products.count(); i++) {
             const productList = products.nth(i);
-            await console.log(productList.locator('.productinfo.text-center h2').textContent());
+            // await console.log(productList.locator('.productinfo.text-center p').textContent());
         };
     });
 });
