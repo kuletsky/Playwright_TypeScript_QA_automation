@@ -261,5 +261,17 @@ test.describe('UI tests', () => {
             await expect(productList.locator('.productinfo.text-center p')).not.toHaveText('');
             await expect(productList.locator('.productinfo.text-center h2')).not.toHaveText('');
         };
+
+        // Click on 'View Product' of first product
+        await page.locator('a[href="/product_details/1"]').click();
+
+        // Verify User is landed to product detail page
+        await expect(page).toHaveURL('https://automationexercise.com/product_details/1');
+        await expect(page.locator('.product-information h2')).toBeVisible();
+        await expect(page.locator('.product-information p').nth(0)).toBeVisible();
+        await expect(page.locator('.product-information p').nth(1)).toBeVisible();
+        await expect(page.locator('.product-information p').nth(2)).toBeVisible();
+        await expect(page.locator('.product-information p').nth(3)).toBeVisible();
+        await expect(page.locator('.product-information span').nth(1)).toBeVisible();
     });
 });
