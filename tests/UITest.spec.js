@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const exp = require('constants');
+const { syncBuiltinESMExports } = require('module');
 
 test.beforeEach(async ({ page }) => {
     await page.goto('https://automationexercise.com/');
@@ -254,10 +255,11 @@ test.describe('UI tests', () => {
 
         // Verify that all list of products is visible
         const products = await page.locator('.single-products');
-        console.log(await page.locator('.productinfo.text-center p').textContent());
+          
         for (let i = 0; i < await products.count(); i++) {
             const productList = products.nth(i);
-            // await console.log(productList.locator('.productinfo.text-center p').textContent());
+            await expect(productList.locator('.productinfo.text-center p')).not.toHaveText('');
+            await expect(productList.locator('.productinfo.text-center h2')).not.toHaveText('');
         };
     });
 });
