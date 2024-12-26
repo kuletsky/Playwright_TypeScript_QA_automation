@@ -247,7 +247,7 @@ test.describe('UI tests', () => {
 
     });
 
-    test.only('Verify that user can navigate All products page and product detail page', async ({ page }) => {
+    test('Verify that user can navigate All products page and product detail page', async ({ page }) => {
         await page.locator('a[href="/products"]').click();
 
         // Verify that the page is navigated successfuly 
@@ -274,4 +274,24 @@ test.describe('UI tests', () => {
         await expect(page.locator('.product-information p').nth(3)).toBeVisible();
         await expect(page.locator('.product-information span').nth(1)).toBeVisible();
     });
+
+    test.only('Verify that user can search a product', async ({ page }) => {
+        await page.locator('a[href="/products"]').click();
+        // Verify that the page is navigated successfuly 
+        await expect(page.locator('.title.text-center')).toHaveText('All Products');
+
+        // Verify that all list of products is visible
+        const products = await page.locator('.single-products');
+
+        await page.locator('#search_product').fill('Polo');
+        await page.locator('.fa.fa-search').click();
+        
+        // const products1 = .productinfo.text-center p
+        for (let i = 0; i < await products.count(); i++) {
+            const searchList = products.nth(i);
+            expect(await searchList.locator('.productinfo.text-center p')).toContainText('Polo');
+        };
+
+    });
+    
 });
