@@ -298,6 +298,13 @@ test.describe('UI tests', () => {
         // Verify text Subscription
         await page.locator('.single-widget').scrollIntoViewIfNeeded();
         await expect(page.locator('.single-widget h2')).toHaveText('Subscription');    
-    });
 
+        // Enter email address in input and click arrow button
+        await page.locator('#susbscribe_email').fill('wef@weg.com');
+        await page.locator('#subscribe').click();
+        
+        // Verify success message 'You have been successfully subscribed!' is visible
+        await expect(page.locator('.alert-success.alert')).toContainText('You have been successfully subscribed!')
+
+    });
 });
