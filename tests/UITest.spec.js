@@ -275,7 +275,7 @@ test.describe('UI tests', () => {
         await expect(page.locator('.product-information span').nth(1)).toBeVisible();
     });
 
-    test.only('Verify that user can search a product', async ({ page }) => {
+    test('Verify that user can search a product', async ({ page }) => {
         await page.locator('a[href="/products"]').click();
         // Verify that the page is navigated successfuly 
         await expect(page.locator('.title.text-center')).toHaveText('All Products');
@@ -294,4 +294,10 @@ test.describe('UI tests', () => {
 
     });
     
+    test.only('Verify that user can succcessfully subscribe', async ({ page }) => {
+        // Verify text Subscription
+        await page.locator('.single-widget').scrollIntoViewIfNeeded();
+        await expect(page.locator('.single-widget h2')).toHaveText('Subscription');    
+    });
+
 });
