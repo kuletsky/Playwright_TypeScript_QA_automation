@@ -326,5 +326,32 @@ test.describe('UI tests', () => {
     test.only('Verify user can add product in Cart', async ({ page }) => {
         // Click 'Products' button
         await page.locator('a[href*="/products"]').click();
+
+        // Hover over first product and click "Add to cart"
+        const product1 = await page.locator('.single-products').first();
+        const product1Name = await product1.locator('.productinfo.text-center p').textContent();
+        await product1.hover();
+        await product1.getByText('Add to cart').nth(1).click();
+
+        // Click 'Continue Shopping' button
+        await page.locator('[data-dismiss="modal"]').click();
+
+        // Hover over second product and click 'Add to cart'
+        const product2 = await page.locator('.single-products').nth(1);
+        const product2Name = await product2.locator('.productinfo.text-center p').textContent();
+        await product2.hover();
+        await product2.getByText('Add to cart').nth(1).click();
+
+        // Click 'View Cart' button
+        await page.locator('a[href="/view_cart"]').nth(1).click();
+
+        // Verify both products are added to Cart
+        console.log(product1Name, product2Name)
+        await expect(page.locator('a[href="/product_details/1"]')).toContainText(product1Name);
+        await expect(page.locator('a[href="/product_details/2"]')).toContainText(product2Name);
+
+        await page.pause();
+
+
     });
 });
