@@ -294,7 +294,7 @@ test.describe('UI tests', () => {
 
     });
     
-    test.only('Verify that user can succcessfully subscribe', async ({ page }) => {
+    test('Verify that user can succcessfully subscribe', async ({ page }) => {
         // Verify text Subscription
         await page.locator('.single-widget').scrollIntoViewIfNeeded();
         await expect(page.locator('.single-widget h2')).toHaveText('Subscription');    
@@ -305,6 +305,26 @@ test.describe('UI tests', () => {
         
         // Verify success message 'You have been successfully subscribed!' is visible
         await expect(page.locator('.alert-success.alert')).toContainText('You have been successfully subscribed!')
+    });
 
+    test('Verify Subscription in Cart page', async ({ page }) => {
+        // Click 'Cart' button
+        await page.locator('a[href*="cart"]').first().click();
+        
+        // Verify text Subscription
+        await page.locator('.single-widget').scrollIntoViewIfNeeded();
+        await expect(page.locator('.single-widget h2')).toHaveText('Subscription');    
+ 
+        // Enter email address in input and click arrow button
+        await page.locator('#susbscribe_email').fill('wef@weg.com');
+        await page.locator('#subscribe').click();
+         
+        // Verify success message 'You have been successfully subscribed!' is visible
+        await expect(page.locator('.alert-success.alert')).toContainText('You have been successfully subscribed!')
+    });
+
+    test.only('Verify user can add product in Cart', async ({ page }) => {
+        // Click 'Products' button
+        await page.locator('a[href*="/products"]').click();
     });
 });
