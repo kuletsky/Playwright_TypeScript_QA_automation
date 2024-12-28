@@ -1,6 +1,4 @@
 const { test, expect } = require('@playwright/test');
-const exp = require('constants');
-const { syncBuiltinESMExports } = require('module');
 
 test.beforeEach(async ({ page }) => {
     await page.goto('https://automationexercise.com/');
@@ -367,5 +365,32 @@ test.describe('UI tests', () => {
         await expect(page.locator('.cart_total_price').nth(1)).toContainText(product2Price);
     });
 
+    test('Verify product quantity in Cart', async ({ page }) => {
+        //  Click 'View Product' for any product on home page
+        const productFirst = await page.locator('.productinfo.text-center p').first().textContent();
+        await page.locator('a[href="/product_details/1"]').click();
+
+        // Verify product detail is opened
+        await expect(page).toHaveURL('https://automationexercise.com/product_details/1');
+        await expect(page.locator('.product-information h2')).toBeVisible();
+        await expect(page.locator('.product-information p').nth(0)).toBeVisible();
+        await expect(page.locator('.product-information p').nth(1)).toBeVisible();
+        await expect(page.locator('.product-information p').nth(2)).toBeVisible();
+        await expect(page.locator('.product-information p').nth(3)).toBeVisible();
+        await expect(page.locator('.product-information span').nth(1)).toBeVisible();
+
+        // Increase quantity to 4
+        await page.locator('#quantity').fill('4');
+
+        // Click 'Add to cart' button
+        await page.locator('.btn.btn-default.cart').click();
+
+        // Click view cart button
+        await page.locator('a[href="/view_cart"]').nth(1).click();
+
+        // Verify that product is displayed in cart page with exact quantity
+        await expect(page.locator('a[href="/product_details/1"]')).toContainText(productFirst);
+        await expect(page.locator('.disabled').first()).toContainText('4');
+    });
 
 });
