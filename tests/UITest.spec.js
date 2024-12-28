@@ -323,13 +323,16 @@ test.describe('UI tests', () => {
         await expect(page.locator('.alert-success.alert')).toContainText('You have been successfully subscribed!')
     });
 
-    test.only('Verify user can add product in Cart', async ({ page }) => {
+    test('Verify user can add product in Cart', async ({ page }) => {
         // Click 'Products' button
         await page.locator('a[href*="/products"]').click();
 
         // Hover over first product and click "Add to cart"
         const product1 = await page.locator('.single-products').first();
         const product1Name = await product1.locator('.productinfo.text-center p').textContent();
+        const product1Price = await product1.locator('.productinfo.text-center h2').textContent();
+        // const product1Quantiti = 
+        // const product1Total = 
         await product1.hover();
         await product1.getByText('Add to cart').nth(1).click();
 
@@ -339,6 +342,7 @@ test.describe('UI tests', () => {
         // Hover over second product and click 'Add to cart'
         const product2 = await page.locator('.single-products').nth(1);
         const product2Name = await product2.locator('.productinfo.text-center p').textContent();
+        const product2Price = await product2.locator('.productinfo.text-center h2').textContent();
         await product2.hover();
         await product2.getByText('Add to cart').nth(1).click();
 
@@ -349,9 +353,19 @@ test.describe('UI tests', () => {
         console.log(product1Name, product2Name)
         await expect(page.locator('a[href="/product_details/1"]')).toContainText(product1Name);
         await expect(page.locator('a[href="/product_details/2"]')).toContainText(product2Name);
+        
+        // Verify correct prices, quantity and total price
+        await expect(page.locator('.cart_price p').first()).toContainText(product1Price);
+        await expect(page.locator('.cart_price p').nth(1)).toContainText(product2Price);
 
-        await page.pause();
+        // Verify correct quantity
+        await expect(page.locator('.disabled').first()).toContainText('1');
+        await expect(page.locator('.disabled').nth(1)).toContainText('1');
 
-
+        // Verify correct totalPrice
+        await expect(page.locator('.cart_total_price').first()).toContainText(product1Price);
+        await expect(page.locator('.cart_total_price').nth(1)).toContainText(product2Price);
     });
+
+
 });
