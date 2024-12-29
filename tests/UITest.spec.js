@@ -16,7 +16,7 @@ test.beforeEach(async ({ page }) => {
 
 const testData = {
     name: 'john',
-    email: 'john@gm123456789012.com'
+    email: 'john@gm12345678901231.com'
 };
 
 test.describe('UI tests', () => {
@@ -329,8 +329,6 @@ test.describe('UI tests', () => {
         const product1 = await page.locator('.single-products').first();
         const product1Name = await product1.locator('.productinfo.text-center p').textContent();
         const product1Price = await product1.locator('.productinfo.text-center h2').textContent();
-        // const product1Quantiti = 
-        // const product1Total = 
         await product1.hover();
         await product1.getByText('Add to cart').nth(1).click();
 
@@ -393,4 +391,104 @@ test.describe('UI tests', () => {
         await expect(page.locator('.disabled').first()).toContainText('4');
     });
 
+    test.only('Verify user can Register while Checkout', async ({ page }) => {
+        // Add products to card
+        await page.locator('a[data-product-id="1"]').first().click();
+        
+        // Click 'Continue Shopping' button
+        await page.locator('[data-dismiss="modal"]').click();
+        
+        // Click 'Cart' button
+        await page.locator('a[href="/view_cart"]').first().click();
+        
+        // Verify that cart page is displayed
+        await expect(page.locator('#cart_info_table')).toBeVisible();
+
+        // Click proceed to checkout
+        await page.locator('.btn.btn-default.check_out').click();
+
+        // Click 'Register / Login' button
+        await page.locator('a[href="/login"]').nth(1).click();
+
+        // Fill all details in Signup and creat account
+        // Enter name and email address
+        const signupNameInput = page.locator('[data-qa="signup-name"]');
+        const signupEmailInput = page.locator('[data-qa="signup-email"]');
+            
+        // Verify that input fields contain the expected values
+        await signupNameInput.fill(testData.name);
+        await expect(signupNameInput).toHaveValue(testData.name);
+            
+        await signupEmailInput.fill(testData.email);
+        await expect(signupEmailInput).toHaveValue(testData.email);
+            
+        // Click 'signUp' button
+        await page.locator('[data-qa="signup-button"]').click();
+                    
+        // Verify that 'ENTER ACCOUNT INFORMATION' is visible
+        const text = await page.locator('b').first().textContent();
+        await expect(text).toContain('Enter Account Information');
+                    
+        // Fill detailse: Title, Name, Email, Password, Date of birth
+                        
+        // Verify title radio botton works
+        const title = page.locator('#id_gender1');
+        await title.check();
+        await expect(title).toBeChecked();
+        await expect(page.locator('#id_gender2')).not.toBeChecked();
+            
+        // Veryfy that Name field contains the expected name
+        const name = page.locator('#name');
+        await name.fill('');
+        await name.fill('john');
+        await expect(name).toHaveValue('john'); 
+            
+        const email = page.locator('#email');
+            
+        // Verify that pswd contains the expected password
+        const pswd = page.locator('#password');
+        await pswd.fill('1234');
+        await expect(pswd).toHaveValue('1234')
+            
+        await page.locator('[for="newsletter"]').check();
+        await page.locator('[for="optin"]').check();
+            
+        // Fill details
+        await page.locator('#first_name').fill('John');
+        await page.locator('#last_name').fill('Cooper');
+        await page.locator('#company').fill('Kuletsky Software');
+        await page.locator('#address1').fill('address1');
+        await page.locator('#address2').fill('address2');
+        await page.locator('select#country').selectOption('United States');
+        await page.locator('#state').fill('MD');
+        await page.locator('#city').fill('Goodwil');
+        await page.locator('#zipcode').fill('111111');
+        await page.locator('#mobile_number').fill('12345678');
+        
+        await page.locator('[data-qa="create-account"]').click();
+
+        // Verify that 'Account created!' is visible
+        const account_created = await page.locator('b').textContent();
+        await expect(account_created).toContain('Account Created!');
+            
+        // Click 'Continue' button
+        await page.locator('[data-qa="continue-button"]').click();
+    
+        // Verify that 'Logged in as Username'
+        const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
+        await expect(logged).toContain('Logged in as');        
+                
+        // Click 'cart' button
+        await page.locator('a[href="/view_cart"]').first().click();
+
+        // Click 'Proceed to checkout' button
+        await page.locator('.btn.btn-default.check_out').click();
+
+        // Verify Address Details and Review Your Order
+        
+
+
+        await page.pause();
+
+    });
 });
