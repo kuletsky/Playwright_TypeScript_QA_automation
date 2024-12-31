@@ -217,8 +217,8 @@ test.describe('UI tests', () => {
     await page.locator('[data-qa="message"]').fill('qfwf');
 
     // Upload a file
-    const fileInput = page.locator('input[type="file"]');
-    await fileInput.setInputFiles('test-data.json');
+    // const fileInput = page.locator('input[type="file"]');
+    // await fileInput.setInputFiles('test-data.json');
 
     // Click "Submit" button
     // page.on('dialog', async (dialog) => {
@@ -691,5 +691,5 @@ test.describe('UI tests', () => {
         await expect(page.locator('.alert-success.alert').first()).toHaveText('You have been successfully subscribed!');
 
     });
-    
+
 });
