@@ -16,7 +16,7 @@ test.beforeEach(async ({ page }) => {
 
 const testData = {
     name: 'john',
-    email: 'john@gm12345678901231.com'
+    email: 'john@gm123456w789011223ww11w2w.com'
 };
 
 test.describe('UI tests', () => {
@@ -485,10 +485,37 @@ test.describe('UI tests', () => {
         await page.locator('.btn.btn-default.check_out').click();
 
         // Verify Address Details and Review Your Order
+        await expect(page.locator('.address_firstname').first()).toContainText('Mr. John Cooper');
+        await expect(page.locator('.address_address1').nth(1)).toContainText('address1');
+
+        // Enter description in comment text area and click 'Place Order'
+        await page.locator('.form-control').fill('1234ergf');
+        await page.locator('a[href="/payment"]').click();
+
+        // Enter payment details: Name on Card, Card Number, CVC, Expiration date
+        await page.locator('[data-qa="name-on-card"]').fill('soft');
+        await page.locator('[data-qa="card-number"]').fill('1223-2132-1211-1211');
+        await page.locator('[data-qa="cvc"]').fill('988');
+        await page.locator('[data-qa="expiry-month"]').fill('12.23');
+        await page.locator('[data-qa="expiry-year"]').fill('2030');
         
+        // Click 'Pay and Confirm Order' button
+        await page.locator('#submit').click();
 
+        // Verify success message 'Your order has been placed successfully!'
+        await expect(page.locator('.alert-success.alert').first()).toHaveText('You have been successfully subscribed!');
 
-        await page.pause();
+        // Click 'Delete Account' button
+        await page.locator('a[href="/delete_account"]').click();
 
+        // Verify 'ACCOUNT DELETED!' and click 'Continue' button
+        const del = await page.locator('b').textContent();
+        await expect(del).toContain('Account Deleted!')
+        await expect(page.locator('b')).toContainText('Account Deleted!')
+    
+        // Click 'Continue' button
+        await page.locator('[data-qa="continue-button"]').click();  
     });
+
+    
 });
