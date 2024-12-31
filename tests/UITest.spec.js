@@ -517,7 +517,7 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="continue-button"]').click();  
     });
 
-    test.only('Verify user can Register before Checkout', async ({ page }) => {
+    test('Verify user can Register before Checkout', async ({ page }) => {
         // Verify the New user signUp is visible 
         await page.locator('.fa.fa-lock').click();
         const signUp = await page.locator('.signup-form h2').textContent();
@@ -635,4 +635,61 @@ test.describe('UI tests', () => {
         // Click 'Continue' button
         await page.locator('[data-qa="continue-button"]').click();  
     });
+
+    test('Verify user can Login befor Checkout', async ({ page }) => {
+        // Click the 'Signup/Login' button
+        page.locator('.fa.fa-lock').click();
+          
+        // Verify 'Login to your acount' is visible
+        const loginForm = await page.locator('.login-form h2').textContent();
+        await expect(loginForm).toContain('Login to your account');
+        
+        // Enter valid email amd password
+        await page.locator('[data-qa="login-email"]').fill('trip27@lftjaguar.com');
+        await page.locator('[data-qa="login-password"]').fill('1234');
+    
+        // Click the 'Login' button
+        await page.locator('[data-qa="login-button"]').click();
+            
+        // Verify that 'Logged in as' is visible
+        const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
+        await expect(logged).toContain('Logged in as');
+
+                // Add products to cart
+        const product1 = await page.locator('.single-products').first();
+        const product1Name = await product1.locator('.productinfo.text-center p').textContent();
+        await page.locator('[data-product-id="1"]').first().click();
+
+        // Click 'View Cart' button
+        await page.locator('a[href="/view_cart"]').nth(1).click();
+
+        // Verify both products are added to Cart
+        await expect(page.locator('a[href="/product_details/1"]')).toContainText(product1Name);
+
+        // Click 'Proceed to checkout' button
+        await page.locator('.btn.btn-default.check_out').click();
+
+        // Verify Address Details and Review Your Order
+        await expect(page.locator('.address_firstname').first()).toContainText('Mr. 1234 1234');
+        await expect(page.locator('.address_address1').nth(1)).toContainText('1234');
+
+        // Enter description in comment text area and click 'Place Order'
+        await page.locator('.form-control').fill('1234ergf');
+        await page.locator('a[href="/payment"]').click();
+
+        // Enter payment details: Name on Card, Card Number, CVC, Expiration date
+        await page.locator('[data-qa="name-on-card"]').fill('soft');
+        await page.locator('[data-qa="card-number"]').fill('1223-2132-1211-1211');
+        await page.locator('[data-qa="cvc"]').fill('988');
+        await page.locator('[data-qa="expiry-month"]').fill('12.23');
+        await page.locator('[data-qa="expiry-year"]').fill('2030');
+        
+        // Click 'Pay and Confirm Order' button
+        await page.locator('#submit').click();
+
+        // Verify success message 'Your order has been placed successfully!'
+        await expect(page.locator('.alert-success.alert').first()).toHaveText('You have been successfully subscribed!');
+
+    });
+    
 });
