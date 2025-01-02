@@ -655,7 +655,7 @@ test.describe('UI tests', () => {
         const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
         await expect(logged).toContain('Logged in as');
 
-                // Add products to cart
+        // Add products to cart
         const product1 = await page.locator('.single-products').first();
         const product1Name = await product1.locator('.productinfo.text-center p').textContent();
         await page.locator('[data-product-id="1"]').first().click();
@@ -663,7 +663,7 @@ test.describe('UI tests', () => {
         // Click 'View Cart' button
         await page.locator('a[href="/view_cart"]').nth(1).click();
 
-        // Verify both products are added to Cart
+        // Verify the product are added to Cart
         await expect(page.locator('a[href="/product_details/1"]')).toContainText(product1Name);
 
         // Click 'Proceed to checkout' button
@@ -689,7 +689,27 @@ test.describe('UI tests', () => {
 
         // Verify success message 'Your order has been placed successfully!'
         await expect(page.locator('.alert-success.alert').first()).toHaveText('You have been successfully subscribed!');
-
     });
+
+    test('Verify user can remove Products from the cart', async ({ page }) => {
+        // Add products to cart
+        const product = await page.locator('.single-products').first();
+        const productName = await product.locator('.productinfo.text-center p').textContent();
+        await page.locator('[data-product-id="1"]').first().click();
+
+        // Click 'View Cart' button
+        await page.locator('a[href="/view_cart"]').nth(1).click();
+
+        // Verify the product are added to Cart
+        await expect(page.locator('a[href="/product_details/1"]')).toContainText(productName);
+
+        // Click 'X' button corresponding to particular product
+        await page.locator('.fa.fa-times').click();
+
+        // Verify that product is removed from the cart
+        await expect(page.locator('p b')).toContainText('Cart is empty!');
+    });
+
+    
 
 });
