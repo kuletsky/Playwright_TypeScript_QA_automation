@@ -710,6 +710,25 @@ test.describe('UI tests', () => {
         await expect(page.locator('p b')).toContainText('Cart is empty!');
     });
 
-    
+    test('Verify user can view categories of products', async ({ page }) => {
+        // Verify that categories are visible on left side bar
+        await expect(page.locator('#accordian')).toBeVisible();
+
+        // Click on 'Women' category
+        await page.locator('a[href="#Women"]').click();
+
+        // Click on TOPS category link under 'Women' category
+        await page.locator('a[href="/category_products/2"]').click();
+
+        // Verify that category page is displayed and confirm text 'WOMEN - TOPS PRODUCTS'
+        await expect(page.locator('.title.text-center')).toContainText('Women - Tops Products');
+
+        // On left side bar, click on any sub-category link of 'Men' category
+        await page.locator('a[href="#Men"]').click();
+        await page.locator('a[href="/category_products/3"]').click();
+
+        // Verify that user is navigated to that category page
+        await expect(page.locator('.title.text-center')).toContainText('Men - Tshirts Products');
+    });
 
 });
