@@ -275,6 +275,7 @@ test.describe('UI tests', () => {
 
     test('Verify that user can search a product', async ({ page }) => {
         await page.locator('a[href="/products"]').click();
+       
         // Verify that the page is navigated successfuly 
         await expect(page.locator('.title.text-center')).toHaveText('All Products');
 
@@ -284,7 +285,6 @@ test.describe('UI tests', () => {
         await page.locator('#search_product').fill('Polo');
         await page.locator('.fa.fa-search').click();
         
-        // const products1 = .productinfo.text-center p
         for (let i = 0; i < await products.count(); i++) {
             const searchList = products.nth(i);
             expect(await searchList.locator('.productinfo.text-center p')).toContainText('Polo');
@@ -721,14 +721,43 @@ test.describe('UI tests', () => {
         await page.locator('a[href="/category_products/2"]').click();
 
         // Verify that category page is displayed and confirm text 'WOMEN - TOPS PRODUCTS'
-        await expect(page.locator('.title.text-center')).toContainText('Women - Tops Products');
+        await page.waitForLoadState();
+        await expect(page.locator('h2.title.text-center')).toContainText('Women - Tops Products');
 
         // On left side bar, click on any sub-category link of 'Men' category
         await page.locator('a[href="#Men"]').click();
         await page.locator('a[href="/category_products/3"]').click();
 
         // Verify that user is navigated to that category page
-        await expect(page.locator('.title.text-center')).toContainText('Men - Tshirts Products');
+        await page.waitForLoadState();
+        await expect(page.locator('h2.title.text-center')).toContainText('Men - Tshirts Products');
     });
 
+    test.only('Verify search products and cart after login', async ({ page }) => {
+        // Click on 'Products' button
+        await page.locator('a[href="/products"]').click();
+
+        // Verify user is navigated to ALL PRODUCTS page successfully
+        await page.waitForLoadState();
+        await expect(page.locator('h2.title.text-center')).toContainText('All Products');
+
+        // Enter product name in search input and click search button
+        await page.locator('#search_product').fill('Polo');
+        await page.locator('.fa.fa-search').click();
+
+        //  Verify all the products related to search are visible
+        const searchedProducts = page.locator('.single-products');
+
+        for (let i=0; i < await searchedProducts.count(); i++) {
+            // const searchList = searchedProducts.nth(i);
+            expect(await searchedProducts.locator('.productinfo.text-center p').nth(i)).toContainText('Polo');
+            console.log(await searchedProducts.locator('.productinfo.text-center p').nth(i).textContent());
+        }
+
+        // Add those products to cart
+        for (let i = 0; i < await searchedProducts.count(); i++) {
+            await searchedProducts.locator('.btn.btn-default.add-to-cart').nth(i).click();
+        }
+
+    });
 });
