@@ -1,6 +1,15 @@
 const { test, expect } = require('@playwright/test');
+const { ADDRGETNETWORKPARAMS } = require('dns');
 
 test.beforeEach(async ({ page }) => {
+    await page.route('**/*', (route) => {
+        if (route.request().url().includes('google')) {
+            route.abort();
+        } else {
+            route.continue();
+        }
+    });
+
     await page.goto('https://automationexercise.com/');
     
     // Verify the page title
@@ -16,7 +25,7 @@ test.beforeEach(async ({ page }) => {
 
 const testData = {
     name: 'john',
-    email: 'john@gm123456w789011223ww11qw2w.com'
+    email: 'john@gm123w4e56w78sw90121223ww1w11qw2wwqw.com'
 };
 
 test.describe('UI tests', () => {
@@ -41,6 +50,7 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="signup-button"]').click();
             
         // Verify that 'ENTER ACCOUNT INFORMATION' is visible
+        await page.waitForLoadState();
         const text = await page.locator('b').first().textContent();
         await expect(text).toContain('Enter Account Information');
             
@@ -426,6 +436,7 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="signup-button"]').click();
                     
         // Verify that 'ENTER ACCOUNT INFORMATION' is visible
+        await page.waitForLoadState();
         const text = await page.locator('b').first().textContent();
         await expect(text).toContain('Enter Account Information');
                     
@@ -468,8 +479,8 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="create-account"]').click();
 
         // Verify that 'Account created!' is visible
-        const account_created = await page.locator('b').textContent();
-        await expect(account_created).toContain('Account Created!');
+        await page.waitForLoadState();
+        await expect(page.locator('b')).toContainText('Account Created!');
             
         // Click 'Continue' button
         await page.locator('[data-qa="continue-button"]').click();
@@ -538,6 +549,7 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="signup-button"]').click();
             
         // Verify that 'ENTER ACCOUNT INFORMATION' is visible
+        await page.waitForLoadState();
         const text = await page.locator('b').first().textContent();
         await expect(text).toContain('Enter Account Information');
             
@@ -576,11 +588,11 @@ test.describe('UI tests', () => {
             await page.locator('#city').fill('Goodwil');
             await page.locator('#zipcode').fill('111111');
             await page.locator('#mobile_number').fill('12345678');
-        await page.locator('[data-qa="create-account"]').click();
+            await page.locator('[data-qa="create-account"]').click();
             
         // Verify that 'Account created!' is visible
-        const account_created = await page.locator('b').textContent();
-        await expect(account_created).toContain('Account Created!');
+        await page.waitForLoadState();
+        await expect(page.locator('b')).toContainText('Account Created!');
             
         // Click 'Continue' button
         await page.locator('[data-qa="continue-button"]').click();
@@ -592,7 +604,8 @@ test.describe('UI tests', () => {
         // Add products to cart
         const product1 = await page.locator('.single-products').first();
         const product1Name = await product1.locator('.productinfo.text-center p').textContent();
-        await page.locator('[data-product-id="1"]').first().click();
+        await product1.hover();
+        await product1.getByText('Add to cart').nth(1).click();
 
         // Click 'View Cart' button
         await page.locator('a[href="/view_cart"]').nth(1).click();
@@ -604,6 +617,7 @@ test.describe('UI tests', () => {
         await page.locator('.btn.btn-default.check_out').click();
 
         // Verify Address Details and Review Your Order
+        await page.waitForLoadState();
         await expect(page.locator('.address_firstname').first()).toContainText('Mr. John Cooper');
         await expect(page.locator('.address_address1').nth(1)).toContainText('address1');
 
@@ -657,8 +671,9 @@ test.describe('UI tests', () => {
 
         // Add products to cart
         const product1 = await page.locator('.single-products').first();
-        const product1Name = await product1.locator('.productinfo.text-center p').textContent();
-        await page.locator('[data-product-id="1"]').first().click();
+        const product1Name = await page.locator('.productinfo.text-center p').first().textContent();
+        await product1.hover();
+        await product1.getByText('Add to cart').nth(1).click();
 
         // Click 'View Cart' button
         await page.locator('a[href="/view_cart"]').nth(1).click();
@@ -733,13 +748,13 @@ test.describe('UI tests', () => {
         await expect(page.locator('h2.title.text-center')).toContainText('Men - Tshirts Products');
     });
 
-    test.only('Verify search products and cart after login', async ({ page }) => {
+    test('Verify search products and cart after login', async ({ page }) => {
         // Click on 'Products' button
         await page.locator('a[href="/products"]').click();
 
         // Verify user is navigated to ALL PRODUCTS page successfully
         await page.waitForLoadState();
-        await expect(page.locator('h2.title.text-center')).toContainText('All Products');
+        expect(await page.locator('h2.title.text-center')).toContainText('All Products');
 
         // Enter product name in search input and click search button
         await page.locator('#search_product').fill('Polo');
@@ -748,16 +763,47 @@ test.describe('UI tests', () => {
         //  Verify all the products related to search are visible
         const searchedProducts = page.locator('.single-products');
 
-        for (let i=0; i < await searchedProducts.count(); i++) {
+        for (let i = 0; i < await searchedProducts.count(); i++) {
             // const searchList = searchedProducts.nth(i);
             expect(await searchedProducts.locator('.productinfo.text-center p').nth(i)).toContainText('Polo');
             console.log(await searchedProducts.locator('.productinfo.text-center p').nth(i).textContent());
         }
 
         // Add those products to cart
-        for (let i = 0; i < await searchedProducts.count(); i++) {
-            await searchedProducts.locator('.btn.btn-default.add-to-cart').nth(i).click();
+        for (let j = 0; j < await searchedProducts.count(); j++) {
+            await searchedProducts.locator('.btn.btn-default.add-to-cart').nth(j).click();
         }
+
+        // Click 'Cart' button and verify that products are visible in cart
+        await page.locator('a').filter({ hasText: 'View Cart' }).click();
+
+        // Click the 'Signup/Login' button
+        await page.locator('.fa.fa-lock').click();
+          
+        // Verify 'Login to your acount' is visible
+        const loginForm = await page.locator('.login-form h2').textContent();
+        await expect(loginForm).toContain('Login to your account');
+        
+        // Enter valid email amd password
+        await page.locator('[data-qa="login-email"]').fill('trip27@lftjaguar.com');
+        await page.locator('[data-qa="login-password"]').fill('1234');
+    
+        // Click the 'Login' button
+        await page.locator('[data-qa="login-button"]').click();
+            
+        // Verify that 'Logged in as' is visible
+        const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
+        await expect(logged).toContain('Logged in as');
+
+        // Again, go to Cart page
+        await page.locator('li a[href="/view_cart"]').click();
+        
+        // Verify that those products are visible in cart after login as well
+        const cartProducts = await page.locator('td.cart_description')
+        for (let k = 0; k < await cartProducts.count(); k++) {
+            expect(await cartProducts.locator('h4 a').nth(k)).toContainText('Polo');
+            console.log(await cartProducts.locator('h4 a').nth(k).textContent());
+        }        
 
     });
 });
