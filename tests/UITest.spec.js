@@ -804,6 +804,33 @@ test.describe('UI tests', () => {
             expect(await cartProducts.locator('h4 a').nth(k)).toContainText('Polo');
             console.log(await cartProducts.locator('h4 a').nth(k).textContent());
         }        
-
     });
+
+    test('Verify can add review on product', async ({ page }) => {
+        // Click on 'Products' button
+        await page.locator('a[href="/products"]').click();
+
+        // Verify user is navigated to ALL PRODUCTS page successfully
+        await page.waitForLoadState();
+        expect(await page.locator('h2.title.text-center')).toContainText('All Products');
+
+        // Click on 'View Product' button
+        await page.locator('a[href="/product_details/1"]').click();
+
+        // Verify 'Write Your Review' is visible
+        await expect(page.locator('a[data-toggle="tab"]')).toContainText('Write Your Review');
+
+        // Enter name, email and review
+        await page.locator('#name').fill('wqf');
+        await page.locator('#email').fill('qwf@ewf');
+        await page.locator('#review').fill('wqfqw');
+
+        // Click 'Submit' button
+        await page.locator('#button-review').click();
+
+        // Verify success message 'Thank you for your review.'
+        await expect(page.locator('.alert-success.alert span')).toContainText('Thank you for your review.');
+    });
+
+
 });
