@@ -832,7 +832,7 @@ test.describe('UI tests', () => {
         await expect(page.locator('.alert-success.alert span')).toContainText('Thank you for your review.');
     });
 
-    test.only('User can add to cart from Recommended items', async ({ page }) => {
+    test('User can add to cart from Recommended items', async ({ page }) => {
         // Scroll to bottom of page
         await page.locator('.single-widget').scrollIntoViewIfNeeded();
 
@@ -840,13 +840,14 @@ test.describe('UI tests', () => {
         await expect(page.locator('.recommended_items .title.text-center')).toContainText('recommended items');
 
         // Click on 'Add To Cart' on Recommended product
-        await page.locator('#recommended-item-carousel a[data-product-id="1"]').click();
+        // const recommendedItem = page.locator('.item.active .single-products p', { hasText: 'Stylish Dress' }); 
+        await page.locator('#recommended-item-carousel a[data-product-id="4"]').click();
 
         //  Click on 'View Cart' button
         await page.locator('a u').click();
 
         // Verify that product is displayed in cart page
-
+        await expect(page.locator('a[href="/product_details/4"]')).toContainText('Stylish Dress');
     });
 
 });
