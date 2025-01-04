@@ -1071,4 +1071,19 @@ test.describe('UI tests', () => {
         // Click 'Continue' button
         await page.locator('[data-qa="continue-button"]').click();  
     });
+
+    test('Verify Scroll Up using "Arrow" button and Scroll Down functionality', async ({ page }) => {
+        // Scroll down page to bottom
+        await page.locator('.single-widget').scrollIntoViewIfNeeded();
+
+        // Verify 'SUBSCRIPTION' is visible
+        await expect(page.locator('.single-widget h2')).toHaveText('Subscription'); 
+
+        // Click on arrow at bottom right side to move upward
+        await page.locator('.fa.fa-angle-up').click();
+
+        // Verify that page is scrolled up and 'Full-Fledged practice website for Automation Engineers' text is visible on screen
+        await expect(page.locator('.col-sm-6 h2').first()).toContainText('Full-Fledged practice website for Automation Engineers');
+
+    });
 });
