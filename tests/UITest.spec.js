@@ -25,7 +25,7 @@ test.beforeEach(async ({ page }) => {
 
 const testData = {
     name: 'john',
-    email: 'john@gm1w2s3w4es5c6w78swssws9sw0121223ww1w11qsw2wwqw.com'
+    email: 'john@gwm1w2s3w4es5c6w78swssdws9sw0121223ww1w11wqsw2wwqww.com'
 };
 
 test.describe('UI tests', () => {
@@ -121,8 +121,6 @@ test.describe('UI tests', () => {
     
         // Verify URL if applicable
         await expect(page).toHaveURL('https://automationexercise.com/')
-    
-        // await page.pause();
     }); 
         
     test('Verify that user can successfuly SignIn with valid credentials', async ({ page }) => {
@@ -280,8 +278,9 @@ test.describe('UI tests', () => {
         await page.locator('.fa.fa-search').click();
         
         for (let i = 0; i < await products.count(); i++) {
+            await expect
             const searchList = products.nth(i);
-            expect(await searchList.locator('.productinfo.text-center p')).toContainText('Polo');
+            await expect(searchList.locator('.productinfo.text-center p')).toContainText('Polo');
         };
 
     });
@@ -355,6 +354,16 @@ test.describe('UI tests', () => {
         // Verify correct totalPrice
         await expect(page.locator('.cart_total_price').first()).toContainText(product1Price);
         await expect(page.locator('.cart_total_price').nth(1)).toContainText(product2Price);
+
+        // Click 'X' button corresponding to particular product
+        const itemCart = page.locator('tbody tr');
+        for (let i = 0; i < await itemCart.count(); i++) {
+            await page.locator('.fa.fa-times').nth(i).click();
+        }
+        
+        // Verify that product is removed from the cart
+        await expect(page.locator('p b')).toContainText('Cart is empty!');
+
     });
 
     test('Verify product quantity in Cart', async ({ page }) => {
@@ -383,6 +392,15 @@ test.describe('UI tests', () => {
         // Verify that product is displayed in cart page with exact quantity
         await expect(page.locator('a[href="/product_details/1"]')).toContainText(productFirst);
         await expect(page.locator('.disabled').first()).toContainText('4');
+
+        // Click 'X' button corresponding to particular product
+        const itemCart = page.locator('tbody tr');
+        for (let i = 0; i < await itemCart.count(); i++) {
+            await page.locator('.fa.fa-times').nth(i).click();
+        };
+
+        // Verify that product is removed from the cart
+        await expect(page.locator('p b')).toContainText('Cart is empty!');        
     });
 
     test('Verify user can Register while Checkout', async ({ page }) => {
@@ -533,7 +551,6 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="signup-button"]').click();
             
         // Verify that 'ENTER ACCOUNT INFORMATION' is visible
-        await page.waitForLoadState();
         const text = await page.locator('b').first().textContent();
         await expect(text).toContain('Enter Account Information');
             
@@ -751,12 +768,12 @@ test.describe('UI tests', () => {
             // const searchList = searchedProducts.nth(i);
             expect(await searchedProducts.locator('.productinfo.text-center p').nth(i)).toContainText('Polo');
             console.log(await searchedProducts.locator('.productinfo.text-center p').nth(i).textContent());
-        }
+        };
 
         // Add those products to cart
         for (let j = 0; j < await searchedProducts.count(); j++) {
             await searchedProducts.locator('.btn.btn-default.add-to-cart').nth(j).click();
-        }
+        };
 
         // Click 'Cart' button and verify that products are visible in cart
         await page.locator('a').filter({ hasText: 'View Cart' }).click();
@@ -787,7 +804,16 @@ test.describe('UI tests', () => {
         for (let k = 0; k < await cartProducts.count(); k++) {
             expect(await cartProducts.locator('h4 a').nth(k)).toContainText('Polo');
             console.log(await cartProducts.locator('h4 a').nth(k).textContent());
-        }        
+        };
+        
+        // Click 'X' button corresponding to particular product
+        const itemCart = page.locator('tbody tr');
+        for (let i = 0; i < await itemCart.count(); i++) {
+            await page.locator('.fa.fa-times').nth(i).click();
+        };
+        
+        // Verify that product is removed from the cart
+        await expect(page.locator('p b')).toContainText('Cart is empty!');        
     });
 
     test('Verify can add review on product', async ({ page }) => {
@@ -824,7 +850,6 @@ test.describe('UI tests', () => {
         await expect(page.locator('.recommended_items .title.text-center')).toContainText('recommended items');
 
         // Click on 'Add To Cart' on Recommended product
-        // const recommendedItem = page.locator('.item.active .single-products p', { hasText: 'Stylish Dress' }); 
         await page.locator('#recommended-item-carousel a[data-product-id="4"]').click();
 
         //  Click on 'View Cart' button
@@ -832,6 +857,15 @@ test.describe('UI tests', () => {
 
         // Verify that product is displayed in cart page
         await expect(page.locator('a[href="/product_details/4"]')).toContainText('Stylish Dress');
+
+        // Click 'X' button corresponding to particular product
+        const itemCart = page.locator('tbody tr');
+        for (let i = 0; i < await itemCart.count(); i++) {
+            await page.locator('.fa.fa-times').nth(i).click();
+        };
+        
+        // Verify that product is removed from the cart
+        await expect(page.locator('p b')).toContainText('Cart is empty!');          
     });
 
     test('Verify address details in checkout page', async ({ page }) => {
