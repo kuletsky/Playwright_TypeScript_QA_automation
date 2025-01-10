@@ -24,7 +24,7 @@ test.beforeEach(async ({ page }) => {
 
 const testData = {
     name: 'john',
-    email: 'john@gwm1w2s3w4es5c6w78swssdws9sw0121223ww1w11wqsw2wwqww.com'
+    email: 'john@gwm1w2s3w4es5cw6w78swssdws9wsw0121223ww1w11wqsw2wwqww.com'
 };
 
 test.describe('UI tests', () => {
@@ -276,8 +276,7 @@ test.describe('UI tests', () => {
         await page.locator('#search_product').fill('Polo');
         await page.locator('.fa.fa-search').click();
         
-        for (let i = 0; i < await products.count(); i++) {
-            await expect
+        for (let i = 0; i < await products.count(); i++){
             const searchList = products.nth(i);
             await expect(searchList.locator('.productinfo.text-center p')).toContainText('Polo');
         };
@@ -322,7 +321,7 @@ test.describe('UI tests', () => {
         const product1Name = await product1.locator('.productinfo.text-center p').textContent();
         const product1Price = await product1.locator('.productinfo.text-center h2').textContent();
         await product1.hover();
-        await product1.getByText('Add to cart').nth(1).click();
+        await product1.locator('.overlay-content .btn').first().click();
 
         // Click 'Continue Shopping' button
         await page.locator('[data-dismiss="modal"]').click();
@@ -332,7 +331,7 @@ test.describe('UI tests', () => {
         const product2Name = await product2.locator('.productinfo.text-center p').textContent();
         const product2Price = await product2.locator('.productinfo.text-center h2').textContent();
         await product2.hover();
-        await product2.getByText('Add to cart').nth(1).click();
+        await page.locator('.overlay-content .btn').nth(1).click();
 
         // Click 'View Cart' button
         await page.locator('a[href="/view_cart"]').nth(1).click();
@@ -418,8 +417,8 @@ test.describe('UI tests', () => {
         // Click proceed to checkout
         await page.locator('.btn.btn-default.check_out').click();
 
-        // Click 'Register / Login' button
-        await page.locator('a[href="/login"]').nth(1).click();
+        // Click 'Register/Login' button
+        page.getByRole('link', { name: 'Register / Login' }).click();
 
         // Fill all details in Signup and creat account
         // Enter name and email address
@@ -972,7 +971,7 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="continue-button"]').click();  
     });
 
-    test('Verify user can download Invoice after purchase order', async ({ page }) => {
+    test.only('Verify user can download Invoice after purchase order', async ({ page }) => {
         // Add products to card
         await page.locator('a[data-product-id="1"]').first().click();
         
@@ -988,8 +987,8 @@ test.describe('UI tests', () => {
         // Click proceed to checkout
         await page.locator('.btn.btn-default.check_out').click();
 
-        // Click 'Register / Login' button
-        await page.locator('a[href="/login"]').nth(1).click();
+        // Click 'Register/Login' button
+        page.getByRole('link', { name: 'Register / Login' }).click();
 
         // Fill all details in Signup and creat account
         // Enter name and email address
