@@ -971,7 +971,7 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="continue-button"]').click();  
     });
 
-    test.only('Verify user can download Invoice after purchase order', async ({ page }) => {
+    test('Verify user can download Invoice after purchase order', async ({ page }) => {
         // Add products to card
         await page.locator('a[data-product-id="1"]').first().click();
         
