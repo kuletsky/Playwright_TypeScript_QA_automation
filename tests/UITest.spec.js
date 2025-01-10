@@ -1,5 +1,4 @@
 const { test, expect } = require('@playwright/test');
-const { ADDRGETNETWORKPARAMS } = require('dns');
 
 test.beforeEach(async ({ page }) => {
     await page.route('**/*', (route) => {
