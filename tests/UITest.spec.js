@@ -124,7 +124,7 @@ test.describe('UI tests', () => {
         
     test('Verify that user can successfuly SignIn with valid credentials', async ({ page }) => {
         // Click the 'Signup/Login' button
-        page.locator('.fa.fa-lock').click();
+        await page.locator('.fa.fa-lock').click();
           
         // Verify 'Login to your acount' is visible
         const loginForm = await page.locator('.login-form h2').textContent();
