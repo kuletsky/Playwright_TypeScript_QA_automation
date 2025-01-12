@@ -7,3 +7,4 @@ node_modules/
 
 # Ignore test data file
 test-data.json
+state.json

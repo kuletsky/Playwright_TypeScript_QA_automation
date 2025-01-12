@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-let = WebContext
+let webContext;
 
 test.beforeAll( async({ browser }) => {
     const context = await browser.newContext();
@@ -19,18 +19,18 @@ test.beforeAll( async({ browser }) => {
     await context.storageState({path: 'state.json'});
 
     // Inject cookies
-    WebContext = await browser.newContext({storageState: 'state.json'});
-
+    webContext = await browser.newContext({storageState: 'state.json'});
 });
 
 test('Verify that user can successfuly SignIn with valid credentials', async () => {
     // LogIn
-    const page = await WebContext.newPage();   
+    const page = await webContext.newPage();   
 
     await page.goto('https://automationexercise.com/');
-    await page.locator('.fa.fa-lock').click();
+    // await page.locator('.fa.fa-lock').click();
 
     // Verify that 'Logged in as' is visible
-    const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
-    await expect(logged).toContain('Logged in as');
+    // const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
+    // await expect(logged).toContain('Logged in as');
+    await expect(page.locator('a').filter({ hasText: 'Logged in as' })).toContainText('Logged in as');
 });
