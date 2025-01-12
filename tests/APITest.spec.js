@@ -29,7 +29,7 @@ test('sf', async () => {
     const fullLoginPayload = {
         email: loginPayload.email,
         password: loginPayload.password,
-        csrfmiddlewaretoken: csrfToken,
+        csrfmiddlewaretoken: "90d178fc-4071-4abc-be75-0b74b259e58c",
     };
 
     console.log('Prepared Login Payload:', fullLoginPayload);
@@ -41,7 +41,7 @@ test('sf', async () => {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-            'X-CSRFToken': csrfToken, // Adding CSRF token in headers as well
+            // 'X-CSRFToken': "90d178fc-4071-4abc-be75-0b74b259e58c", // Adding CSRF token in headers as well
         },
     });
 
