@@ -5,7 +5,7 @@ node_modules/
 /playwright/.cache/
 /test-examples/
 /screenshots/
-/__snapshots__/
+VisualTest.spec.js-snapshots
 
 # Ignore test data file
 test-data.json
