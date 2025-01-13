@@ -10,8 +10,12 @@ test.beforeEach(async ({ page }) => {
     });
 });
 
-test('Verify visual Main page', async({ page }) => {
+test('Verify visual Main page', async ({ page }) => {
     await page.goto('https://automationexercise.com/');
-    await expect(await page.screenshot()).toMatchSnapshot('/screenshorts/main.png')
+    await expect(page).toHaveScreenshot('main.png');
+});
 
+test('Verify visual contuct Us page', async ({ page }) => {
+    await page.goto('https://automationexercise.com/contact_us');
+    await expect(page).toHaveScreenshot('contuctUs.png');
 });

@@ -6,6 +6,7 @@ node_modules/
 /test-examples/
 /screenshots/
 VisualTest.spec.js-snapshots/
+
 # Ignore test data file
 test-data.json
 state.json
