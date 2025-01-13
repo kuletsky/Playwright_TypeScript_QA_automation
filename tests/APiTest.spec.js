@@ -26,11 +26,9 @@ test('Verify that user can successfuly SignIn with valid credentials', async () 
     // LogIn
     const page = await webContext.newPage();   
 
+    // Go to mainPage
     await page.goto('https://automationexercise.com/');
-    // await page.locator('.fa.fa-lock').click();
-
-    // Verify that 'Logged in as' is visible
-    // const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
-    // await expect(logged).toContain('Logged in as');
+    
+    // Verify that user loged in successfuly 
     await expect(page.locator('a').filter({ hasText: 'Logged in as' })).toContainText('Logged in as');
 });
