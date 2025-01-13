@@ -10,192 +10,192 @@ test.beforeEach(async ({ page }) => {
     });
 
     await page.goto('https://automationexercise.com/');
-    
+
     // Verify the page title
     await expect(page).toHaveTitle('Automation Exercise');
 
     // Verify the presence of a logo
     const logo = await page.locator('img[alt="Website for automation practice"]');
     await expect(page.locator(logo)).toBeVisible;
-    
+
     // Verify URL if applicable
     await expect(page).toHaveURL('https://automationexercise.com/');
 });
 
 const testData = {
     name: 'john',
-    email: 'john@gwm1w2s3w4es5cw6w78swssdws9wsww01212323ww1w11wqsw2wwqww.com'
+    email: 'john@gwm1w2s3w4ews5cw6w78swssdws9wsww01212323ww1w11wqsw2wwqww.com'
 };
 
 test.describe('UI tests', () => {
-    test('Verify that user can successfuly SignUp with valid credentials',  async ({ page }) => {
+    test('Verify that user can successfuly SignUp with valid credentials', async ({ page }) => {
         // Verify the New user signUp is visible 
         await page.locator('.fa.fa-lock').click();
         const signUp = await page.locator('.signup-form h2').textContent();
         await expect(signUp).toContain('New User Signup!')
-    
+
         // Enter name and email address
         const signupNameInput = page.locator('[data-qa="signup-name"]');
         const signupEmailInput = page.locator('[data-qa="signup-email"]');
-    
+
         // Verify that input fields contain the expected values
         await signupNameInput.fill(testData.name);
         await expect(signupNameInput).toHaveValue(testData.name);
-    
+
         await signupEmailInput.fill(testData.email);
         await expect(signupEmailInput).toHaveValue(testData.email);
-    
+
         // Click 'signUp' button
         await page.locator('[data-qa="signup-button"]').click();
-            
+
         // Verify that 'ENTER ACCOUNT INFORMATION' is visible
         await page.waitForLoadState();
         const text = await page.locator('b').first().textContent();
         await expect(text).toContain('Enter Account Information');
-            
+
         // Fill detailse: Title, Name, Email, Password, Date of birth
-                
-            // Verify title radio botton works
-            const title = page.locator('#id_gender1');
-            await title.check();
-            await expect(title).toBeChecked();
-            await expect(page.locator('#id_gender2')).not.toBeChecked();
-    
-            // Veryfy that Name field contains the expected name
-            const name = page.locator('#name');
-            await name.fill('');
-            await name.fill('john');
-            await expect(name).toHaveValue('john'); 
-    
-            const email = page.locator('#email');
-    
-            // Verify that pswd contains the expected password
-            const pswd = page.locator('#password');
-            await pswd.fill('1234');
-            await expect(pswd).toHaveValue('1234')
-    
-            await page.locator('[for="newsletter"]').check();
-            await page.locator('[for="optin"]').check();
-    
-            // Fill details
-            await page.locator('#first_name').fill('John');
-            await page.locator('#last_name').fill('Cooper');
-            await page.locator('#company').fill('Kuletsky Software');
-            await page.locator('#address1').fill('address1');
-            await page.locator('#address2').fill('address2');
-            await page.locator('select#country').selectOption('United States');
-            await page.locator('#state').fill('MD');
-            await page.locator('#city').fill('Goodwil');
-            await page.locator('#zipcode').fill('111111');
-            await page.locator('#mobile_number').fill('12345678');
+
+        // Verify title radio botton works
+        const title = page.locator('#id_gender1');
+        await title.check();
+        await expect(title).toBeChecked();
+        await expect(page.locator('#id_gender2')).not.toBeChecked();
+
+        // Veryfy that Name field contains the expected name
+        const name = page.locator('#name');
+        await name.fill('');
+        await name.fill('john');
+        await expect(name).toHaveValue('john');
+
+        const email = page.locator('#email');
+
+        // Verify that pswd contains the expected password
+        const pswd = page.locator('#password');
+        await pswd.fill('1234');
+        await expect(pswd).toHaveValue('1234')
+
+        await page.locator('[for="newsletter"]').check();
+        await page.locator('[for="optin"]').check();
+
+        // Fill details
+        await page.locator('#first_name').fill('John');
+        await page.locator('#last_name').fill('Cooper');
+        await page.locator('#company').fill('Kuletsky Software');
+        await page.locator('#address1').fill('address1');
+        await page.locator('#address2').fill('address2');
+        await page.locator('select#country').selectOption('United States');
+        await page.locator('#state').fill('MD');
+        await page.locator('#city').fill('Goodwil');
+        await page.locator('#zipcode').fill('111111');
+        await page.locator('#mobile_number').fill('12345678');
         await page.locator('[data-qa="create-account"]').click();
-            
+
         // Verify that 'Account created!' is visible
         const account_created = await page.locator('b').textContent();
         await expect(account_created).toContain('Account Created!');
-            
+
         // Click 'Continue' button
         await page.locator('[data-qa="continue-button"]').click();
-    
+
         // Verify that 'Logged in as Username'
         const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
         await expect(logged).toContain('Logged in as');
-    
+
         // Click 'Delete account' button
         await page.locator('a[href*="del"]').click();
-    
+
         // Verify that 'ACCOUNT DELETED!' is visible
         const del = await page.locator('b').textContent();
         await expect(del).toContain('Account Deleted!')
-    
+
         // Click 'Continue' button
-        await page.locator('[data-qa="continue-button"]').click();        
-    
+        await page.locator('[data-qa="continue-button"]').click();
+
         // Verify the page title
         await expect(page).toHaveTitle('Automation Exercise');
-    
+
         // Verify the presence of a logo
         const logo = await page.locator('img[alt="Website for automation practice"]');
         await expect(page.locator(logo)).toBeVisible;
-    
+
         // Verify URL if applicable
         await expect(page).toHaveURL('https://automationexercise.com/')
-    }); 
-        
+    });
+
     test('Verify that user can successfuly SignIn with valid credentials', async ({ page }) => {
         // Click the 'Signup/Login' button
         await page.locator('.fa.fa-lock').click();
-          
+
         // Verify 'Login to your acount' is visible
         const loginForm = await page.locator('.login-form h2').textContent();
         await expect(loginForm).toContain('Login to your account');
-        
+
         // Enter valid email amd password
         await page.locator('[data-qa="login-email"]').fill('trip27@lftjaguar.com');
         await page.locator('[data-qa="login-password"]').fill('1234');
-    
+
         // Click the 'Login' button
         await page.locator('[data-qa="login-button"]').click();
-            
+
         // Verify that 'Logged in as' is visible
         const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
         await expect(logged).toContain('Logged in as');
     });
-        
+
     test('Verify that user cannot SignIn with invalid credentials', async ({ page }) => {
         // Click the 'Signup/Login' button
         page.locator('.fa.fa-lock').click();
-    
+
         // Enter invalid crdentials
         await page.locator('[data-qa="login-email"]').fill('trip27@lftjaguar.com');
         await page.locator('[data-qa="login-password"]').fill('1234r5');
-    
+
         // Click the 'Login' button
         await page.locator('[data-qa="login-button"]').click();
-    
+
         // Verify error 'Your email or password is incorrect!' is vissible
         const error = await page.getByText('Your email or password is incorrect!').textContent();
         await expect(error).toContain('Your email or password is incorrect!');
     });
-    
-    test('Verify user can successfuly Logout', async({ page }) => {
+
+    test('Verify user can successfuly Logout', async ({ page }) => {
         // Click the 'Signup/Login' button
         page.locator('.fa.fa-lock').click();
-          
+
         // Verify 'Login to your acount' is visible
         const loginForm = await page.locator('.login-form h2').textContent();
         await expect(loginForm).toContain('Login to your account');
-        
+
         // Enter valid email amd password
         await page.locator('[data-qa="login-email"]').fill('trip27@lftjaguar.com');
         await page.locator('[data-qa="login-password"]').fill('1234');
-    
+
         // Click the 'Login' button
         await page.locator('[data-qa="login-button"]').click();
-            
+
         // Verify that 'Logged in as' is visible
         const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
         await expect(logged).toContain('Logged in as');
-    
+
         // Click 'logout' button
         await page.locator('a[href*="/logout"]').click();
-            
+
         // Verify thet user navigated to gin page
         await expect(loginForm).toContain('Login to your account');
     });
-    
-    test('Verify that User cannot signUp with existing email', async({ page }) => {
+
+    test('Verify that User cannot signUp with existing email', async ({ page }) => {
         // Verify the 'New user signUp' is visible 
         await page.locator('.fa.fa-lock').click();
         const signUp = await page.locator('.signup-form h2').textContent();
         await expect(signUp).toContain('New User Signup!')
-    
+
         // Enter name and already registered email address
         const signupNameInput = page.locator('[data-qa="signup-name"]');
         const signupEmailInput = page.locator('[data-qa="signup-email"]');
         await signupNameInput.fill(testData.name);
         await signupEmailInput.fill('trip27@lftjaguar.com');
-    
+
         // Click 'signUp' button
         await page.locator('[data-qa="signup-button"]').click();
 
@@ -205,29 +205,29 @@ test.describe('UI tests', () => {
     });
 
     test('Verify user can navigate to Contact Us Form', async ({ page }) => {
-    // Click on "Contuct Us" button
-    await page.locator('a[href*="contact"]').click();
+        // Click on "Contuct Us" button
+        await page.locator('a[href*="contact"]').click();
 
-    // Verify "Get in touch" is visible
-    const getinTouch = await page.locator('.contact-form h2').textContent();
-    await expect(getinTouch).toContain('Get In Touch');
+        // Verify "Get in touch" is visible
+        const getinTouch = await page.locator('.contact-form h2').textContent();
+        await expect(getinTouch).toContain('Get In Touch');
 
-    // Fill the form
-    page.on('dialog', async (dialog) => {
-        console.log(dialog.message()); 
-        await dialog.accept();         
-      });
+        // Fill the form
+        page.on('dialog', async (dialog) => {
+            console.log(dialog.message());
+            await dialog.accept();
+        });
 
-    await page.locator('[data-qa="name"]').fill('John');
-    await page.locator('[data-qa="email"]').fill('wqfq@fvgf.com');
-    await page.locator('[data-qa="subject"]').fill('wef');
-    await page.locator('[data-qa="message"]').fill('qfwf');
+        await page.locator('[data-qa="name"]').fill('John');
+        await page.locator('[data-qa="email"]').fill('wqfq@fvgf.com');
+        await page.locator('[data-qa="subject"]').fill('wef');
+        await page.locator('[data-qa="message"]').fill('qfwf');
 
-    page.once('dialog', dialog => {
-        console.log(`Dialog message: ${dialog.message()}`);
-        dialog.accept().catch(() => {});
-      });
-      await page.getByRole('button', { name: 'Submit' }).click();
+        page.once('dialog', dialog => {
+            console.log(`Dialog message: ${dialog.message()}`);
+            dialog.accept().catch(() => { });
+        });
+        await page.getByRole('button', { name: 'Submit' }).click();
     });
 
     test('Verify that user can navigate to Test Cases Page', async ({ page }) => {
@@ -244,7 +244,7 @@ test.describe('UI tests', () => {
 
         // Verify that all list of products is visible
         const products = await page.locator('.single-products');
-          
+
         for (let i = 0; i < await products.count(); i++) {
             const productList = products.nth(i);
             await expect(productList.locator('.productinfo.text-center p')).not.toHaveText('');
@@ -264,34 +264,36 @@ test.describe('UI tests', () => {
         await expect(page.locator('.product-information span').nth(1)).toBeVisible();
     });
 
-    test('Verify that user can search a product', async ({ page }) => {
+    test.only('Verify that user can search a product', async ({ page }) => {
         await page.locator('a[href="/products"]').click();
-       
+
         // Verify that the page is navigated successfuly 
         await expect(page.locator('.title.text-center')).toHaveText('All Products');
 
         // Verify that all list of products is visible
         const products = await page.locator('.single-products');
 
-        await page.locator('#search_product').fill('Polo');
+        await page.locator('#search_product').fill('Blue Top');
+        await page.waitForSelector('.fa.fa-search');
         await page.locator('.fa.fa-search').click();
-        
-        for (let i = 0; i < await products.count(); i++){
+        await page.waitForSelector('.single-products');
+
+        for (let i = 0; i < await products.count(); i++) {
             const searchList = products.nth(i);
-            await expect(searchList.locator('.productinfo.text-center p')).toContainText('Polo');
+            await expect(searchList.locator('.productinfo.text-center p')).toContainText('Blue Top');
         };
 
     });
-    
+
     test('Verify that user can succcessfully subscribe', async ({ page }) => {
         // Verify text Subscription
         await page.locator('.single-widget').scrollIntoViewIfNeeded();
-        await expect(page.locator('.single-widget h2')).toHaveText('Subscription');    
+        await expect(page.locator('.single-widget h2')).toHaveText('Subscription');
 
         // Enter email address in input and click arrow button
         await page.locator('#susbscribe_email').fill('wef@weg.com');
         await page.locator('#subscribe').click();
-        
+
         // Verify success message 'You have been successfully subscribed!' is visible
         await expect(page.locator('.alert-success.alert')).toContainText('You have been successfully subscribed!')
     });
@@ -299,15 +301,15 @@ test.describe('UI tests', () => {
     test('Verify Subscription in Cart page', async ({ page }) => {
         // Click 'Cart' button
         await page.locator('a[href*="cart"]').first().click();
-        
+
         // Verify text Subscription
         await page.locator('.single-widget').scrollIntoViewIfNeeded();
-        await expect(page.locator('.single-widget h2')).toHaveText('Subscription');    
- 
+        await expect(page.locator('.single-widget h2')).toHaveText('Subscription');
+
         // Enter email address in input and click arrow button
         await page.locator('#susbscribe_email').fill('wef@weg.com');
         await page.locator('#subscribe').click();
-         
+
         // Verify success message 'You have been successfully subscribed!' is visible
         await expect(page.locator('.alert-success.alert')).toContainText('You have been successfully subscribed!')
     });
@@ -340,7 +342,7 @@ test.describe('UI tests', () => {
         console.log(product1Name, product2Name)
         await expect(page.locator('a[href="/product_details/1"]')).toContainText(product1Name);
         await expect(page.locator('a[href="/product_details/2"]')).toContainText(product2Name);
-        
+
         // Verify correct prices, quantity and total price
         await expect(page.locator('.cart_price p').first()).toContainText(product1Price);
         await expect(page.locator('.cart_price p').nth(1)).toContainText(product2Price);
@@ -358,7 +360,7 @@ test.describe('UI tests', () => {
         for (let i = 0; i < await itemCart.count(); i++) {
             await page.locator('.fa.fa-times').nth(i).click();
         }
-        
+
         // Verify that product is removed from the cart
         await expect(page.locator('p b')).toContainText('Cart is empty!');
 
@@ -398,19 +400,19 @@ test.describe('UI tests', () => {
         };
 
         // Verify that product is removed from the cart
-        await expect(page.locator('p b')).toContainText('Cart is empty!');        
+        await expect(page.locator('p b')).toContainText('Cart is empty!');
     });
 
     test('Verify user can Register while Checkout', async ({ page }) => {
         // Add products to card
         await page.locator('a[data-product-id="1"]').first().click();
-        
+
         // Click 'Continue Shopping' button
         await page.locator('[data-dismiss="modal"]').click();
-        
+
         // Click 'Cart' button
         await page.locator('a[href="/view_cart"]').first().click();
-        
+
         // Verify that cart page is displayed
         await expect(page.locator('#cart_info_table')).toBeVisible();
 
@@ -424,46 +426,46 @@ test.describe('UI tests', () => {
         // Enter name and email address
         const signupNameInput = page.locator('[data-qa="signup-name"]');
         const signupEmailInput = page.locator('[data-qa="signup-email"]');
-            
+
         // Verify that input fields contain the expected values
         await signupNameInput.fill(testData.name);
         await expect(signupNameInput).toHaveValue(testData.name);
-            
+
         await signupEmailInput.fill(testData.email);
         await expect(signupEmailInput).toHaveValue(testData.email);
-            
+
         // Click 'signUp' button
         await page.locator('[data-qa="signup-button"]').click();
-                    
+
         // Verify that 'ENTER ACCOUNT INFORMATION' is visible
         await page.waitForLoadState();
         const text = await page.locator('b').first().textContent();
         await expect(text).toContain('Enter Account Information');
-                    
+
         // Fill detailse: Title, Name, Email, Password, Date of birth
-                        
+
         // Verify title radio botton works
         const title = page.locator('#id_gender1');
         await title.check();
         await expect(title).toBeChecked();
         await expect(page.locator('#id_gender2')).not.toBeChecked();
-            
+
         // Veryfy that Name field contains the expected name
         const name = page.locator('#name');
         await name.fill('');
         await name.fill('john');
-        await expect(name).toHaveValue('john'); 
-            
+        await expect(name).toHaveValue('john');
+
         const email = page.locator('#email');
-            
+
         // Verify that pswd contains the expected password
         const pswd = page.locator('#password');
         await pswd.fill('1234');
         await expect(pswd).toHaveValue('1234')
-            
+
         await page.locator('[for="newsletter"]').check();
         await page.locator('[for="optin"]').check();
-            
+
         // Fill details
         await page.locator('#first_name').fill('John');
         await page.locator('#last_name').fill('Cooper');
@@ -475,20 +477,20 @@ test.describe('UI tests', () => {
         await page.locator('#city').fill('Goodwil');
         await page.locator('#zipcode').fill('111111');
         await page.locator('#mobile_number').fill('12345678');
-        
+
         await page.locator('[data-qa="create-account"]').click();
 
         // Verify that 'Account created!' is visible
         await page.waitForLoadState();
         await expect(page.locator('b')).toContainText('Account Created!');
-            
+
         // Click 'Continue' button
         await page.locator('[data-qa="continue-button"]').click();
-    
+
         // Verify that 'Logged in as Username'
         const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
-        await expect(logged).toContain('Logged in as');        
-                
+        await expect(logged).toContain('Logged in as');
+
         // Click 'cart' button
         await page.locator('a[href="/view_cart"]').first().click();
 
@@ -509,7 +511,7 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="cvc"]').fill('988');
         await page.locator('[data-qa="expiry-month"]').fill('12.23');
         await page.locator('[data-qa="expiry-year"]').fill('2030');
-        
+
         // Click 'Pay and Confirm Order' button
         await page.locator('#submit').click();
 
@@ -523,9 +525,9 @@ test.describe('UI tests', () => {
         const del = await page.locator('b').textContent();
         await expect(del).toContain('Account Deleted!')
         await expect(page.locator('b')).toContainText('Account Deleted!')
-    
+
         // Click 'Continue' button
-        await page.locator('[data-qa="continue-button"]').click();  
+        await page.locator('[data-qa="continue-button"]').click();
     });
 
     test('Verify user can Register before Checkout', async ({ page }) => {
@@ -533,69 +535,69 @@ test.describe('UI tests', () => {
         await page.locator('.fa.fa-lock').click();
         const signUp = await page.locator('.signup-form h2').textContent();
         await expect(signUp).toContain('New User Signup!')
-    
+
         // Enter name and email address
         const signupNameInput = page.locator('[data-qa="signup-name"]');
         const signupEmailInput = page.locator('[data-qa="signup-email"]');
-    
+
         // Verify that input fields contain the expected values
         await signupNameInput.fill(testData.name);
         await expect(signupNameInput).toHaveValue(testData.name);
-    
+
         await signupEmailInput.fill(testData.email);
         await expect(signupEmailInput).toHaveValue(testData.email);
-    
+
         // Click 'signUp' button
         await page.locator('[data-qa="signup-button"]').click();
-            
+
         // Verify that 'ENTER ACCOUNT INFORMATION' is visible
         const text = await page.locator('b').first().textContent();
         await expect(text).toContain('Enter Account Information');
-            
+
         // Fill detailse: Title, Name, Email, Password, Date of birth
-                
-            // Verify title radio botton works
-            const title = page.locator('#id_gender1');
-            await title.check();
-            await expect(title).toBeChecked();
-            await expect(page.locator('#id_gender2')).not.toBeChecked();
-    
-            // Veryfy that Name field contains the expected name
-            const name = page.locator('#name');
-            await name.fill('');
-            await name.fill('john');
-            await expect(name).toHaveValue('john'); 
-    
-            const email = page.locator('#email');
-    
-            // Verify that pswd contains the expected password
-            const pswd = page.locator('#password');
-            await pswd.fill('1234');
-            await expect(pswd).toHaveValue('1234')
-    
-            await page.locator('[for="newsletter"]').check();
-            await page.locator('[for="optin"]').check();
-    
-            // Fill details
-            await page.locator('#first_name').fill('John');
-            await page.locator('#last_name').fill('Cooper');
-            await page.locator('#company').fill('Kuletsky Software');
-            await page.locator('#address1').fill('address1');
-            await page.locator('#address2').fill('address2');
-            await page.locator('select#country').selectOption('United States');
-            await page.locator('#state').fill('MD');
-            await page.locator('#city').fill('Goodwil');
-            await page.locator('#zipcode').fill('111111');
-            await page.locator('#mobile_number').fill('12345678');
-            await page.locator('[data-qa="create-account"]').click();
-            
+
+        // Verify title radio botton works
+        const title = page.locator('#id_gender1');
+        await title.check();
+        await expect(title).toBeChecked();
+        await expect(page.locator('#id_gender2')).not.toBeChecked();
+
+        // Veryfy that Name field contains the expected name
+        const name = page.locator('#name');
+        await name.fill('');
+        await name.fill('john');
+        await expect(name).toHaveValue('john');
+
+        const email = page.locator('#email');
+
+        // Verify that pswd contains the expected password
+        const pswd = page.locator('#password');
+        await pswd.fill('1234');
+        await expect(pswd).toHaveValue('1234')
+
+        await page.locator('[for="newsletter"]').check();
+        await page.locator('[for="optin"]').check();
+
+        // Fill details
+        await page.locator('#first_name').fill('John');
+        await page.locator('#last_name').fill('Cooper');
+        await page.locator('#company').fill('Kuletsky Software');
+        await page.locator('#address1').fill('address1');
+        await page.locator('#address2').fill('address2');
+        await page.locator('select#country').selectOption('United States');
+        await page.locator('#state').fill('MD');
+        await page.locator('#city').fill('Goodwil');
+        await page.locator('#zipcode').fill('111111');
+        await page.locator('#mobile_number').fill('12345678');
+        await page.locator('[data-qa="create-account"]').click();
+
         // Verify that 'Account created!' is visible
         await page.waitForLoadState();
         await expect(page.locator('b')).toContainText('Account Created!');
-            
+
         // Click 'Continue' button
         await page.locator('[data-qa="continue-button"]').click();
-    
+
         // Verify that 'Logged in as Username'
         const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
         await expect(logged).toContain('Logged in as');
@@ -630,7 +632,7 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="cvc"]').fill('988');
         await page.locator('[data-qa="expiry-month"]').fill('12.23');
         await page.locator('[data-qa="expiry-year"]').fill('2030');
-        
+
         // Click 'Pay and Confirm Order' button
         await page.locator('#submit').click();
 
@@ -644,26 +646,26 @@ test.describe('UI tests', () => {
         const del = await page.locator('b').textContent();
         await expect(del).toContain('Account Deleted!')
         await expect(page.locator('b')).toContainText('Account Deleted!')
-    
+
         // Click 'Continue' button
-        await page.locator('[data-qa="continue-button"]').click();  
+        await page.locator('[data-qa="continue-button"]').click();
     });
 
     test('Verify user can Login befor Checkout', async ({ page }) => {
         // Click the 'Signup/Login' button
         page.locator('.fa.fa-lock').click();
-          
+
         // Verify 'Login to your acount' is visible
         const loginForm = await page.locator('.login-form h2').textContent();
         await expect(loginForm).toContain('Login to your account');
-        
+
         // Enter valid email amd password
         await page.locator('[data-qa="login-email"]').fill('trip27@lftjaguar.com');
         await page.locator('[data-qa="login-password"]').fill('1234');
-    
+
         // Click the 'Login' button
         await page.locator('[data-qa="login-button"]').click();
-            
+
         // Verify that 'Logged in as' is visible
         const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
         await expect(logged).toContain('Logged in as');
@@ -697,7 +699,7 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="cvc"]').fill('988');
         await page.locator('[data-qa="expiry-month"]').fill('12.23');
         await page.locator('[data-qa="expiry-year"]').fill('2030');
-        
+
         // Click 'Pay and Confirm Order' button
         await page.locator('#submit').click();
 
@@ -778,40 +780,40 @@ test.describe('UI tests', () => {
 
         // Click the 'Signup/Login' button
         await page.locator('.fa.fa-lock').click();
-          
+
         // Verify 'Login to your acount' is visible
         const loginForm = await page.locator('.login-form h2').textContent();
         await expect(loginForm).toContain('Login to your account');
-        
+
         // Enter valid email amd password
         await page.locator('[data-qa="login-email"]').fill('trip27@lftjaguar.com');
         await page.locator('[data-qa="login-password"]').fill('1234');
-    
+
         // Click the 'Login' button
         await page.locator('[data-qa="login-button"]').click();
-            
+
         // Verify that 'Logged in as' is visible
         const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
         await expect(logged).toContain('Logged in as');
 
         // Again, go to Cart page
         await page.locator('li a[href="/view_cart"]').click();
-        
+
         // Verify that those products are visible in cart after login as well
         const cartProducts = await page.locator('td.cart_description')
         for (let k = 0; k < await cartProducts.count(); k++) {
             expect(await cartProducts.locator('h4 a').nth(k)).toContainText('Polo');
             console.log(await cartProducts.locator('h4 a').nth(k).textContent());
         };
-        
+
         // Click 'X' button corresponding to particular product
         const itemCart = page.locator('tbody tr');
         for (let i = 0; i < await itemCart.count(); i++) {
             await page.locator('.fa.fa-times').nth(i).click();
         };
-        
+
         // Verify that product is removed from the cart
-        await expect(page.locator('p b')).toContainText('Cart is empty!');        
+        await expect(page.locator('p b')).toContainText('Cart is empty!');
     });
 
     test('Verify can add review on product', async ({ page }) => {
@@ -861,9 +863,9 @@ test.describe('UI tests', () => {
         for (let i = 0; i < await itemCart.count(); i++) {
             await page.locator('.fa.fa-times').nth(i).click();
         };
-        
+
         // Verify that product is removed from the cart
-        await expect(page.locator('p b')).toContainText('Cart is empty!');          
+        await expect(page.locator('p b')).toContainText('Cart is empty!');
     });
 
     test('Verify address details in checkout page', async ({ page }) => {
@@ -871,70 +873,70 @@ test.describe('UI tests', () => {
         await page.locator('.fa.fa-lock').click();
         const signUp = await page.locator('.signup-form h2').textContent();
         await expect(signUp).toContain('New User Signup!')
-    
+
         // Enter name and email address
         const signupNameInput = page.locator('[data-qa="signup-name"]');
         const signupEmailInput = page.locator('[data-qa="signup-email"]');
-    
+
         // Verify that input fields contain the expected values
         await signupNameInput.fill(testData.name);
         await expect(signupNameInput).toHaveValue(testData.name);
-    
+
         await signupEmailInput.fill(testData.email);
         await expect(signupEmailInput).toHaveValue(testData.email);
-    
+
         // Click 'signUp' button
         await page.locator('[data-qa="signup-button"]').click();
-            
+
         // Verify that 'ENTER ACCOUNT INFORMATION' is visible
         await page.waitForLoadState();
         const text = await page.locator('b').first().textContent();
         await expect(text).toContain('Enter Account Information');
-            
+
         // Fill detailse: Title, Name, Email, Password, Date of birth
-                
-            // Verify title radio botton works
-            const title = page.locator('#id_gender1');
-            await title.check();
-            await expect(title).toBeChecked();
-            await expect(page.locator('#id_gender2')).not.toBeChecked();
-    
-            // Veryfy that Name field contains the expected name
-            const name = page.locator('#name');
-            await name.fill('');
-            await name.fill('john');
-            await expect(name).toHaveValue('john'); 
-    
-            const email = page.locator('#email');
-    
-            // Verify that pswd contains the expected password
-            const pswd = page.locator('#password');
-            await pswd.fill('1234');
-            await expect(pswd).toHaveValue('1234')
-    
-            await page.locator('[for="newsletter"]').check();
-            await page.locator('[for="optin"]').check();
-    
-            // Fill details
-            await page.locator('#first_name').fill('John');
-            await page.locator('#last_name').fill('Cooper');
-            await page.locator('#company').fill('Kuletsky Software');
-            await page.locator('#address1').fill('address1');
-            await page.locator('#address2').fill('address2');
-            await page.locator('select#country').selectOption('United States');
-            await page.locator('#state').fill('MD');
-            await page.locator('#city').fill('Goodwil');
-            await page.locator('#zipcode').fill('111111');
-            await page.locator('#mobile_number').fill('12345678');
+
+        // Verify title radio botton works
+        const title = page.locator('#id_gender1');
+        await title.check();
+        await expect(title).toBeChecked();
+        await expect(page.locator('#id_gender2')).not.toBeChecked();
+
+        // Veryfy that Name field contains the expected name
+        const name = page.locator('#name');
+        await name.fill('');
+        await name.fill('john');
+        await expect(name).toHaveValue('john');
+
+        const email = page.locator('#email');
+
+        // Verify that pswd contains the expected password
+        const pswd = page.locator('#password');
+        await pswd.fill('1234');
+        await expect(pswd).toHaveValue('1234')
+
+        await page.locator('[for="newsletter"]').check();
+        await page.locator('[for="optin"]').check();
+
+        // Fill details
+        await page.locator('#first_name').fill('John');
+        await page.locator('#last_name').fill('Cooper');
+        await page.locator('#company').fill('Kuletsky Software');
+        await page.locator('#address1').fill('address1');
+        await page.locator('#address2').fill('address2');
+        await page.locator('select#country').selectOption('United States');
+        await page.locator('#state').fill('MD');
+        await page.locator('#city').fill('Goodwil');
+        await page.locator('#zipcode').fill('111111');
+        await page.locator('#mobile_number').fill('12345678');
         await page.locator('[data-qa="create-account"]').click();
-            
+
         // Verify that 'Account created!' is visible
         const account_created = await page.locator('b').textContent();
         await expect(account_created).toContain('Account Created!');
-            
+
         // Click 'Continue' button
         await page.locator('[data-qa="continue-button"]').click();
-    
+
         // Verify that 'Logged in as Username'
         const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
         await expect(logged).toContain('Logged in as');
@@ -966,21 +968,21 @@ test.describe('UI tests', () => {
         const del = await page.locator('b').textContent();
         await expect(del).toContain('Account Deleted!')
         await expect(page.locator('b')).toContainText('Account Deleted!')
-    
+
         // Click 'Continue' button
-        await page.locator('[data-qa="continue-button"]').click();  
+        await page.locator('[data-qa="continue-button"]').click();
     });
 
     test('Verify user can download Invoice after purchase order', async ({ page }) => {
         // Add products to card
         await page.locator('a[data-product-id="1"]').first().click();
-        
+
         // Click 'Continue Shopping' button
         await page.locator('[data-dismiss="modal"]').click();
-        
+
         // Click 'Cart' button
         await page.locator('a[href="/view_cart"]').first().click();
-        
+
         // Verify that cart page is displayed
         await expect(page.locator('#cart_info_table')).toBeVisible();
 
@@ -994,46 +996,46 @@ test.describe('UI tests', () => {
         // Enter name and email address
         const signupNameInput = page.locator('[data-qa="signup-name"]');
         const signupEmailInput = page.locator('[data-qa="signup-email"]');
-            
+
         // Verify that input fields contain the expected values
         await signupNameInput.fill(testData.name);
         await expect(signupNameInput).toHaveValue(testData.name);
-            
+
         await signupEmailInput.fill(testData.email);
         await expect(signupEmailInput).toHaveValue(testData.email);
-            
+
         // Click 'signUp' button
         await page.locator('[data-qa="signup-button"]').click();
-                    
+
         // Verify that 'ENTER ACCOUNT INFORMATION' is visible
         await page.waitForLoadState();
         const text = await page.locator('b').first().textContent();
         await expect(text).toContain('Enter Account Information');
-                    
+
         // Fill detailse: Title, Name, Email, Password, Date of birth
-                        
+
         // Verify title radio botton works
         const title = page.locator('#id_gender1');
         await title.check();
         await expect(title).toBeChecked();
         await expect(page.locator('#id_gender2')).not.toBeChecked();
-            
+
         // Veryfy that Name field contains the expected name
         const name = page.locator('#name');
         await name.fill('');
         await name.fill('john');
-        await expect(name).toHaveValue('john'); 
-            
+        await expect(name).toHaveValue('john');
+
         const email = page.locator('#email');
-            
+
         // Verify that pswd contains the expected password
         const pswd = page.locator('#password');
         await pswd.fill('1234');
         await expect(pswd).toHaveValue('1234')
-            
+
         await page.locator('[for="newsletter"]').check();
         await page.locator('[for="optin"]').check();
-            
+
         // Fill details
         await page.locator('#first_name').fill('John');
         await page.locator('#last_name').fill('Cooper');
@@ -1045,20 +1047,20 @@ test.describe('UI tests', () => {
         await page.locator('#city').fill('Goodwil');
         await page.locator('#zipcode').fill('111111');
         await page.locator('#mobile_number').fill('12345678');
-        
+
         await page.locator('[data-qa="create-account"]').click();
 
         // Verify that 'Account created!' is visible
         await page.waitForLoadState();
         await expect(page.locator('b')).toContainText('Account Created!');
-            
+
         // Click 'Continue' button
         await page.locator('[data-qa="continue-button"]').click();
-    
+
         // Verify that 'Logged in as Username'
         const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
-        await expect(logged).toContain('Logged in as');        
-                
+        await expect(logged).toContain('Logged in as');
+
         // Click 'cart' button
         await page.locator('a[href="/view_cart"]').first().click();
 
@@ -1079,12 +1081,12 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="cvc"]').fill('988');
         await page.locator('[data-qa="expiry-month"]').fill('12.23');
         await page.locator('[data-qa="expiry-year"]').fill('2030');
-        
+
         // Click 'Pay and Confirm Order' button
         await page.locator('#submit').click();
 
         // Verify success message 'Your order has been placed successfully!'
-        await expect(page.locator('.alert-success.alert').first()).toHaveText('You have been successfully subscribed!');        
+        await expect(page.locator('.alert-success.alert').first()).toHaveText('You have been successfully subscribed!');
 
         // Click 'Download Invoice' button and verify invoice is downloaded successfully.
         await page.locator('.btn.btn-default.check_out').click();
@@ -1099,9 +1101,9 @@ test.describe('UI tests', () => {
         const del = await page.locator('b').textContent();
         await expect(del).toContain('Account Deleted!')
         await expect(page.locator('b')).toContainText('Account Deleted!')
-    
+
         // Click 'Continue' button
-        await page.locator('[data-qa="continue-button"]').click();  
+        await page.locator('[data-qa="continue-button"]').click();
     });
 
     test('Verify Scroll Up using "Arrow" button and Scroll Down functionality', async ({ page }) => {
@@ -1109,7 +1111,7 @@ test.describe('UI tests', () => {
         await page.locator('.single-widget').scrollIntoViewIfNeeded();
 
         // Verify 'SUBSCRIPTION' is visible
-        await expect(page.locator('.single-widget h2')).toHaveText('Subscription'); 
+        await expect(page.locator('.single-widget h2')).toHaveText('Subscription');
 
         // Click on arrow at bottom right side to move upward
         await page.locator('.fa.fa-angle-up').click();
