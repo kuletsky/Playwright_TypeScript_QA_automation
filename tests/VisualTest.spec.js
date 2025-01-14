@@ -18,4 +18,5 @@ test('Verify visual Main page', async ({ page }) => {
 test('Verify visual contuct Us page', async ({ page }) => {
     await page.goto('https://automationexercise.com/contact_us');
     await expect(page).toHaveScreenshot('contuctUs.png');
+    await expect(locator('wegf')).toMatch
 });

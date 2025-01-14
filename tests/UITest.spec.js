@@ -264,26 +264,27 @@ test.describe('UI tests', () => {
         await expect(page.locator('.product-information span').nth(1)).toBeVisible();
     });
 
-    test.only('Verify that user can search a product', async ({ page }) => {
-        await page.locator('a[href="/products"]').click();
+    test
+        ('Verify that user can search a product', async ({ page }) => {
+            await page.locator('a[href="/products"]').click();
 
-        // Verify that the page is navigated successfuly 
-        await expect(page.locator('.title.text-center')).toHaveText('All Products');
+            // Verify that the page is navigated successfuly 
+            await expect(page.locator('.title.text-center')).toHaveText('All Products');
 
-        // Verify that all list of products is visible
-        const products = await page.locator('.single-products');
+            // Verify that all list of products is visible
+            const products = await page.locator('.single-products');
 
-        await page.locator('#search_product').fill('Blue Top');
-        await page.waitForSelector('.fa.fa-search');
-        await page.locator('.fa.fa-search').click();
-        await page.waitForSelector('.single-products');
+            await page.locator('#search_product').fill('Blue Top');
+            await page.waitForSelector('.fa.fa-search');
+            await page.locator('.fa.fa-search').click();
+            await page.waitForSelector('.single-products');
 
-        for (let i = 0; i < await products.count(); i++) {
-            const searchList = products.nth(i);
-            await expect(searchList.locator('.productinfo.text-center p')).toContainText('Blue Top');
-        };
+            for (let i = 0; i < await products.count(); i++) {
+                const searchList = products.nth(i);
+                await expect(searchList.locator('.productinfo.text-center p')).toContainText('Blue Top');
+            };
 
-    });
+        });
 
     test('Verify that user can succcessfully subscribe', async ({ page }) => {
         // Verify text Subscription
