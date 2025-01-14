@@ -37,6 +37,15 @@ module.exports = defineConfig({
     },
   },
 
+  /* Global visual comparison settings for toHaveScreenshot */
+  expect: {
+    toHaveScreenshot: {
+      threshold: 0.1, // Allow up to 10% pixel color difference
+      maxDiffPixelRatio: 0.01, // Allow 1% of total pixels to differ
+      animations: 'disabled', // Disable animations for consistent screenshots
+    },
+  },
+
   /* Configure projects for major browsers */
   projects: [
     {
