@@ -46,7 +46,7 @@ test('Fetch products list via API', async ({ request }) => {
 
     // Verify that the  response is in JSON format
     const responseBody = await response.json();
-    // console.log(responseBody);
+
     expect(responseBody).toBeDefined();
 
     // Verify that the response contains fields in the expected fields
@@ -65,7 +65,7 @@ test('Fetch products list via API', async ({ request }) => {
 test('Verify POST request returns 405 Method Not Allowed', async ({ request }) => {
     // Send a POST request to the API URL
     const response = await request.post('https://automationexercise.com/api/productsList');
-    
+
     // Verify the response code is 405 (Method Not Allowd)
     // await expect(response.status()).toBe(405);
 
@@ -73,5 +73,25 @@ test('Verify POST request returns 405 Method Not Allowed', async ({ request }) =
     const responseBody = await response.json();
     expect(responseBody.responseCode).toBe(405);
     expect(responseBody.message).toBe("This request method is not supported.");
+});
 
+test('Fetch all brands list', async ({ request }) => {
+    const response = await request.get('https://automationexercise.com/api/brandsList');
+
+    // Check if the response status code is 200
+    expect(response.status()).toBe(200);
+
+    // Verify the response body message
+    const responseBody = await response.json();
+
+    expect(responseBody).toBeDefined();
+
+    // Verify that the response contains fields in the expected fields
+    expect(responseBody).toHaveProperty('brands');
+    expect(responseBody.brands).toBeInstanceOf(Array); // Ensure it's an array of products
+
+    // Optionally, check the first brand in the list
+    const firstBrand = responseBody.brands[0];
+    expect(firstBrand).toHaveProperty('id');
+    expect(firstBrand).toHaveProperty('brand');
 });
