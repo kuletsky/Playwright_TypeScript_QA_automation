@@ -2,33 +2,183 @@
   "cookies": [
     {
       "name": "csrftoken",
-      "value": "F5yjq1vgMBRlZoOJzriX9hqMs0B3ye4z3xRt3Gr2cThmp1aDt4tdhgVPHWs2ObTy",
+      "value": "EtDtK8g1sKBc5riCXvLjR4ZLIC8v1tL7QW6u4DAWAUTCf0BnhFUWiRW1Q1syksF3",
       "domain": "automationexercise.com",
       "path": "/",
-      "expires": 1768405163.820848,
+      "expires": 1768408413.843742,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
-      "name": "sessionid",
-      "value": "70pl2toeorw8d9k3dlg9s80mzwjfl7s0",
-      "domain": "automationexercise.com",
+      "name": "IDE",
+      "value": "AHWqTUmJuG8tzf_s-Lq-7q_jtyEWMvAs6xVP3GX0maeaaxvgSU4lXHxiD_CBToA0zY4",
+      "domain": ".doubleclick.net",
       "path": "/",
-      "expires": 1738165163.677472,
+      "expires": 1771518811.596065,
       "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__gads",
+      "value": "ID=ef45501e185b4def:T=1736958811:RT=1736958811:S=ALNI_MatNW0T3NbxhYGVGLgs6G1oC8BsxQ",
+      "domain": ".automationexercise.com",
+      "path": "/",
+      "expires": 1770654811,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__gpi",
+      "value": "UID=00000fc06461d4ab:T=1736958811:RT=1736958811:S=ALNI_Mbqg4t-O1kbXMHkveRfYeQkP81-bg",
+      "domain": ".automationexercise.com",
+      "path": "/",
+      "expires": 1770654811,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__eoi",
+      "value": "ID=4663563dd787ae15:T=1736958811:RT=1736958811:S=AA-AfjYYoVELMKXE6lOcGwpL3JTt",
+      "domain": ".automationexercise.com",
+      "path": "/",
+      "expires": 1752510811,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__mguid_",
+      "value": "1d604f1ae351f86a20tn3r00m5y4fgps",
+      "domain": ".admaster.cc",
+      "path": "/",
+      "expires": 1768494812.790336,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "cst_44",
+      "value": "ts=1736958812",
+      "domain": "gtracenep.admaster.cc",
+      "path": "/",
+      "expires": 1768494812.278395,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "cst_70",
+      "value": "ts=1736958812",
+      "domain": "gtracenep.admaster.cc",
+      "path": "/",
+      "expires": 1768494812.278478,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "cst_78",
+      "value": "ts=1736958812",
+      "domain": "gtracenep.admaster.cc",
+      "path": "/",
+      "expires": 1768494812.278515,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "CMID",
+      "value": "Z4fjXNHM7x8AABDgBoT4rQAA",
+      "domain": ".casalemedia.com",
+      "path": "/",
+      "expires": 1768494812.577846,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "CMPS",
+      "value": "047",
+      "domain": ".casalemedia.com",
+      "path": "/",
+      "expires": 1744734812.484112,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "CMPRO",
+      "value": "047",
+      "domain": ".casalemedia.com",
+      "path": "/",
+      "expires": 1744734812.577916,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "XANDR_PANID",
+      "value": "1JE9ccEjOo-0QtAdRl4M4Nyv8GbRPaojRNEAGGVdkzsJVJ6OB51ae348tLG2RBrGVXqpZuIqNjTvj2_Ps1eGAfWJMvhIDl5aT5h8ZbJbmZY.",
+      "domain": ".adnxs.com",
+      "path": "/",
+      "expires": 1744734812.628312,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "receive-cookie-deprecation",
+      "value": "1",
+      "domain": ".adnxs.com",
+      "path": "/",
+      "expires": 1771518812.628459,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "uuid2",
+      "value": "5190326474281672142",
+      "domain": ".adnxs.com",
+      "path": "/",
+      "expires": 1744734812.628518,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "FCNEC",
+      "value": "%5B%5B%22AKsRol-DA0Dysqp8sYVbtfPzAzwO_MN25qAnG9xXR_6WpHBfb2ARZ0gmELFDKCMSdWZgwsla-RkM1Z_xUQNA9yXfh0QlkzBJ-rNVt2XS45wNF44XOqmuQxmP9D-q2ko-Fvy1tJBL_2gW7tQEJszBUNrIvs8B5impSw%3D%3D%22%5D%5D",
+      "domain": ".automationexercise.com",
+      "path": "/",
+      "expires": 1768494812,
+      "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
-      "name": "IDE",
-      "value": "AHWqTUkPc954mmuTIOfyDfvjnoj7gYEkuKufNyGtxTMY7V7UvPvhyg8eXyOoazaVyFM",
-      "domain": ".doubleclick.net",
+      "name": "anj",
+      "value": "dTM7k!M4.FE:2jUF']wIg2GU`KU23u!@wnfH8KVePiSir=BRA%gjTPO3NZ/4j4k1f2GHT6/l]!Eced:=iRlI]XRP0y_5(g!/X%W#.wL4W1Qw2W8<Ukn",
+      "domain": ".adnxs.com",
       "path": "/",
-      "expires": 1771515563.700799,
+      "expires": 1744734812.628411,
       "httpOnly": true,
       "secure": true,
       "sameSite": "None"
+    },
+    {
+      "name": "sessionid",
+      "value": "g1r2nkcrywxa6ep7isup8u2mm5abpzcx",
+      "domain": "automationexercise.com",
+      "path": "/",
+      "expires": 1738168413.682025,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
     }
   ],
   "origins": [
@@ -36,8 +186,12 @@
       "origin": "https://automationexercise.com",
       "localStorage": [
         {
+          "name": "google_adsense_settings",
+          "value": "{\"ca-pub-1677597403311019\":[\"ca-pub-1677597403311019\"]}"
+        },
+        {
           "name": "google_ama_config",
-          "value": "[[[[null,0,null,[],null,null,\"DIV.footer-bottom\"],2,[\"10px\",\"10px\",0],[5],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV.footer-widget\"],1,[\"10px\",\"185px\",1],[3],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"BODY\"],3,[\"10px\",\"10px\",1],[5],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV.footer-bottom\"],3,[\"10px\",\"10px\",0],[5],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV#slider-carousel\"],4,[\"10px\",\"10px\",1],[1],null,[],[],1,[],[]],[[null,1,null,[],null,null,\"BODY>SECTION>DIV.container>DIV.row\"],4,[\"10px\",\"10px\",0],[3],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"SECTION#form\"],4,[\"10px\",\"185px\",1],[3],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV.footer-bottom\"],4,[\"10px\",\"10px\",0],[5],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV.footer-widget>DIV.container>DIV.row\"],4,[\"10px\",\"10px\",0],[3],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV#accordian\"],4,[\"10px\",\"35px\",0],[0],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"BODY\"],2,[\"10px\",\"10px\",1],[4],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"BODY>FOOTER#footer\"],1,[\"10px\",\"185px\",1],[0],null,[],[],1,[],[2,4]],[[null,1,null,[],null,null,\"BODY>SECTION>DIV.container\"],4,[\"10px\",\"10px\",0],[3],null,[],[],1,[],[]]],[],[1737041963747],\"20250110_150258\",[],[[[[null,0,null,[],null,null,\"DIV#slider-carousel>DIV.carousel-inner>DIV.item.active.left>DIV\"],[null,null,null,[],null,null,\"P\"],null,[null,null,null,[],null,null,\"H1,H2,P\"]],[[null,null,null,[],null,null,\"SECTION#form>DIV.container>DIV.row>DIV\"],[null,null,null,[],null,null,\"P\"],null,[null,null,null,[],null,null,\"H2.title.text-center,P\"]]]],[[null,[1,3,2,5],null,\"4334590153\",[],[],[0,2],null,null,[1,null,2,16,480,1],[]]],[null,[[1,\"1vp\",[[4,\"2vp\",\"2vp\"],[6,\"3vp\",\"3vp\"]],8,\"1vp\",0.30000001,[\"0.2vp\",\"0vp\",2]],[2,\"300px\",[[4,\"600px\",\"600px\"],[6,\"900px\",\"900px\"]],8,\"300px\",0.30000001,[\"60px\",\"0px\",2]]]],null,null,null,null,null,null,[null,null,null,null,null,null,null,null,null,null,null,0],null,null,[1,null,null,[]],null,[445906054],null,null,[1736746173803],null,null,null,null,null,null,null,null,null,[[\"Toggle toolbar expansion\",\"Toggle privacy and legal settings display\",\"Dismiss privacy and legal settings display\"]]]"
+          "value": "[[[[null,0,null,[],null,null,\"DIV.footer-bottom\"],2,[\"10px\",\"10px\",0],[5],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV.footer-widget\"],1,[\"10px\",\"185px\",1],[3],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"BODY\"],3,[\"10px\",\"10px\",1],[5],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV.footer-bottom\"],3,[\"10px\",\"10px\",0],[5],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV#slider-carousel\"],4,[\"10px\",\"10px\",1],[1],null,[],[],1,[],[]],[[null,1,null,[],null,null,\"BODY>SECTION>DIV.container>DIV.row\"],4,[\"10px\",\"10px\",0],[3],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"SECTION#form\"],4,[\"10px\",\"185px\",1],[3],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV.footer-bottom\"],4,[\"10px\",\"10px\",0],[5],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV.footer-widget>DIV.container>DIV.row\"],4,[\"10px\",\"10px\",0],[3],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV#accordian\"],4,[\"10px\",\"35px\",0],[0],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"BODY\"],2,[\"10px\",\"10px\",1],[4],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"BODY>FOOTER#footer\"],1,[\"10px\",\"185px\",1],[0],null,[],[],1,[],[2,4]],[[null,1,null,[],null,null,\"BODY>SECTION>DIV.container\"],4,[\"10px\",\"10px\",0],[3],null,[],[],1,[],[]]],[],[1737045210680],\"20250110_150258\",[],[[[[null,0,null,[],null,null,\"DIV#slider-carousel>DIV.carousel-inner>DIV.item.active.left>DIV\"],[null,null,null,[],null,null,\"P\"],null,[null,null,null,[],null,null,\"H1,H2,P\"]],[[null,null,null,[],null,null,\"SECTION#form>DIV.container>DIV.row>DIV\"],[null,null,null,[],null,null,\"P\"],null,[null,null,null,[],null,null,\"H2.title.text-center,P\"]]]],[[null,[1,3,2,5],null,\"4334590153\",[],[],[0,2],null,null,[1,null,2,16,480,1],[]]],[null,[[1,\"1vp\",[[4,\"2vp\",\"2vp\"],[6,\"3vp\",\"3vp\"]],8,\"1vp\",0.30000001,[\"0.2vp\",\"0vp\",2]],[2,\"300px\",[[4,\"600px\",\"600px\"],[6,\"900px\",\"900px\"]],8,\"300px\",0.30000001,[\"60px\",\"0px\",2]]]],null,null,null,null,null,null,[null,null,null,null,null,null,null,null,null,null,null,0],null,null,[1,null,null,[]],null,[445906054],null,null,[1736746173803],null,null,null,null,null,null,null,null,null,[[\"Toggle toolbar expansion\",\"Toggle privacy and legal settings display\",\"Dismiss privacy and legal settings display\"]]]"
         }
       ]
     }

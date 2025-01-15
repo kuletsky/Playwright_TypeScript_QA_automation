@@ -34,12 +34,12 @@ test('Verify that user can successfuly SignIn with valid credentials', async () 
     await expect(page.locator('a').filter({ hasText: 'Logged in as' })).toContainText('Logged in as');
 });
 
-test.only('Fetch products list via API', async () => {
+test('Fetch products list via API', async ({ request }) => {
     // Create a new API context
-    const apiContext = await request.newContext();
+    // const apiContext = await request.newContext();
 
     // Perform the GET request
-    const response = await apiContext.get('https://automationexercise.com/api/productsList');
+    const response = await request.get('https://automationexercise.com/api/productsList');
 
     // Check if the response status code is 200
     expect(response.status()).toBe(200);
@@ -60,7 +60,18 @@ test.only('Fetch products list via API', async () => {
     expect(firstProduct).toHaveProperty('price');
     expect(firstProduct).toHaveProperty('brand');
     expect(firstProduct).toHaveProperty('category');
+});
 
+test('Verify POST request returns 405 Method Not Allowed', async ({ request }) => {
+    // Send a POST request to the API URL
+    const response = await request.post('https://automationexercise.com/api/productsList');
+    
+    // Verify the response code is 405 (Method Not Allowd)
+    // await expect(response.status()).toBe(405);
 
+    // Verify the response body message 
+    const responseBody = await response.json();
+    expect(responseBody.responseCode).toBe(405);
+    expect(responseBody.message).toBe("This request method is not supported.");
 
 });
