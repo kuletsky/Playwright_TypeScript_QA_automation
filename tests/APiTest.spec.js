@@ -95,3 +95,17 @@ test('Fetch all brands list', async ({ request }) => {
     expect(firstBrand).toHaveProperty('id');
     expect(firstBrand).toHaveProperty('brand');
 });
+
+test('Verify PUT request returns 405 Method Not allowed', async ({ request }) => {
+    // Send a PUT request to the API endpoint
+    const response = await request.put('https://automationexercise.com/api/brandsList');
+
+  // Log response details for debugging
+  console.log('Response Status:', response.status());
+  console.log('Response Body:', await response.text());
+  
+  // Verify the response body contains the expected response code and message
+  const responseBody = await response.json();
+  expect(responseBody.responseCode).toBe(405);
+  expect(responseBody.message).toBe('This request method is not supported.');
+});

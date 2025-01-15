@@ -2,60 +2,180 @@
   "cookies": [
     {
       "name": "csrftoken",
-      "value": "zeRxquK1uN55dGzdboJVfmuFZNbTxcaZbYFLb2JGkQYmUO273aVgP0cSenOBhU88",
+      "value": "hsQAFmEKAdZWjlllDazWGNshiCesqB2gjVFM9nWQaFuEH2ukIK01nxq9AT0K8QS8",
       "domain": "automationexercise.com",
       "path": "/",
-      "expires": 1768409199.585781,
+      "expires": 1768422629.989523,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "IDE",
-      "value": "AHWqTUl0UZv91DBczsMELHphaGN5sDNPEABzpNY3XK5SzCLvEmjPXgCl1GDopdH56-I",
+      "value": "AHWqTUlYjq9dVNxS4DvDbtu5egszk485MH_dKz-e0ob_st-zsMRGZ34rq40vc3yjfoU",
       "domain": ".doubleclick.net",
       "path": "/",
-      "expires": 1771519597.954509,
+      "expires": 1771533022.782296,
       "httpOnly": true,
       "secure": true,
       "sameSite": "None"
     },
     {
       "name": "__gads",
-      "value": "ID=2327f9a5be0828ae:T=1736959597:RT=1736959597:S=ALNI_MYC8chSN3F-JyH6GEAk9rEBqczT9w",
+      "value": "ID=f7e862c640a33509:T=1736973022:RT=1736973022:S=ALNI_MYt-tvLpEIwjgH_OYgunaVFdJJwmA",
       "domain": ".automationexercise.com",
       "path": "/",
-      "expires": 1770655597,
+      "expires": 1770669022,
       "httpOnly": false,
       "secure": true,
       "sameSite": "None"
     },
     {
       "name": "__gpi",
-      "value": "UID=00000fc064910aa5:T=1736959597:RT=1736959597:S=ALNI_MaHn6MVMH2P-GK9W3hmcsHPI4muxg",
+      "value": "UID=00000fc074fd8220:T=1736973022:RT=1736973022:S=ALNI_MZagcYPmfjMnvyaAJv_n4q7J9W-gA",
       "domain": ".automationexercise.com",
       "path": "/",
-      "expires": 1770655597,
+      "expires": 1770669022,
       "httpOnly": false,
       "secure": true,
       "sameSite": "None"
     },
     {
       "name": "__eoi",
-      "value": "ID=c4ebb70074fe71f8:T=1736959597:RT=1736959597:S=AA-AfjYCqBz-Y5zMz0wySOWQ3ItH",
+      "value": "ID=c4d0ada4849c0609:T=1736973022:RT=1736973022:S=AA-AfjYpkuGZDyG6KIxA_uK6SaCw",
       "domain": ".automationexercise.com",
       "path": "/",
-      "expires": 1752511597,
+      "expires": 1752525022,
       "httpOnly": false,
       "secure": true,
       "sameSite": "None"
     },
     {
+      "name": "__mguid_",
+      "value": "1d604f1ac00c6b5b267vws00m5ycw22k",
+      "domain": ".admaster.cc",
+      "path": "/",
+      "expires": 1768509029.131531,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "FCNEC",
+      "value": "%5B%5B%22AKsRol-kizIq0zlkBNyiXnZppe8gXcupj3c9lpZ6j37R9qcXEQsAACoc0u-CZp2jA6eqOShEiHGEBLzQmFsKcn4csGpwPPBCcdyD-T3xJ10kPboG1MjzL4FfU7cQd_xk3MfhMHiud-yFP4MQSd7f-ySQA0oafu3HwA%3D%3D%22%5D%5D",
+      "domain": ".automationexercise.com",
+      "path": "/",
+      "expires": 1768509023,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "cst_44",
+      "value": "ts=1736973028",
+      "domain": "gtracenep.admaster.cc",
+      "path": "/",
+      "expires": 1768509028.414832,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "cst_70",
+      "value": "ts=1736973028",
+      "domain": "gtracenep.admaster.cc",
+      "path": "/",
+      "expires": 1768509028.414941,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "cst_78",
+      "value": "ts=1736973028",
+      "domain": "gtracenep.admaster.cc",
+      "path": "/",
+      "expires": 1768509028.414966,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "CMID",
+      "value": "Z4ga5NHM7.EAACLNAAR5ZgAA",
+      "domain": ".casalemedia.com",
+      "path": "/",
+      "expires": 1768509028.760142,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "CMPS",
+      "value": "1535",
+      "domain": ".casalemedia.com",
+      "path": "/",
+      "expires": 1744749028.680699,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "CMPRO",
+      "value": "1535",
+      "domain": ".casalemedia.com",
+      "path": "/",
+      "expires": 1744749028.760286,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "XANDR_PANID",
+      "value": "0m10w6LJhy5DLZ7cHmnRKvUDqspXPXyBKFrLe_6CUhEPIEcEXQ7an5Qo0APyPRQm6YQPqVNzkOLwss8OO1PjXwCvXd0CcZudgLgvfpKD4rk.",
+      "domain": ".adnxs.com",
+      "path": "/",
+      "expires": 1744749028.768054,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "receive-cookie-deprecation",
+      "value": "1",
+      "domain": ".adnxs.com",
+      "path": "/",
+      "expires": 1771533028.768262,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "uuid2",
+      "value": "1543827084842508321",
+      "domain": ".adnxs.com",
+      "path": "/",
+      "expires": 1744749028.768313,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "anj",
+      "value": "dTM7k!M4.FE:2jUF']wIg2E?_trs5M!]tbPl1MzM(ZqWiUa(^)VAVvzD>LRs9-f]ZFu.YLL!/IyNS0KUEXKBH?:A=*]YJo/<QG=%9sk@3@'s>TjW/oA",
+      "domain": ".adnxs.com",
+      "path": "/",
+      "expires": 1744749028.768227,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
       "name": "sessionid",
-      "value": "koyk83pmjk68uxmsyi129wgj3x5uc72y",
+      "value": "zoi0eq6c3qmailvxoibex8noo4vkau0p",
       "domain": "automationexercise.com",
       "path": "/",
-      "expires": 1738169199.449487,
+      "expires": 1738182629.84522,
       "httpOnly": true,
       "secure": false,
       "sameSite": "Lax"
@@ -71,7 +191,7 @@
         },
         {
           "name": "google_ama_config",
-          "value": "[[[[null,0,null,[],null,null,\"DIV.footer-bottom\"],2,[\"10px\",\"10px\",0],[5],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV.footer-widget\"],1,[\"10px\",\"185px\",1],[3],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"BODY\"],3,[\"10px\",\"10px\",1],[5],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV.footer-bottom\"],3,[\"10px\",\"10px\",0],[5],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV#slider-carousel\"],4,[\"10px\",\"10px\",1],[1],null,[],[],1,[],[]],[[null,1,null,[],null,null,\"BODY>SECTION>DIV.container>DIV.row\"],4,[\"10px\",\"10px\",0],[3],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"SECTION#form\"],4,[\"10px\",\"185px\",1],[3],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV.footer-bottom\"],4,[\"10px\",\"10px\",0],[5],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV.footer-widget>DIV.container>DIV.row\"],4,[\"10px\",\"10px\",0],[3],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV#accordian\"],4,[\"10px\",\"35px\",0],[0],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"BODY\"],2,[\"10px\",\"10px\",1],[4],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"BODY>FOOTER#footer\"],1,[\"10px\",\"185px\",1],[0],null,[],[],1,[],[2,4]],[[null,1,null,[],null,null,\"BODY>SECTION>DIV.container\"],4,[\"10px\",\"10px\",0],[3],null,[],[],1,[],[]]],[],[1737045997069],\"20250110_150258\",[],[[[[null,0,null,[],null,null,\"DIV#slider-carousel>DIV.carousel-inner>DIV.item.active.left>DIV\"],[null,null,null,[],null,null,\"P\"],null,[null,null,null,[],null,null,\"H1,H2,P\"]],[[null,null,null,[],null,null,\"SECTION#form>DIV.container>DIV.row>DIV\"],[null,null,null,[],null,null,\"P\"],null,[null,null,null,[],null,null,\"H2.title.text-center,P\"]]]],[[null,[1,3,2,5],null,\"4334590153\",[],[],[0,2],null,null,[1,null,2,16,480,1],[]]],[null,[[1,\"1vp\",[[4,\"2vp\",\"2vp\"],[6,\"3vp\",\"3vp\"]],8,\"1vp\",0.30000001,[\"0.2vp\",\"0vp\",2]],[2,\"300px\",[[4,\"600px\",\"600px\"],[6,\"900px\",\"900px\"]],8,\"300px\",0.30000001,[\"60px\",\"0px\",2]]]],null,null,null,null,null,null,[null,null,null,null,null,null,null,null,null,null,null,0],null,null,[1,null,null,[]],null,[445906054],null,null,[1736746173803],null,null,null,null,null,null,null,null,null,[[\"Toggle toolbar expansion\",\"Toggle privacy and legal settings display\",\"Dismiss privacy and legal settings display\"]]]"
+          "value": "[[[[null,0,null,[],null,null,\"DIV.footer-bottom\"],2,[\"10px\",\"10px\",0],[5],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV.footer-widget\"],1,[\"10px\",\"185px\",1],[3],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"BODY\"],3,[\"10px\",\"10px\",1],[5],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV.footer-bottom\"],3,[\"10px\",\"10px\",0],[5],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV#slider-carousel\"],4,[\"10px\",\"10px\",1],[1],null,[],[],1,[],[]],[[null,1,null,[],null,null,\"BODY>SECTION>DIV.container>DIV.row\"],4,[\"10px\",\"10px\",0],[3],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"SECTION#form\"],4,[\"10px\",\"185px\",1],[3],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV.footer-bottom\"],4,[\"10px\",\"10px\",0],[5],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV.footer-widget>DIV.container>DIV.row\"],4,[\"10px\",\"10px\",0],[3],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"DIV#accordian\"],4,[\"10px\",\"35px\",0],[0],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"BODY\"],2,[\"10px\",\"10px\",1],[4],null,[],[],1,[],[]],[[null,0,null,[],null,null,\"BODY>FOOTER#footer\"],1,[\"10px\",\"185px\",1],[0],null,[],[],1,[],[2,4]],[[null,1,null,[],null,null,\"BODY>SECTION>DIV.container\"],4,[\"10px\",\"10px\",0],[3],null,[],[],1,[],[]]],[],[1737059429864],\"20250110_150258\",[],[[[[null,0,null,[],null,null,\"DIV#slider-carousel>DIV.carousel-inner>DIV.item.active.left>DIV\"],[null,null,null,[],null,null,\"P\"],null,[null,null,null,[],null,null,\"H1,H2,P\"]],[[null,null,null,[],null,null,\"SECTION#form>DIV.container>DIV.row>DIV\"],[null,null,null,[],null,null,\"P\"],null,[null,null,null,[],null,null,\"H2.title.text-center,P\"]]]],[[null,[1,3,2,5],null,\"4334590153\",[],[],[0,2],null,null,[1,null,2,16,480,1],[]]],[null,[[1,\"1vp\",[[4,\"2vp\",\"2vp\"],[6,\"3vp\",\"3vp\"]],8,\"1vp\",0.30000001,[\"0.2vp\",\"0vp\",2]],[2,\"300px\",[[4,\"600px\",\"600px\"],[6,\"900px\",\"900px\"]],8,\"300px\",0.30000001,[\"60px\",\"0px\",2]]]],null,null,null,null,null,null,[null,null,null,null,null,null,null,null,null,null,null,0],null,null,[1,null,null,[]],null,[445906054],null,null,[1736746173803],null,null,null,null,null,null,null,null,null,[[\"Toggle toolbar expansion\",\"Toggle privacy and legal settings display\",\"Dismiss privacy and legal settings display\"]]]"
         }
       ]
     }
