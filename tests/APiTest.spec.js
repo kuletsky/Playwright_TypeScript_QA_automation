@@ -144,3 +144,30 @@ test('POST To Search Product without search_product parameter', async ({ request
     expect(responseBody).toHaveProperty('responseCode', 400);
     expect(responseBody).toHaveProperty('message', 'Bad request, search_product parameter is missing in POST request.');
 });
+
+test('Verify POST to verifyLogin request with unvalid credentials', async ({ request }) => {
+    // Define the request payload with valid email and password
+    const requestBody = {
+        email: 'testuser@example.com', // Replace with a valid email
+        password: 'testpassword123',  // Replace with a valid password
+    };
+
+    // Send the POST request
+    const response = await request.post('https://automationexercise.com/api/verifyLogin', {
+        headers: {
+            'Content-Type': 'application/json', // Ensure the correct content type
+        },
+        data: JSON.stringify(requestBody), // Pass the email and password
+    });
+
+    // Parse the response
+    const responseBody = await response.json();
+    console.log('Response JSON:', responseBody);
+
+    // Verify the response status code
+    expect(response.status()).toBe(200);
+
+    // Verify the success message in the response body
+    expect(responseBody).toHaveProperty('responseCode', 400);
+    expect(responseBody).toHaveProperty('message', 'Bad request, email or password parameter is missing in POST request.');
+});
