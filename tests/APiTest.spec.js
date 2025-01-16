@@ -171,3 +171,14 @@ test('Verify POST to verifyLogin request with unvalid credentials', async ({ req
     expect(responseBody).toHaveProperty('responseCode', 400);
     expect(responseBody).toHaveProperty('message', 'Bad request, email or password parameter is missing in POST request.');
 });
+
+test('Verify DELETE method returns 405 Metgod not allowed', async ({ request }) => {
+    const response = await request.delete('https://automationexercise.com/api/verifyLogin')
+    const responseBody = await response.json();
+
+
+    // Verify the response message in the response body
+    expect(responseBody).toHaveProperty('responseCode', 405);
+    expect(responseBody).toHaveProperty('message', 'This request method is not supported.');
+});
+
