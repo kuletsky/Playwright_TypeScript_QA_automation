@@ -100,12 +100,35 @@ test('Verify PUT request returns 405 Method Not allowed', async ({ request }) =>
     // Send a PUT request to the API endpoint
     const response = await request.put('https://automationexercise.com/api/brandsList');
 
-  // Log response details for debugging
-  console.log('Response Status:', response.status());
-  console.log('Response Body:', await response.text());
-  
-  // Verify the response body contains the expected response code and message
-  const responseBody = await response.json();
-  expect(responseBody.responseCode).toBe(405);
-  expect(responseBody.message).toBe('This request method is not supported.');
+    // Log response details for debugging
+    console.log(response);
+
+    // Verify the response body contains the expected response code and message
+    const responseBody = await response.json();
+    expect(responseBody.responseCode).toBe(405);
+    expect(responseBody.message).toBe('This request method is not supported.');
+});
+
+test('Verify POST to SearchProduct request', async ({ request }) => {
+    // Create the request payload
+    const payload = {
+        search_porduct: 'tshirt',
+    };
+
+    // Send a POST request to the API endpoint
+    const response = await request.post('https://automationexercise.com/api/searchProduct', {
+        headers: {
+            'Content-Type': 'application/json', // Ensure the correct content type
+        },
+        data: JSON.stringify(payload), // Properly stringify the payload
+    });
+
+    // Check if the response status code is 200
+    await expect(response.status()).toBe(200);
+
+    // Parse the response body as Json
+    const responseBody = await response.json();
+
+    // Verify that response searched products
+    console.log('Response Json', responseBody);
 });
