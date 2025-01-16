@@ -132,3 +132,15 @@ test('Verify POST to SearchProduct request', async ({ request }) => {
     // Verify that response searched products
     console.log('Response Json', responseBody);
 });
+
+test('POST To Search Product without search_product parameter', async ({ request }) => {
+    const response = await request.post('https://automationexercise.com/api/searchProduct');
+    const responseBody = await response.json();
+
+    // Verify the response status code
+    expect(response.status()).toBe(200);
+
+    // Verify the error message in the response body
+    expect(responseBody).toHaveProperty('responseCode', 400);
+    expect(responseBody).toHaveProperty('message', 'Bad request, search_product parameter is missing in POST request.');
+});
