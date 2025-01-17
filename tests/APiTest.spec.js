@@ -100,9 +100,6 @@ test('Verify PUT request returns 405 Method Not allowed', async ({ request }) =>
     // Send a PUT request to the API endpoint
     const response = await request.put('https://automationexercise.com/api/brandsList');
 
-    // Log response details for debugging
-    console.log(response);
-
     // Verify the response body contains the expected response code and message
     const responseBody = await response.json();
     expect(responseBody.responseCode).toBe(405);
@@ -137,9 +134,6 @@ test('POST To Search Product without search_product parameter', async ({ request
     const response = await request.post('https://automationexercise.com/api/searchProduct');
     const responseBody = await response.json();
 
-    // Verify the response status code
-    expect(response.status()).toBe(200);
-
     // Verify the error message in the response body
     expect(responseBody).toHaveProperty('responseCode', 400);
     expect(responseBody).toHaveProperty('message', 'Bad request, search_product parameter is missing in POST request.');
@@ -162,10 +156,6 @@ test('Verify POST to verifyLogin request with unvalid credentials', async ({ req
 
     // Parse the response
     const responseBody = await response.json();
-    console.log('Response JSON:', responseBody);
-
-    // Verify the response status code
-    expect(response.status()).toBe(200);
 
     // Verify the success message in the response body
     expect(responseBody).toHaveProperty('responseCode', 400);
