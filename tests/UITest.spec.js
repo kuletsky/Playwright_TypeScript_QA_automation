@@ -27,7 +27,7 @@ test.beforeEach(async ({ page }) => {
 
 const testData = {
     name: 'john',
-    email: 'john@gwm1sw2s3w4ews5cw6w78swssdws9gwsww01212323ww1w11wqsw2wwqww.com'
+    email: 'john@gwm1sw2s3w4ews5cw6w78swewssdws9gdwsww0d12123c23ww1w11wqsw2wwqww.com'
 };
 
 test.describe('UI tests', () => {
@@ -121,32 +121,34 @@ test.describe('UI tests', () => {
         await expect(page).toHaveURL('https://automationexercise.com/')
     });
 
-    test('Verify that user can successfuly SignIn with valid credentials', async ({ page }) => {
-        
-        const poManager = new POManager(page);
-        // const email = dataSet.email;
-        // const psw = dataSet.psw;
-        // Click the 'Signup/Login' button
-        await page.locator('.fa.fa-lock').click();
+    for (const data of dataSet) {
+        test(`Verify that user can successfuly SignIn with valid credentials ${data.email}`, async ({ page }) => {
 
-        // Verify 'Login to your acount' is visible
-        const loginForm = await page.locator('.login-form h2').textContent();
-        await expect(loginForm).toContain('Login to your account');
+            const poManager = new POManager(page);
+            // const email = dataSet.email;
+            // const psw = dataSet.psw;
+            // Click the 'Signup/Login' button
+            await page.locator('.fa.fa-lock').click();
 
-        const loginPage = poManager.getLoginPage();
-        await loginPage.signIn(dataSet.email, dataSet.psw);
+            // Verify 'Login to your acount' is visible
+            const loginForm = await page.locator('.login-form h2').textContent();
+            await expect(loginForm).toContain('Login to your account');
 
-        // // Enter valid email amd password
-        // await page.locator('[data-qa="login-email"]').fill('trip27@lftjaguar.com');
-        // await page.locator('[data-qa="login-password"]').fill('1234');
+            const loginPage = poManager.getLoginPage();
+            await loginPage.signIn(data.email, data.psw);
 
-        // // Click the 'Login' button
-        // await page.locator('[data-qa="login-button"]').click();
+            // // Enter valid email amd password
+            // await page.locator('[data-qa="login-email"]').fill('trip27@lftjaguar.com');
+            // await page.locator('[data-qa="login-password"]').fill('1234');
 
-        // Verify that 'Logged in as' is visible
-        const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
-        await expect(logged).toContain('Logged in as');
-    });
+            // // Click the 'Login' button
+            // await page.locator('[data-qa="login-button"]').click();
+
+            // Verify that 'Logged in as' is visible
+            const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
+            await expect(logged).toContain('Logged in as');
+        });
+    };
 
     test('Verify that user cannot SignIn with invalid credentials', async ({ page }) => {
         // Click the 'Signup/Login' button

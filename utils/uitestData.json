@@ -1,4 +1,10 @@
-{
-    "email": "trip27@lftjaguar.com",
-    "psw": "1234"
-}
+[
+    {
+        "email": "trip27@lftjaguar.com",
+        "psw": "1234"
+    },
+    {
+        "email": "1234@1234.com",
+        "psw": "1234"
+    }
+]
