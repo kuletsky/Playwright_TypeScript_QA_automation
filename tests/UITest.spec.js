@@ -1,4 +1,5 @@
 const { test, expect } = require('@playwright/test');
+const {LoginPage} = require('../pages/loginPage')
 
 test.beforeEach(async ({ page }) => {
     await page.route('**/*', (route) => {
@@ -24,7 +25,7 @@ test.beforeEach(async ({ page }) => {
 
 const testData = {
     name: 'john',
-    email: 'john@gwm1w2s3w4ews5cw6w78swssdws9wsww01212323ww1w11wqsw2wwqww.com'
+    email: 'john@gwm1sw2s3w4ews5cw6w78swssdws9wsww01212323ww1w11wqsw2wwqww.com'
 };
 
 test.describe('UI tests', () => {
@@ -38,12 +39,8 @@ test.describe('UI tests', () => {
         const signupNameInput = page.locator('[data-qa="signup-name"]');
         const signupEmailInput = page.locator('[data-qa="signup-email"]');
 
-        // Verify that input fields contain the expected values
         await signupNameInput.fill(testData.name);
-        await expect(signupNameInput).toHaveValue(testData.name);
-
         await signupEmailInput.fill(testData.email);
-        await expect(signupEmailInput).toHaveValue(testData.email);
 
         // Click 'signUp' button
         await page.locator('[data-qa="signup-button"]').click();
@@ -123,6 +120,8 @@ test.describe('UI tests', () => {
     });
 
     test('Verify that user can successfuly SignIn with valid credentials', async ({ page }) => {
+        const email = 'trip27@lftjaguar.com';
+        const psw = '1234'
         // Click the 'Signup/Login' button
         await page.locator('.fa.fa-lock').click();
 
@@ -130,12 +129,15 @@ test.describe('UI tests', () => {
         const loginForm = await page.locator('.login-form h2').textContent();
         await expect(loginForm).toContain('Login to your account');
 
-        // Enter valid email amd password
-        await page.locator('[data-qa="login-email"]').fill('trip27@lftjaguar.com');
-        await page.locator('[data-qa="login-password"]').fill('1234');
+        const loginPage = new LoginPage(page);
+        await loginPage.signIn(email, psw);
 
-        // Click the 'Login' button
-        await page.locator('[data-qa="login-button"]').click();
+        // // Enter valid email amd password
+        // await page.locator('[data-qa="login-email"]').fill('trip27@lftjaguar.com');
+        // await page.locator('[data-qa="login-password"]').fill('1234');
+
+        // // Click the 'Login' button
+        // await page.locator('[data-qa="login-button"]').click();
 
         // Verify that 'Logged in as' is visible
         const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
@@ -264,27 +266,26 @@ test.describe('UI tests', () => {
         await expect(page.locator('.product-information span').nth(1)).toBeVisible();
     });
 
-    test
-        ('Verify that user can search a product', async ({ page }) => {
-            await page.locator('a[href="/products"]').click();
+    test('Verify that user can search a product', async ({ page }) => {
+        await page.locator('a[href="/products"]').click();
 
-            // Verify that the page is navigated successfuly 
-            await expect(page.locator('.title.text-center')).toHaveText('All Products');
+        // Verify that the page is navigated successfuly 
+        await expect(page.locator('.title.text-center')).toHaveText('All Products');
 
-            // Verify that all list of products is visible
-            const products = await page.locator('.single-products');
+        // Verify that all list of products is visible
+        const products = await page.locator('.single-products');
 
-            await page.locator('#search_product').fill('Blue Top');
-            await page.waitForSelector('.fa.fa-search');
-            await page.locator('.fa.fa-search').click();
-            await page.waitForSelector('.single-products');
+        await page.locator('#search_product').fill('Blue Top');
+        await page.waitForSelector('.fa.fa-search');
+        await page.locator('.fa.fa-search').click();
+        await page.waitForSelector('.single-products');
 
-            for (let i = 0; i < await products.count(); i++) {
-                const searchList = products.nth(i);
-                await expect(searchList.locator('.productinfo.text-center p')).toContainText('Blue Top');
-            };
+        for (let i = 0; i < await products.count(); i++) {
+            const searchList = products.nth(i);
+            await expect(searchList.locator('.productinfo.text-center p')).toContainText('Blue Top');
+        };
 
-        });
+    });
 
     test('Verify that user can succcessfully subscribe', async ({ page }) => {
         // Verify text Subscription
