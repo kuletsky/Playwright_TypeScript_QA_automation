@@ -1,5 +1,4 @@
 const { test, expect, request } = require('@playwright/test');
-const exp = require('constants');
 let webContext;
 
 test.beforeAll(async ({ browser }) => {
@@ -17,7 +16,7 @@ test.beforeAll(async ({ browser }) => {
     await page.locator('[data-qa="login-button"]').click();
 
     // Storage cookies
-    await context.storageState({ path: 'state.json' });
+    await context.storageState({ path: './utils/state.json' });
 
     // Inject cookies
     webContext = await browser.newContext({ storageState: 'state.json' });

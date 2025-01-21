@@ -1,5 +1,7 @@
 const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../pages/loginPage')
+const { POManager } = require('../pages/POManager');
+
+const dataSet = JSON.parse(JSON.stringify(require("../utils/uitestData.json")));
 
 test.beforeEach(async ({ page }) => {
     await page.route('**/*', (route) => {
@@ -25,7 +27,7 @@ test.beforeEach(async ({ page }) => {
 
 const testData = {
     name: 'john',
-    email: 'john@gwm1sw2s3w4ews5cw6w78swssdws9wsww01212323ww1w11wqsw2wwqww.com'
+    email: 'john@gwm1sw2s3w4ews5cw6w78swssdws9gwsww01212323ww1w11wqsw2wwqww.com'
 };
 
 test.describe('UI tests', () => {
@@ -120,8 +122,10 @@ test.describe('UI tests', () => {
     });
 
     test('Verify that user can successfuly SignIn with valid credentials', async ({ page }) => {
-        const email = 'trip27@lftjaguar.com';
-        const psw = '1234'
+        
+        const poManager = new POManager(page);
+        // const email = dataSet.email;
+        // const psw = dataSet.psw;
         // Click the 'Signup/Login' button
         await page.locator('.fa.fa-lock').click();
 
@@ -129,8 +133,8 @@ test.describe('UI tests', () => {
         const loginForm = await page.locator('.login-form h2').textContent();
         await expect(loginForm).toContain('Login to your account');
 
-        const loginPage = new LoginPage(page);
-        await loginPage.signIn(email, psw);
+        const loginPage = poManager.getLoginPage();
+        await loginPage.signIn(dataSet.email, dataSet.psw);
 
         // // Enter valid email amd password
         // await page.locator('[data-qa="login-email"]').fill('trip27@lftjaguar.com');
