@@ -100,7 +100,7 @@ test('Verify PUT request returns 405 Method Not allowed', async ({ request }) =>
     // Send a PUT request to the API endpoint
     const response = await request.put('https://automationexercise.com/api/brandsList');
 
-    // Verify the response body contains the expected response code and message
+     // Verify the response body contains the expected response code and message
     const responseBody = await response.json();
     expect(responseBody.responseCode).toBe(405);
     expect(responseBody.message).toBe('This request method is not supported.');
