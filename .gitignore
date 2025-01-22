@@ -5,6 +5,8 @@ node_modules/
 /playwright/.cache/
 /test-examples/
 /screenshots/
+allure-report/
+allure-results/
 VisualTest.spec.js-snapshots/
 
 # Ignore test data file
