@@ -32,8 +32,10 @@ module.exports = defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     browserName: 'chromium',
-    headless: false,
-    viewport: null,
+    headless: process.env.CI ? false : false, // Use headed mode in CI
+    viewport: { width: 1920, height: 1080 },
+    // headless: false,
+    // viewport: null,
     launchOptions: {
       args: ['--start-maximized'], // Maximize the browser window on launch
     },
