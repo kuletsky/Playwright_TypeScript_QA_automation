@@ -6,7 +6,9 @@
   "directories": {
     "test": "tests"
   },
-  "scripts": {},
+  "scripts": {
+    "regression": "npx playwright test"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kuletsky/Playwright_TypeScript_QA_automation.git"
@@ -20,6 +22,7 @@
   "homepage": "https://github.com/kuletsky/Playwright_TypeScript_QA_automation#readme",
   "devDependencies": {
     "@playwright/test": "^1.49.1",
-    "@types/node": "^22.10.2"
+    "@types/node": "^22.10.2",
+    "allure-playwright": "^3.0.9"
   }
 }

@@ -19,7 +19,7 @@ test.beforeAll(async ({ browser }) => {
     await context.storageState({ path: './utils/state.json' });
 
     // Inject cookies
-    webContext = await browser.newContext({ storageState: 'state.json' });
+    webContext = await browser.newContext({ storageState: './utils/state.json' });
 });
 
 test('Verify that user can successfuly SignIn with valid credentials', async () => {
