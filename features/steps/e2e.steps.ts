@@ -21,7 +21,7 @@ After(async function () {
 });
 
 
-Given('Go to the Main Page', async function () {
+Given('Open the main page', async function () {
     await this.page.goto('https://automationexercise.com/');
 });
 
