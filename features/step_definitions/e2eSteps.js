@@ -1,6 +1,5 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
 const { POManager } = require("../../pages/POManager");
-const { expect } = require("@playwright/test");
 const playwright = require("@playwright/test");
 
 Given('Open the main page', async function () {
@@ -9,29 +8,26 @@ Given('Open the main page', async function () {
     this.context = await this.browser.newContext();
     this.page = await this.context.newPage(); // Store the page in the `this` context
     this.poManager = new POManager(this.page); // Initialize POManager with the page
+    this.loginPage = this.poManager.getLoginPage();
 
-    await this.page.goto('https://automationexercise.com/');
+    await this.loginPage.goTo();
 });
 
 When('Click the Signup\\/Login menu', async function () {
-    // Ensure `this.page` is used consistently
-    await this.page.locator('.fa.fa-lock').click();
+    await this.loginPage.linkSignIn();
 });
 
 Then('Verify right page is opened', async function () {
     // Verify 'Login to your account' is visible
-    const loginForm = await this.page.locator('.login-form h2').textContent();
-    expect(loginForm).toContain('Login to your account');
+    await this.loginPage.verifyLoginPage();
 });
 
 Then('Verify user can Signin with {string} and {string}', async function (username, psw) {
-    // Use the POManager to sign in
-    const loginPage = this.poManager.getLoginPage();
-    await loginPage.signIn(username, psw);
+    // Sign in the page
+    await this.loginPage.signIn(username, psw);
 
     // Verify that 'Logged in as' is visible
-    const logged = await this.page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
-    expect(logged).toContain('Logged in as');
+    await this.loginPage.verifySuccessLogin();
 });
 
 // Optional: Add cleanup logic after scenarios
