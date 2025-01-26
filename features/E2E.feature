@@ -1,5 +1,5 @@
 Feature: E2E
-    Here wiil be all E2E tests
+    Here will be all E2E tests
     Background:
         Given Open the main page
 
