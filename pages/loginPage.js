@@ -8,7 +8,7 @@ class LoginPage {
         this.signinEmail = page.locator('[data-qa="login-email"]');
         this.signinPSW = page.locator('[data-qa="login-password"]');
         this.btnSignIn = page.locator('[data-qa="login-button"]');
-        this.signInLink = page.locator('.fa.fa-lock');
+        // this.signInLink = page.locator('.fa.fa-lock');
         this.loginFormHeader = page.locator('.login-form h2');
         this.loggedInText = page.locator('a').filter({ hasText: 'Logged in as' });
     }
@@ -29,9 +29,9 @@ class LoginPage {
     }
 
 
-    async linkSignIn() {
-        await this.signInLink.click();
-    }
+    // async linkSignIn() {
+    //     await this.signInLink.click();
+    // }
 
 
     async verifyLoginPage() {
