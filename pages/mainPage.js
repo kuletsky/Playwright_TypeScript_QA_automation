@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { expect } = require("@playwright/test");
 
 class MainPage {
@@ -10,7 +11,7 @@ class MainPage {
 
 
     async goToMain() {
-        await this.page.goto('https://automationexercise.com/');
+        await this.page.goto(process.env.BASE_URL);
     }
 
 

@@ -14,11 +14,6 @@ class LoginPage {
     }
 
 
-    async goTo() {
-        await this.page.goto('https://automationexercise.com/');
-    }
-
-
     async signIn(username, password) {
         // Enter email amd password
         await this.signinEmail.fill(username);
