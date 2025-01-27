@@ -12,3 +12,12 @@ VisualTest.spec.js-snapshots/
 # Ignore test data file
 test-data.json
 state.json
+
+# Ignore screenshots
+*.png
+
+# Ignore environment variables file
+.env
+
+# Ignore Cucumber report
+cucumber-report.html
