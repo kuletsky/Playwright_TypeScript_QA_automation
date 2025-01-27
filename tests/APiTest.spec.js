@@ -1,11 +1,12 @@
 const { test, expect, request } = require('@playwright/test');
 let webContext;
+require('dotenv').config();
 
 test.beforeAll(async ({ browser }) => {
     const context = await browser.newContext();
     const page = await context.newPage();
 
-    await page.goto('https://automationexercise.com/');
+    await page.goto(process.env.BASE_URL);
     await page.locator('.fa.fa-lock').click();
 
     // Enter valid email amd password
@@ -27,7 +28,7 @@ test('Verify that user can successfuly SignIn with valid credentials', async () 
     const page = await webContext.newPage();
 
     // Go to mainPage
-    await page.goto('https://automationexercise.com/');
+    await page.goto(process.env.BASE_URL);
 
     // Verify that user loged in successfuly 
     await expect(page.locator('a').filter({ hasText: 'Logged in as' })).toContainText('Logged in as');
@@ -38,7 +39,7 @@ test('Fetch products list via API', async ({ request }) => {
     // const apiContext = await request.newContext();
 
     // Perform the GET request
-    const response = await request.get('https://automationexercise.com/api/productsList');
+    const response = await request.get('${process.env.BASE_URL}/api/productsList');
 
     // Check if the response status code is 200
     expect(response.status()).toBe(200);
@@ -63,7 +64,7 @@ test('Fetch products list via API', async ({ request }) => {
 
 test('Verify POST request returns 405 Method Not Allowed', async ({ request }) => {
     // Send a POST request to the API URL
-    const response = await request.post('https://automationexercise.com/api/productsList');
+    const response = await request.post('${process.env.BASE_URL}/api/productsList');
 
     // Verify the response code is 405 (Method Not Allowd)
     // await expect(response.status()).toBe(405);
@@ -75,7 +76,7 @@ test('Verify POST request returns 405 Method Not Allowed', async ({ request }) =
 });
 
 test('Fetch all brands list', async ({ request }) => {
-    const response = await request.get('https://automationexercise.com/api/brandsList');
+    const response = await request.get('${process.env.BASE_URL}/api/brandsList');
 
     // Check if the response status code is 200
     expect(response.status()).toBe(200);
@@ -97,7 +98,7 @@ test('Fetch all brands list', async ({ request }) => {
 
 test('Verify PUT request returns 405 Method Not allowed', async ({ request }) => {
     // Send a PUT request to the API endpoint
-    const response = await request.put('https://automationexercise.com/api/brandsList');
+    const response = await request.put('${process.env.BASE_URL}/api/brandsList');
 
      // Verify the response body contains the expected response code and message
     const responseBody = await response.json();
@@ -112,7 +113,7 @@ test('Verify POST to SearchProduct request', async ({ request }) => {
     };
 
     // Send a POST request to the API endpoint
-    const response = await request.post('https://automationexercise.com/api/searchProduct', {
+    const response = await request.post('${process.env.BASE_URL}/api/searchProduct', {
         headers: {
             'Content-Type': 'application/json', // Ensure the correct content type
         },
@@ -130,7 +131,7 @@ test('Verify POST to SearchProduct request', async ({ request }) => {
 });
 
 test('POST To Search Product without search_product parameter', async ({ request }) => {
-    const response = await request.post('https://automationexercise.com/api/searchProduct');
+    const response = await request.post('${process.env.BASE_URL}/api/searchProduct');
     const responseBody = await response.json();
 
     // Verify the error message in the response body
@@ -146,7 +147,7 @@ test('Verify POST to verifyLogin request with unvalid credentials', async ({ req
     };
 
     // Send the POST request
-    const response = await request.post('https://automationexercise.com/api/verifyLogin', {
+    const response = await request.post('${process.env.BASE_URL}/api/verifyLogin', {
         headers: {
             'Content-Type': 'application/json', // Ensure the correct content type
         },
@@ -162,7 +163,7 @@ test('Verify POST to verifyLogin request with unvalid credentials', async ({ req
 });
 
 test('Verify DELETE method returns 405 Metgod not allowed', async ({ request }) => {
-    const response = await request.delete('https://automationexercise.com/api/verifyLogin')
+    const response = await request.delete('${process.env.BASE_URL}/api/verifyLogin')
     const responseBody = await response.json();
 
 

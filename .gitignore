@@ -1,13 +1,14 @@
 node_modules/
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-/test-examples/
-/screenshots/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+tests-examples/
+screenshots/
 allure-report/
 allure-results/
 VisualTest.spec.js-snapshots/
+reports/
 
 # Ignore test data file
 test-data.json

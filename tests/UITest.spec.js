@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const { POManager } = require('../pages/POManager');
+require('dotenv').config();
 
 const dataSet = JSON.parse(JSON.stringify(require("../utils/uitestData.json")));
 
@@ -12,7 +13,7 @@ test.beforeEach(async ({ page }) => {
         }
     });
 
-    await page.goto('https://automationexercise.com/');
+    await page.goto(process.env.BASE_URL);
 
     // Verify the page title
     await expect(page).toHaveTitle('Automation Exercise');
@@ -22,7 +23,7 @@ test.beforeEach(async ({ page }) => {
     await expect(page.locator(logo)).toBeVisible;
 
     // Verify URL if applicable
-    await expect(page).toHaveURL('https://automationexercise.com/');
+    await expect(page).toHaveURL(process.env.BASE_URL);
 });
 
 const testData = {
@@ -118,7 +119,7 @@ test.describe('UI tests', () => {
         await expect(page.locator(logo)).toBeVisible;
 
         // Verify URL if applicable
-        await expect(page).toHaveURL('https://automationexercise.com/')
+        await expect(page).toHaveURL(process.env.BASE_URL)
     });
 
     for (const data of dataSet) {
@@ -263,7 +264,7 @@ test.describe('UI tests', () => {
         await page.locator('a[href="/product_details/1"]').click();
 
         // Verify User is landed to product detail page
-        await expect(page).toHaveURL('https://automationexercise.com/product_details/1');
+        await expect(page).toHaveURL('${process.env.BASE_URL}/product_details/1');
         await expect(page.locator('.product-information h2')).toBeVisible();
         await expect(page.locator('.product-information p').nth(0)).toBeVisible();
         await expect(page.locator('.product-information p').nth(1)).toBeVisible();
@@ -380,7 +381,7 @@ test.describe('UI tests', () => {
         await page.locator('a[href="/product_details/1"]').click();
 
         // Verify product detail is opened
-        await expect(page).toHaveURL('https://automationexercise.com/product_details/1');
+        await expect(page).toHaveURL('${process.env.BASE_URL}/product_details/1');
         await expect(page.locator('.product-information h2')).toBeVisible();
         await expect(page.locator('.product-information p').nth(0)).toBeVisible();
         await expect(page.locator('.product-information p').nth(1)).toBeVisible();
