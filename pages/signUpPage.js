@@ -1,5 +1,4 @@
 const { expect } = require("@playwright/test");
-const exp = require("constants");
 
 class SignUpPage {
 
@@ -31,6 +30,7 @@ class SignUpPage {
         this.deleteBTN = page.locator('a[href*="del"]');
         this.continueBTN = page.locator('[data-qa="continue-button"]');
         this.accountDeleted = page.locator('b');
+        this.emailExistMSG = page.locator('[action="/signup"] p');
 
 
 
@@ -98,6 +98,10 @@ class SignUpPage {
 
     async verifyAccountDeleted() {
         await expect(this.accountDeleted).toContainText('Account Deleted!');
+    };
+
+    async verifyErrorMsg() {
+        await expect(this.emailExistMSG).toContainText('Email Address already exist!');
     };
 
 

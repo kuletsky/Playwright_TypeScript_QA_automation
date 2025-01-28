@@ -19,8 +19,8 @@ test.beforeEach(async ({ page }) => {
     await expect(page).toHaveTitle('Automation Exercise');
 
     // Verify the presence of a logo
-    const logo = await page.locator('img[alt="Website for automation practice"]');
-    await expect(page.locator(logo)).toBeVisible;
+    const logo = page.locator('img[alt="Website for automation practice"]');
+    expect(page.locator(logo)).toBeVisible;
 
     // Verify URL if applicable
     await expect(page).toHaveURL(process.env.BASE_URL);
@@ -36,7 +36,7 @@ test.describe('UI tests', () => {
         // Verify the New user signUp is visible 
         await page.locator('.fa.fa-lock').click();
         const signUp = await page.locator('.signup-form h2').textContent();
-        await expect(signUp).toContain('New User Signup!')
+        expect(signUp).toContain('New User Signup!')
 
         // Enter name and email address
         const signupNameInput = page.locator('[data-qa="signup-name"]');
@@ -51,7 +51,7 @@ test.describe('UI tests', () => {
         // Verify that 'ENTER ACCOUNT INFORMATION' is visible
         await page.waitForLoadState();
         const text = await page.locator('b').first().textContent();
-        await expect(text).toContain('Enter Account Information');
+        expect(text).toContain('Enter Account Information');
 
         // Fill detailse: Title, Name, Email, Password, Date of birth
 
@@ -92,21 +92,21 @@ test.describe('UI tests', () => {
 
         // Verify that 'Account created!' is visible
         const account_created = await page.locator('b').textContent();
-        await expect(account_created).toContain('Account Created!');
+        expect(account_created).toContain('Account Created!');
 
         // Click 'Continue' button
         await page.locator('[data-qa="continue-button"]').click();
 
         // Verify that 'Logged in as Username'
         const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
-        await expect(logged).toContain('Logged in as');
+        expect(logged).toContain('Logged in as');
 
         // Click 'Delete account' button
         await page.locator('a[href*="del"]').click();
 
         // Verify that 'ACCOUNT DELETED!' is visible
         const del = await page.locator('b').textContent();
-        await expect(del).toContain('Account Deleted!')
+        expect(del).toContain('Account Deleted!')
 
         // Click 'Continue' button
         await page.locator('[data-qa="continue-button"]').click();
@@ -115,8 +115,8 @@ test.describe('UI tests', () => {
         await expect(page).toHaveTitle('Automation Exercise');
 
         // Verify the presence of a logo
-        const logo = await page.locator('img[alt="Website for automation practice"]');
-        await expect(page.locator(logo)).toBeVisible;
+        const logo = page.locator('img[alt="Website for automation practice"]');
+        expect(page.locator(logo)).toBeVisible;
 
         // Verify URL if applicable
         await expect(page).toHaveURL(process.env.BASE_URL)
@@ -133,7 +133,7 @@ test.describe('UI tests', () => {
 
             // Verify 'Login to your acount' is visible
             const loginForm = await page.locator('.login-form h2').textContent();
-            await expect(loginForm).toContain('Login to your account');
+            expect(loginForm).toContain('Login to your account');
 
             const loginPage = poManager.getLoginPage();
             await loginPage.signIn(data.email, data.psw);
@@ -147,7 +147,7 @@ test.describe('UI tests', () => {
 
             // Verify that 'Logged in as' is visible
             const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
-            await expect(logged).toContain('Logged in as');
+            expect(logged).toContain('Logged in as');
         });
     };
 
@@ -164,7 +164,7 @@ test.describe('UI tests', () => {
 
         // Verify error 'Your email or password is incorrect!' is vissible
         const error = await page.getByText('Your email or password is incorrect!').textContent();
-        await expect(error).toContain('Your email or password is incorrect!');
+        expect(error).toContain('Your email or password is incorrect!');
     });
 
     test('Verify user can successfuly Logout', async ({ page }) => {
@@ -173,7 +173,7 @@ test.describe('UI tests', () => {
 
         // Verify 'Login to your acount' is visible
         const loginForm = await page.locator('.login-form h2').textContent();
-        await expect(loginForm).toContain('Login to your account');
+        expect(loginForm).toContain('Login to your account');
 
         // Enter valid email amd password
         await page.locator('[data-qa="login-email"]').fill('trip27@lftjaguar.com');
@@ -184,20 +184,20 @@ test.describe('UI tests', () => {
 
         // Verify that 'Logged in as' is visible
         const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
-        await expect(logged).toContain('Logged in as');
+        expect(logged).toContain('Logged in as');
 
         // Click 'logout' button
         await page.locator('a[href*="/logout"]').click();
 
         // Verify thet user navigated to gin page
-        await expect(loginForm).toContain('Login to your account');
+        expect(loginForm).toContain('Login to your account');
     });
 
     test('Verify that User cannot signUp with existing email', async ({ page }) => {
         // Verify the 'New user signUp' is visible 
         await page.locator('.fa.fa-lock').click();
         const signUp = await page.locator('.signup-form h2').textContent();
-        await expect(signUp).toContain('New User Signup!')
+        expect(signUp).toContain('New User Signup!')
 
         // Enter name and already registered email address
         const signupNameInput = page.locator('[data-qa="signup-name"]');
@@ -219,7 +219,7 @@ test.describe('UI tests', () => {
 
         // Verify "Get in touch" is visible
         const getinTouch = await page.locator('.contact-form h2').textContent();
-        await expect(getinTouch).toContain('Get In Touch');
+        expect(getinTouch).toContain('Get In Touch');
 
         // Fill the form
         page.on('dialog', async (dialog) => {
@@ -232,11 +232,17 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="subject"]').fill('wef');
         await page.locator('[data-qa="message"]').fill('qfwf');
 
-        page.once('dialog', dialog => {
-            console.log(`Dialog message: ${dialog.message()}`);
-            dialog.accept().catch(() => { });
-        });
+        // page.once('dialog', dialog => {
+        //     console.log(`Dialog message: ${dialog.message()}`);
+        //     dialog.accept().catch(() => { });
+        // });
         await page.getByRole('button', { name: 'Submit' }).click();
+        await expect(page.locator('.status.alert.alert-success')).toContainText('Success! Your details have been submitted successfully.')
+        await page.locator('.fa.fa-angle-double-left').click();
+        // Verify the presence of a logo
+        const logo = page.locator('img[alt="Website for automation practice"]');
+        expect(page.locator(logo)).toBeVisible;
+
     });
 
     test('Verify that user can navigate to Test Cases Page', async ({ page }) => {
@@ -252,7 +258,7 @@ test.describe('UI tests', () => {
         await expect(page.locator('.title.text-center')).toHaveText('All Products');
 
         // Verify that all list of products is visible
-        const products = await page.locator('.single-products');
+        const products = page.locator('.single-products');
 
         for (let i = 0; i < await products.count(); i++) {
             const productList = products.nth(i);
@@ -280,7 +286,7 @@ test.describe('UI tests', () => {
         await expect(page.locator('.title.text-center')).toHaveText('All Products');
 
         // Verify that all list of products is visible
-        const products = await page.locator('.single-products');
+        const products = page.locator('.single-products');
 
         await page.locator('#search_product').fill('Blue Top');
         await page.waitForSelector('.fa.fa-search');
@@ -328,7 +334,7 @@ test.describe('UI tests', () => {
         await page.locator('a[href*="/products"]').click();
 
         // Hover over first product and click "Add to cart"
-        const product1 = await page.locator('.single-products').first();
+        const product1 = page.locator('.single-products').first();
         const product1Name = await product1.locator('.productinfo.text-center p').textContent();
         const product1Price = await product1.locator('.productinfo.text-center h2').textContent();
         await product1.hover();
@@ -338,7 +344,7 @@ test.describe('UI tests', () => {
         await page.locator('[data-dismiss="modal"]').click();
 
         // Hover over second product and click 'Add to cart'
-        const product2 = await page.locator('.single-products').nth(1);
+        const product2 = page.locator('.single-products').nth(1);
         const product2Name = await product2.locator('.productinfo.text-center p').textContent();
         const product2Price = await product2.locator('.productinfo.text-center h2').textContent();
         await product2.hover();
@@ -449,7 +455,7 @@ test.describe('UI tests', () => {
         // Verify that 'ENTER ACCOUNT INFORMATION' is visible
         await page.waitForLoadState();
         const text = await page.locator('b').first().textContent();
-        await expect(text).toContain('Enter Account Information');
+        expect(text).toContain('Enter Account Information');
 
         // Fill detailse: Title, Name, Email, Password, Date of birth
 
@@ -498,7 +504,7 @@ test.describe('UI tests', () => {
 
         // Verify that 'Logged in as Username'
         const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
-        await expect(logged).toContain('Logged in as');
+        expect(logged).toContain('Logged in as');
 
         // Click 'cart' button
         await page.locator('a[href="/view_cart"]').first().click();
@@ -532,7 +538,7 @@ test.describe('UI tests', () => {
 
         // Verify 'ACCOUNT DELETED!' and click 'Continue' button
         const del = await page.locator('b').textContent();
-        await expect(del).toContain('Account Deleted!')
+        expect(del).toContain('Account Deleted!')
         await expect(page.locator('b')).toContainText('Account Deleted!')
 
         // Click 'Continue' button
@@ -543,7 +549,7 @@ test.describe('UI tests', () => {
         // Verify the New user signUp is visible 
         await page.locator('.fa.fa-lock').click();
         const signUp = await page.locator('.signup-form h2').textContent();
-        await expect(signUp).toContain('New User Signup!')
+        expect(signUp).toContain('New User Signup!')
 
         // Enter name and email address
         const signupNameInput = page.locator('[data-qa="signup-name"]');
@@ -561,7 +567,7 @@ test.describe('UI tests', () => {
 
         // Verify that 'ENTER ACCOUNT INFORMATION' is visible
         const text = await page.locator('b').first().textContent();
-        await expect(text).toContain('Enter Account Information');
+        expect(text).toContain('Enter Account Information');
 
         // Fill detailse: Title, Name, Email, Password, Date of birth
 
@@ -609,10 +615,10 @@ test.describe('UI tests', () => {
 
         // Verify that 'Logged in as Username'
         const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
-        await expect(logged).toContain('Logged in as');
+        expect(logged).toContain('Logged in as');
 
         // Add products to cart
-        const product1 = await page.locator('.single-products').first();
+        const product1 = page.locator('.single-products').first();
         const product1Name = await product1.locator('.productinfo.text-center p').textContent();
         await product1.hover();
         await product1.getByText('Add to cart').nth(1).click();
@@ -653,7 +659,7 @@ test.describe('UI tests', () => {
 
         // Verify 'ACCOUNT DELETED!' and click 'Continue' button
         const del = await page.locator('b').textContent();
-        await expect(del).toContain('Account Deleted!')
+        expect(del).toContain('Account Deleted!')
         await expect(page.locator('b')).toContainText('Account Deleted!')
 
         // Click 'Continue' button
@@ -666,7 +672,7 @@ test.describe('UI tests', () => {
 
         // Verify 'Login to your acount' is visible
         const loginForm = await page.locator('.login-form h2').textContent();
-        await expect(loginForm).toContain('Login to your account');
+        expect(loginForm).toContain('Login to your account');
 
         // Enter valid email amd password
         await page.locator('[data-qa="login-email"]').fill('trip27@lftjaguar.com');
@@ -677,10 +683,10 @@ test.describe('UI tests', () => {
 
         // Verify that 'Logged in as' is visible
         const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
-        await expect(logged).toContain('Logged in as');
+        expect(logged).toContain('Logged in as');
 
         // Add products to cart
-        const product1 = await page.locator('.single-products').first();
+        const product1 = page.locator('.single-products').first();
         const product1Name = await page.locator('.productinfo.text-center p').first().textContent();
         await product1.hover();
         await product1.getByText('Add to cart').nth(1).click();
@@ -718,7 +724,7 @@ test.describe('UI tests', () => {
 
     test('Verify user can remove Products from the cart', async ({ page }) => {
         // Add products to cart
-        const product = await page.locator('.single-products').first();
+        const product = page.locator('.single-products').first();
         const productName = await product.locator('.productinfo.text-center p').textContent();
         await page.locator('[data-product-id="1"]').first().click();
 
@@ -764,7 +770,7 @@ test.describe('UI tests', () => {
 
         // Verify user is navigated to ALL PRODUCTS page successfully
         await page.waitForLoadState();
-        expect(await page.locator('h2.title.text-center')).toContainText('All Products');
+        expect(page.locator('h2.title.text-center')).toContainText('All Products');
 
         // Enter product name in search input and click search button
         await page.locator('#search_product').fill('Polo');
@@ -775,7 +781,7 @@ test.describe('UI tests', () => {
 
         for (let i = 0; i < await searchedProducts.count(); i++) {
             // const searchList = searchedProducts.nth(i);
-            expect(await searchedProducts.locator('.productinfo.text-center p').nth(i)).toContainText('Polo');
+            expect(searchedProducts.locator('.productinfo.text-center p').nth(i)).toContainText('Polo');
             console.log(await searchedProducts.locator('.productinfo.text-center p').nth(i).textContent());
         };
 
@@ -792,7 +798,7 @@ test.describe('UI tests', () => {
 
         // Verify 'Login to your acount' is visible
         const loginForm = await page.locator('.login-form h2').textContent();
-        await expect(loginForm).toContain('Login to your account');
+        expect(loginForm).toContain('Login to your account');
 
         // Enter valid email amd password
         await page.locator('[data-qa="login-email"]').fill('trip27@lftjaguar.com');
@@ -803,15 +809,15 @@ test.describe('UI tests', () => {
 
         // Verify that 'Logged in as' is visible
         const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
-        await expect(logged).toContain('Logged in as');
+        expect(logged).toContain('Logged in as');
 
         // Again, go to Cart page
         await page.locator('li a[href="/view_cart"]').click();
 
         // Verify that those products are visible in cart after login as well
-        const cartProducts = await page.locator('td.cart_description')
+        const cartProducts = page.locator('td.cart_description')
         for (let k = 0; k < await cartProducts.count(); k++) {
-            expect(await cartProducts.locator('h4 a').nth(k)).toContainText('Polo');
+            expect(cartProducts.locator('h4 a').nth(k)).toContainText('Polo');
             console.log(await cartProducts.locator('h4 a').nth(k).textContent());
         };
 
@@ -831,7 +837,7 @@ test.describe('UI tests', () => {
 
         // Verify user is navigated to ALL PRODUCTS page successfully
         await page.waitForLoadState();
-        expect(await page.locator('h2.title.text-center')).toContainText('All Products');
+        expect(page.locator('h2.title.text-center')).toContainText('All Products');
 
         // Click on 'View Product' button
         await page.locator('a[href="/product_details/1"]').click();
@@ -881,7 +887,7 @@ test.describe('UI tests', () => {
         // Click 'Signup / Login' button 
         await page.locator('.fa.fa-lock').click();
         const signUp = await page.locator('.signup-form h2').textContent();
-        await expect(signUp).toContain('New User Signup!')
+        expect(signUp).toContain('New User Signup!')
 
         // Enter name and email address
         const signupNameInput = page.locator('[data-qa="signup-name"]');
@@ -900,7 +906,7 @@ test.describe('UI tests', () => {
         // Verify that 'ENTER ACCOUNT INFORMATION' is visible
         await page.waitForLoadState();
         const text = await page.locator('b').first().textContent();
-        await expect(text).toContain('Enter Account Information');
+        expect(text).toContain('Enter Account Information');
 
         // Fill detailse: Title, Name, Email, Password, Date of birth
 
@@ -941,17 +947,17 @@ test.describe('UI tests', () => {
 
         // Verify that 'Account created!' is visible
         const account_created = await page.locator('b').textContent();
-        await expect(account_created).toContain('Account Created!');
+        expect(account_created).toContain('Account Created!');
 
         // Click 'Continue' button
         await page.locator('[data-qa="continue-button"]').click();
 
         // Verify that 'Logged in as Username'
         const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
-        await expect(logged).toContain('Logged in as');
+        expect(logged).toContain('Logged in as');
 
         // Add products to Cart
-        const product = await page.locator('.single-products').first();
+        const product = page.locator('.single-products').first();
         const productName = await product.locator('.productinfo.text-center p').textContent();
         await product.hover();
         await product.getByText('Add to cart').first().click();
@@ -975,7 +981,7 @@ test.describe('UI tests', () => {
 
         // Verify 'ACCOUNT DELETED!' and click 'Continue' button
         const del = await page.locator('b').textContent();
-        await expect(del).toContain('Account Deleted!')
+        expect(del).toContain('Account Deleted!')
         await expect(page.locator('b')).toContainText('Account Deleted!')
 
         // Click 'Continue' button
@@ -1019,7 +1025,7 @@ test.describe('UI tests', () => {
         // Verify that 'ENTER ACCOUNT INFORMATION' is visible
         await page.waitForLoadState();
         const text = await page.locator('b').first().textContent();
-        await expect(text).toContain('Enter Account Information');
+        expect(text).toContain('Enter Account Information');
 
         // Fill detailse: Title, Name, Email, Password, Date of birth
 
@@ -1068,7 +1074,7 @@ test.describe('UI tests', () => {
 
         // Verify that 'Logged in as Username'
         const logged = await page.locator('a').filter({ hasText: 'Logged in as' }).textContent();
-        await expect(logged).toContain('Logged in as');
+        expect(logged).toContain('Logged in as');
 
         // Click 'cart' button
         await page.locator('a[href="/view_cart"]').first().click();
@@ -1108,7 +1114,7 @@ test.describe('UI tests', () => {
 
         // Verify 'ACCOUNT DELETED!' and click 'Continue' button
         const del = await page.locator('b').textContent();
-        await expect(del).toContain('Account Deleted!')
+        expect(del).toContain('Account Deleted!')
         await expect(page.locator('b')).toContainText('Account Deleted!')
 
         // Click 'Continue' button

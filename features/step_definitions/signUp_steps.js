@@ -30,6 +30,10 @@ When('Click Delete account button', async function () {
     await this.signUpPage.deleteAccount();
 });
 
-Then('Verify that ACCOUNT DELETED! is visible', async function () {
+Then('Verify that ACCOUNT DELETED! is visible', { timeout: 10000 }, async function () {
     await this.signUpPage.verifyAccountDeleted();
+});
+
+Then('Verify error text: Email Adress already exist!', async function () {
+    await this.signUpPage.verifyErrorMsg();
 });

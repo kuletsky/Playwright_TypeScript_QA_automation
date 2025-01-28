@@ -14,6 +14,7 @@ Before(async function () {
     this.loginPage = this.poManager.getLoginPage();
     this.signUpPage = this.poManager.getSignUpPage();
     this.mainPage = this.poManager.getMainPage();
+    this.contuctUsPage = this.poManager.getcontuctUsPage();
 
 });
 

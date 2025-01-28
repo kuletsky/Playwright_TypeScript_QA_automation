@@ -14,3 +14,9 @@ Feature: SignUp tests
         When Click Continue button
         When Click Delete account button
         Then Verify that ACCOUNT DELETED! is visible
+
+    Scenario: Verify that User cannot signUp with existing email
+        When Click the Signup/Login menu
+        Then Verify SignUp page is opened
+        When Enter "Drew" and "trip27@lftjaguar.com"
+        Then Verify error text: Email Adress already exist!
