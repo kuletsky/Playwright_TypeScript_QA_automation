@@ -8,9 +8,9 @@ class LoginPage {
         this.signinEmail = page.locator('[data-qa="login-email"]');
         this.signinPSW = page.locator('[data-qa="login-password"]');
         this.btnSignIn = page.locator('[data-qa="login-button"]');
-        // this.signInLink = page.locator('.fa.fa-lock');
         this.loginFormHeader = page.locator('.login-form h2');
         this.loggedInText = page.locator('a').filter({ hasText: 'Logged in as' });
+        this.credintialsIscorrect = page.getByText('Your email or password is incorrect!');
     }
 
 
@@ -23,20 +23,16 @@ class LoginPage {
         await this.btnSignIn.click();
     }
 
-
-    // async linkSignIn() {
-    //     await this.signInLink.click();
-    // }
-
-
     async verifyLoginPage() {
         await expect(this.loginFormHeader).toContainText('Login to your account');
     }
 
-
     async verifySuccessLogin() {
-        await expect(this.loggedInText).toContainText('Logged in as');        
+        await expect(this.loggedInText).toContainText('Logged in as');
     }
 
+    async verifyUnsuccessLogin() {
+        await expect(this.credintialsIscorrect).toContainText('Your email or password is incorrect!');
+    }
 }
 module.exports = { LoginPage };

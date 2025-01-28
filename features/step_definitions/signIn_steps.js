@@ -13,3 +13,11 @@ Then('Verify user can Signin with {string} and {string}', async function (userna
     // Verify that 'Logged in as' is visible
     await this.loginPage.verifySuccessLogin();
 });
+
+When('Enter invalid credentials {string} and {string}', async function (username, psw) {
+    await this.loginPage.signIn(username, psw);
+});
+
+Then('Verify error Your email or password is incorrect! is vissible', async function () {
+    await this.loginPage.verifyUnsuccessLogin();
+});
