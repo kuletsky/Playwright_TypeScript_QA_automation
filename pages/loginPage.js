@@ -11,6 +11,7 @@ class LoginPage {
         this.loginFormHeader = page.locator('.login-form h2');
         this.loggedInText = page.locator('a').filter({ hasText: 'Logged in as' });
         this.credintialsIscorrect = page.getByText('Your email or password is incorrect!');
+        this.btnLogout = page.locator('a[href*="/logout"]');
     }
 
 
@@ -21,18 +22,24 @@ class LoginPage {
 
         // Click the 'Login' button
         await this.btnSignIn.click();
-    }
+    };
 
     async verifyLoginPage() {
         await expect(this.loginFormHeader).toContainText('Login to your account');
-    }
+    };
 
     async verifySuccessLogin() {
         await expect(this.loggedInText).toContainText('Logged in as');
-    }
+    };
 
     async verifyUnsuccessLogin() {
         await expect(this.credintialsIscorrect).toContainText('Your email or password is incorrect!');
-    }
+    };
+
+    async clickLogout() {
+        await this.btnLogout.click();
+    };
+
+
 }
 module.exports = { LoginPage };
