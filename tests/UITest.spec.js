@@ -232,10 +232,6 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="subject"]').fill('wef');
         await page.locator('[data-qa="message"]').fill('qfwf');
 
-        // page.once('dialog', dialog => {
-        //     console.log(`Dialog message: ${dialog.message()}`);
-        //     dialog.accept().catch(() => { });
-        // });
         await page.getByRole('button', { name: 'Submit' }).click();
         await expect(page.locator('.status.alert.alert-success')).toContainText('Success! Your details have been submitted successfully.')
         await page.locator('.fa.fa-angle-double-left').click();

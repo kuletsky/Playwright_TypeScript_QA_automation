@@ -1,6 +1,6 @@
 const { expect } = require("@playwright/test");
 
-class contuctUsPage {
+class ContuctUsPage {
 
     constructor(page) {
 
@@ -48,4 +48,4 @@ class contuctUsPage {
 
 
 }
-module.exports = { contuctUsPage };
+module.exports = { ContuctUsPage };

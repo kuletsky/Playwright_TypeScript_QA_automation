@@ -1,7 +1,8 @@
 const { LoginPage } = require("./loginPage");
 const { MainPage } = require("./mainPage");
 const { SignUpPage } = require("./signUpPage");
-const { contuctUsPage } = require("./contuctUsPage");
+const { ContuctUsPage } = require("./contuctUsPage");
+const { ProductDetails } = require("./productDetailsPage");
 
 class POManager {
 
@@ -11,7 +12,8 @@ class POManager {
         this.loginPage = new LoginPage(this.page);
         this.signUpPage = new SignUpPage(this.page);
         this.mainPage = new MainPage(this.page);
-        this.contuctUsPage = new contuctUsPage(this.page)
+        this.contuctUsPage = new ContuctUsPage(this.page)
+        this.productDetails = new ProductDetails(this.page)
     }
 
     getLoginPage() {
@@ -26,9 +28,13 @@ class POManager {
         return this.mainPage;
     }
 
-    getcontuctUsPage() {
+    getContuctUsPage() {
         return this.contuctUsPage;
     };
+
+    getProductDetails() {
+        return this.productDetails;
+    }
 
 }
 module.exports = { POManager };
