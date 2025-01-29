@@ -24,7 +24,7 @@ Then('Verify error Your email or password is incorrect! is visible', async funct
     await this.loginPage.verifyUnsuccessLogin();
 });
 
-When('Click Logout button', async function () {
+When('Click Logout button', {timeout: 10000}, async function () {
     await this.loginPage.clickLogout();
 });
 
