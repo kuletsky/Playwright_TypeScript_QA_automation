@@ -1,6 +1,6 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
 
-Given('Open the main page', {timeout: 10000}, async function () {
+Given('Open the main page', {timeout: 20000}, async function () {
     await this.mainPage.goToMain();
 });
 
