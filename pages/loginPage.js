@@ -4,7 +4,7 @@ class LoginPage {
 
     constructor(page) {
 
-        this.page = page
+        this.page = page;
         this.signinEmail = page.locator('[data-qa="login-email"]');
         this.signinPSW = page.locator('[data-qa="login-password"]');
         this.btnSignIn = page.locator('[data-qa="login-button"]');
@@ -12,7 +12,7 @@ class LoginPage {
         this.loggedInText = page.locator('a').filter({ hasText: 'Logged in as' });
         this.credintialsIscorrect = page.getByText('Your email or password is incorrect!');
         this.btnLogout = page.locator('a[href*="/logout"]');
-    }
+    };
 
 
     async signIn(username, password) {

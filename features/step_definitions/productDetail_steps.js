@@ -1,12 +1,12 @@
-const { When, Then } = require('@cucumber/cucumber');
+// const { When, Then } = require('@cucumber/cucumber');
 
 
-When('Click on Products link', async function () {
-    this.productDetails.clickProductLink();
-});
+// When('Click on Products link', { timeout: 10000 }, async function () {
+//     this.productDetail.clickProductBTN();
+// });
 
 // Then('Verify the page is navigated successfuly', function () {
-
+//     this.productDetail.verifyTextAllProducts();
 // });
 
 

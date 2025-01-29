@@ -2,7 +2,7 @@ const { LoginPage } = require("./loginPage");
 const { MainPage } = require("./mainPage");
 const { SignUpPage } = require("./signUpPage");
 const { ContuctUsPage } = require("./contuctUsPage");
-const { ProductDetails } = require("./productDetailsPage");
+// const { ProductDetail } = require("./productDetailPage");
 
 class POManager {
 
@@ -13,7 +13,7 @@ class POManager {
         this.signUpPage = new SignUpPage(this.page);
         this.mainPage = new MainPage(this.page);
         this.contuctUsPage = new ContuctUsPage(this.page)
-        this.productDetails = new ProductDetails(this.page)
+        // this.productDetail = new ProductDetail(this.page)
     }
 
     getLoginPage() {
@@ -32,9 +32,9 @@ class POManager {
         return this.contuctUsPage;
     };
 
-    getProductDetails() {
-        return this.productDetails;
-    }
+    // getProductDetail() {
+    //     return this.productDetail;
+    // };
 
 }
 module.exports = { POManager };
