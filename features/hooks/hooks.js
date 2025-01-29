@@ -59,7 +59,7 @@ Before(async function () {
     this.mainPage = this.poManager.getMainPage();
     this.contuctUsPage = this.poManager.getContuctUsPage();
     // this.productDetail = this.poManager.getProductDetail();
-
+    this.cartPage = this.poManager.getCartPage();
 });
 
 // After(async function () {
