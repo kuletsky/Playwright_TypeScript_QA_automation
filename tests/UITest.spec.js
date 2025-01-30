@@ -28,7 +28,7 @@ test.beforeEach(async ({ page }) => {
 
 const testData = {
     name: 'john',
-    email: 'john@gwm1sw2s3ws5cqww.com'
+    email: 'john@gwm1sw2s3ws5cqwww.com'
 };
 
 test.describe('UI tests', () => {
