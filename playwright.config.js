@@ -30,7 +30,8 @@ module.exports = defineConfig({
     // baseURL: 'http://127.0.0.1:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    // trace: 'on-first-retry',
+    trace: 'on',
     browserName: 'chromium',
     headless: process.env.CI ? false : false, // Use headed mode in CI
     viewport: { width: 1920, height: 1080 },

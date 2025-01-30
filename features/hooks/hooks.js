@@ -44,9 +44,20 @@ const { POManager } = require("../../pages/POManager");
 
 Before(async function () {
     // Launch the browser and initialize context before each scenario
-    this.browser = await playwright.chromium.launch();
+    this.browser = await playwright.chromium.launch({ headless: false });
+    // this.browser = await playwright.chromium.launch();
     this.context = await this.browser.newContext();
     this.page = await this.context.newPage();
+
+    // Add request interception
+    await this.page.route('**/*', (route) => {
+        if (route.request().url().includes('google')) {
+            console.log(`Blocking request: ${route.request().url()}`);
+            route.abort(); // Block requests to Google
+        } else {
+            route.continue();
+        }
+    });
 
     // Initialize the POManager and make it available for all steps
     this.poManager = new POManager(this.page);

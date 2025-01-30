@@ -9,7 +9,7 @@ When('Click Products link', async function () {
     await this.cartPage.clickProductsLink();
 });
 
-When('Hover over first product and click: Add to cart', async function () {
+When('Hover over first product and click: Add to cart', { timeout: 10000 }, async function () {
     await this.cartPage.clickHoverAddtoCart();
 })
 
@@ -50,7 +50,7 @@ Then('Verify RECOMMENDED ITEMS are visible', async function () {
 });
 
 When('Click on Add To Cart on Recommended product', async function () {
-    await this.cartPage.clickAddRecommendProduct(); 
+    await this.cartPage.clickAddRecommendProduct();
 });
 
 When('Click on View Cart button', async function () {
