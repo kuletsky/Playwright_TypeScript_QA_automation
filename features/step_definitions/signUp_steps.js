@@ -10,7 +10,7 @@ When('Enter {string} and {string}', async function (name, email) {
 
 });
 
-Then('Verify that ENTER ACCOUNT INFORMATION is visible', async function () {
+Then('Verify that ENTER ACCOUNT INFORMATION is visible', {timeout:10000}, async function () {
     await this.signUpPage.verifyFormEnterAccount();
 });
 

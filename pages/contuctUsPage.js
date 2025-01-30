@@ -16,7 +16,7 @@ class ContuctUsPage {
 
 
         this.page.on('dialog', async (dialog) => {
-            console.log("Dialog Message: ", dialog.message());
+            // console.log("Dialog Message: ", dialog.message());
             await dialog.accept();
         });
     }
@@ -27,7 +27,7 @@ class ContuctUsPage {
     };
 
     async verifyTextGetinTouch() {
-        console.log(await this.textGetinTouch.textContent())
+        // console.log(await this.textGetinTouch.textContent())
         await expect(this.textGetinTouch).toContainText('Get In Touch');
     };
 

@@ -17,6 +17,13 @@ class CartPage {
         this.name = page.locator('a[href="/product_details/1"]');
         this.deleteBTN = page.locator('.fa.fa-times');
         this.emptyCardText = page.locator('p b');
+        this.addToCartStreightBTN = page.locator('[data-product-id="1"]').first();
+        this.name2 = page.locator('a[href="/product_details/1"]');
+        this.recommendedItemCarousel = page.locator('.single-widget');
+        this.recommendedItems = page.locator('.recommended_items .title.text-center');
+        this.onCartViewBTN = page.locator('a u');
+        this.AddRecommendProductBTN = page.locator('#recommended-item-carousel a[data-product-id="4"]');
+        this.productInCart = page.locator('a[href="/product_details/4"]');
     }
 
     async clickCartLink() {
@@ -27,7 +34,7 @@ class CartPage {
         await this.productsLink.click();
         this.productPrice = await this.productPriceLocator.textContent();
         this.productName = await this.productNameLocator.textContent();
-        console.log(this.productName, this.productPrice);
+        // console.log(this.productName, this.productPrice);
     }
 
     async clickHoverAddtoCart() {
@@ -69,6 +76,33 @@ class CartPage {
         await expect(this.emptyCardText).toContainText('Cart is empty!');
     };
 
+    async clickAddToCart() {
+        this.productName2 = await this.page.locator('.single-products').first().locator('.productinfo.text-center p').textContent();
+        await this.addToCartStreightBTN.click();
+    };
 
+    async verifyProductInCart() {
+        await expect(this.name2).toContainText(this.productName2);
+    };
+
+    async scrollToRecommend() {
+        await this.recommendedItemCarousel.scrollIntoViewIfNeeded();
+    }
+
+    async verifyVisabilityRecommendItem() {
+        await expect(this.recommendedItems).toContainText('recommended items');
+    }
+
+    async clickAddRecommendProduct() {
+        await this.AddRecommendProductBTN.click();
+    };
+
+    async clickOnCartView() {
+        await this.onCartViewBTN.click();
+    };
+
+    async verifyProductIncart() {
+        await expect(this.productInCart).toContainText('Stylish Dress');
+    }
 };
 module.exports = { CartPage };
