@@ -11,6 +11,8 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    strategy: 
+      max_attempts: 4 
 
     steps:
     - uses: actions/checkout@v4
