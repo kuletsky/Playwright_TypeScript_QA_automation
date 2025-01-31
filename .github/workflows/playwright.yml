@@ -26,13 +26,13 @@ jobs:
     - name: Install xvfb
       run: sudo apt-get install xvfb
 
-    - name: Run Playwright tests in headed mode
+    - name: Run Playwright Tests on All Browsers
       run: | 
         xvfb-run --auto-servernum --server-args='-screen 0 1920x1080x24' npm run test:playwright:all
       env:
           BASE_URL: ${{ secrets.BASE_URL }}  # Access the secret in the workflow
 
-    - name: Run Cucumber Tests
+    - name: Run Cucumber Tests on All Browsers
       run: |
         xvfb-run --auto-servernum --server-args='-screen 0 1920x1080x24' npm run test:cucumber:all
       env:

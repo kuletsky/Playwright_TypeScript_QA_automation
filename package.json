@@ -16,9 +16,9 @@
     "test:playwright:firefox": "npx playwright test --project=firefox",
     "test:playwright:webkit": "npx playwright test --project=webkit",
     
-    "test:cucumber:chrome": "npx cucumber-js --world-parameters '{\"browser\":\"chromium\"}' --retry 1 --parallel 3 --exit --format html:cucumber-report.html",
-    "test:cucumber:firefox": "npx cucumber-js --world-parameters '{\"browser\":\"firefox\"}' --retry 1 --parallel 3 --exit --format html:cucumber-report.html",
-    "test:cucumber:webkit": "npx cucumber-js --world-parameters '{\"browser\":\"webkit\"}' --retry 1 --parallel 3 --exit --format html:cucumber-report.html",
+    "test:cucumber:chrome": "npx cucumber-js --world-parameters '{\"browser\":\"chromium\"}' --retry 1 --parallel 4 --exit --format html:cucumber-report.html",
+    "test:cucumber:firefox": "npx cucumber-js --world-parameters '{\"browser\":\"firefox\"}' --retry 1 --parallel 4 --exit --format html:cucumber-report.html",
+    "test:cucumber:webkit": "npx cucumber-js --world-parameters '{\"browser\":\"webkit\"}' --retry 1 --parallel 4 --exit --format html:cucumber-report.html",
 
     "test:playwright:all": "npm run test:playwright:chrome && npm run test:playwright:firefox && npm run test:playwright:webkit",
 
