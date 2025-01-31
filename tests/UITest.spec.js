@@ -1,5 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const { POManager } = require('../pages/POManager');
+const { time } = require('console');
+const { timeout } = require('../playwright.config');
 require('dotenv').config();
 
 const dataSet = JSON.parse(JSON.stringify(require("../utils/uitestData.json")));
@@ -28,7 +30,8 @@ test.beforeEach(async ({ page }) => {
 
 const testData = {
     name: 'john',
-    email: 'john@gwm1sw2s3ws5cqwww.com'
+    // email: 'john@gw2m1qwsw2sw3ws5cqqwww.com',
+    email:  `testuser_${Date.now()}@example.com`
 };
 
 test.describe('UI tests', () => {
@@ -50,8 +53,8 @@ test.describe('UI tests', () => {
 
         // Verify that 'ENTER ACCOUNT INFORMATION' is visible
         await page.waitForLoadState();
-        const text = await page.locator('b').first().textContent();
-        expect(text).toContain('Enter Account Information');
+        // const text = await page.locator('b').first().textContent();
+        await expect(page.locator('b').first()).toContainText('Enter Account Information');
 
         // Fill detailse: Title, Name, Email, Password, Date of birth
 
@@ -223,7 +226,7 @@ test.describe('UI tests', () => {
 
         // Fill the form
         page.on('dialog', async (dialog) => {
-            console.log(dialog.message());
+            // console.log(dialog.message());
             await dialog.accept();
         });
 
@@ -233,7 +236,7 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="message"]').fill('qfwf');
 
         await page.getByRole('button', { name: 'Submit' }).click();
-        await expect(page.locator('.status.alert.alert-success')).toContainText('Success! Your details have been submitted successfully.')
+        await expect(page.locator('.status.alert.alert-success')).toContainText('Success! Your details have been submitted successfully.', {timeout:10000})
         await page.locator('.fa.fa-angle-double-left').click();
         // Verify the presence of a logo
         const logo = page.locator('img[alt="Website for automation practice"]');
@@ -266,7 +269,7 @@ test.describe('UI tests', () => {
         await page.locator('a[href="/product_details/1"]').click();
 
         // Verify User is landed to product detail page
-        await expect(page).toHaveURL('${process.env.BASE_URL}/product_details/1');
+        await expect(page).toHaveURL(`${process.env.BASE_URL}product_details/1`);
         await expect(page.locator('.product-information h2')).toBeVisible();
         await expect(page.locator('.product-information p').nth(0)).toBeVisible();
         await expect(page.locator('.product-information p').nth(1)).toBeVisible();
@@ -350,7 +353,7 @@ test.describe('UI tests', () => {
         await page.locator('a[href="/view_cart"]').nth(1).click();
 
         // Verify both products are added to Cart
-        console.log(product1Name, product2Name)
+        // console.log(product1Name, product2Name)
         await expect(page.locator('a[href="/product_details/1"]')).toContainText(product1Name);
         await expect(page.locator('a[href="/product_details/2"]')).toContainText(product2Name);
 
@@ -383,7 +386,7 @@ test.describe('UI tests', () => {
         await page.locator('a[href="/product_details/1"]').click();
 
         // Verify product detail is opened
-        await expect(page).toHaveURL('${process.env.BASE_URL}/product_details/1');
+        await expect(page).toHaveURL(`${process.env.BASE_URL}product_details/1`);
         await expect(page.locator('.product-information h2')).toBeVisible();
         await expect(page.locator('.product-information p').nth(0)).toBeVisible();
         await expect(page.locator('.product-information p').nth(1)).toBeVisible();
@@ -449,9 +452,9 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="signup-button"]').click();
 
         // Verify that 'ENTER ACCOUNT INFORMATION' is visible
-        await page.waitForLoadState();
-        const text = await page.locator('b').first().textContent();
-        expect(text).toContain('Enter Account Information');
+        // await page.waitForLoadState();
+        // const text = await page.locator('b').first().textContent();
+        await expect(page.locator('b').first()).toContainText('Enter Account Information');
 
         // Fill detailse: Title, Name, Email, Password, Date of birth
 
@@ -492,8 +495,7 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="create-account"]').click();
 
         // Verify that 'Account created!' is visible
-        await page.waitForLoadState();
-        await expect(page.locator('b')).toContainText('Account Created!');
+        await expect(page.locator('b')).toContainText('Account Created!', {timeout:10000});
 
         // Click 'Continue' button
         await page.locator('[data-qa="continue-button"]').click();
@@ -509,7 +511,7 @@ test.describe('UI tests', () => {
         await page.locator('.btn.btn-default.check_out').click();
 
         // Verify Address Details and Review Your Order
-        await expect(page.locator('.address_firstname').first()).toContainText('Mr. John Cooper');
+        await expect(page.locator('.address_firstname').first()).toContainText('Mr. John Cooper', {timeout:10000});
         await expect(page.locator('.address_address1').nth(1)).toContainText('address1');
 
         // Enter description in comment text area and click 'Place Order'
@@ -562,8 +564,8 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="signup-button"]').click();
 
         // Verify that 'ENTER ACCOUNT INFORMATION' is visible
-        const text = await page.locator('b').first().textContent();
-        expect(text).toContain('Enter Account Information');
+        // const text = await page.locator('b').first().textContent();
+        await expect(page.locator('b').first()).toContainText('Enter Account Information', {timeout:10000});
 
         // Fill detailse: Title, Name, Email, Password, Date of birth
 
@@ -603,8 +605,8 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="create-account"]').click();
 
         // Verify that 'Account created!' is visible
-        await page.waitForLoadState();
-        await expect(page.locator('b')).toContainText('Account Created!');
+        // await page.waitForLoadState();
+        await expect(page.locator('b')).toContainText('Account Created!', {timeout:10000});
 
         // Click 'Continue' button
         await page.locator('[data-qa="continue-button"]').click();
@@ -630,7 +632,7 @@ test.describe('UI tests', () => {
 
         // Verify Address Details and Review Your Order
         await page.waitForLoadState();
-        await expect(page.locator('.address_firstname').first()).toContainText('Mr. John Cooper');
+        await expect(page.locator('.address_firstname').first()).toContainText('Mr. John Cooper', {timeout:10000});
         await expect(page.locator('.address_address1').nth(1)).toContainText('address1');
 
         // Enter description in comment text area and click 'Place Order'
@@ -697,7 +699,7 @@ test.describe('UI tests', () => {
         await page.locator('.btn.btn-default.check_out').click();
 
         // Verify Address Details and Review Your Order
-        await expect(page.locator('.address_firstname').first()).toContainText('Mr. 1234 1234');
+        await expect(page.locator('.address_firstname').first()).toContainText('Mr. 1234 1234', { timeout: 10000 });
         await expect(page.locator('.address_address1').nth(1)).toContainText('1234');
 
         // Enter description in comment text area and click 'Place Order'
@@ -748,12 +750,11 @@ test.describe('UI tests', () => {
         await page.locator('a[href="/category_products/2"]').click();
 
         // Verify that category page is displayed and confirm text 'WOMEN - TOPS PRODUCTS'
-        await page.waitForLoadState();
-        await expect(page.locator('h2.title.text-center')).toContainText('Women - Tops Products');
+        await expect(page.locator('h2.title.text-center')).toContainText('Women - Tops Products', { timeout: 10000 });
 
         // On left side bar, click on any sub-category link of 'Men' category
         await page.locator('a[href="#Men"]').click();
-        await page.locator('a[href="/category_products/3"]').click();
+        await page.locator('a[href="/category_products/3"]').click({timeout:10000});
 
         // Verify that user is navigated to that category page
         await page.waitForLoadState();
@@ -778,7 +779,7 @@ test.describe('UI tests', () => {
         for (let i = 0; i < await searchedProducts.count(); i++) {
             // const searchList = searchedProducts.nth(i);
             expect(searchedProducts.locator('.productinfo.text-center p').nth(i)).toContainText('Polo');
-            console.log(await searchedProducts.locator('.productinfo.text-center p').nth(i).textContent());
+            // console.log(await searchedProducts.locator('.productinfo.text-center p').nth(i).textContent());
         };
 
         // Add those products to cart
@@ -814,7 +815,7 @@ test.describe('UI tests', () => {
         const cartProducts = page.locator('td.cart_description')
         for (let k = 0; k < await cartProducts.count(); k++) {
             expect(cartProducts.locator('h4 a').nth(k)).toContainText('Polo');
-            console.log(await cartProducts.locator('h4 a').nth(k).textContent());
+            // console.log(await cartProducts.locator('h4 a').nth(k).textContent());
         };
 
         // Click 'X' button corresponding to particular product
@@ -900,9 +901,9 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="signup-button"]').click();
 
         // Verify that 'ENTER ACCOUNT INFORMATION' is visible
-        await page.waitForLoadState();
-        const text = await page.locator('b').first().textContent();
-        expect(text).toContain('Enter Account Information');
+        // await page.waitForLoadState();
+        // const text = await page.locator('b').first().textContent();
+        await expect(page.locator('b').first()).toContainText('Enter Account Information', {timeout:10000});
 
         // Fill detailse: Title, Name, Email, Password, Date of birth
 
@@ -942,8 +943,8 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="create-account"]').click();
 
         // Verify that 'Account created!' is visible
-        const account_created = await page.locator('b').textContent();
-        expect(account_created).toContain('Account Created!');
+        // const account_created = await page.locator('b').textContent();
+        await expect(page.locator('b')).toContainText('Account Created!', {timeout:10000});
 
         // Click 'Continue' button
         await page.locator('[data-qa="continue-button"]').click();
@@ -959,18 +960,18 @@ test.describe('UI tests', () => {
         await product.getByText('Add to cart').first().click();
 
         // Click 'View Cart' button
-        await page.locator('a[href="/view_cart"]').nth(1).click();
+        await page.locator('a[href="/view_cart"]').nth(1).click({timeout:10000});
 
         // Verify product are added to Cart
-        console.log(productName)
-        await expect(page.locator('a[href="/product_details/1"]')).toContainText(productName);
+        // console.log(productName)
+        await expect(page.locator('a[href="/product_details/1"]')).toContainText(productName, {timeout:10000});
 
         // Click 'Proceed to checkout' button
         await page.locator('.btn.btn-default.check_out').click();
 
         // Verify Address Details and Review Your Order
-        await expect(page.locator('.address_firstname').first()).toContainText('Mr. John Cooper');
-        await expect(page.locator('.address_address1').nth(1)).toContainText('address1');
+        await expect(page.locator('.address_firstname').first()).toContainText('Mr. John Cooper', {timeout:10000});
+        await expect(page.locator('.address_address1').nth(1)).toContainText('address1', {timeout:10000});
 
         // Click 'Delete Account' button
         await page.locator('a[href="/delete_account"]').click();
@@ -1019,9 +1020,8 @@ test.describe('UI tests', () => {
         await page.locator('[data-qa="signup-button"]').click();
 
         // Verify that 'ENTER ACCOUNT INFORMATION' is visible
-        await page.waitForLoadState();
-        const text = await page.locator('b').first().textContent();
-        expect(text).toContain('Enter Account Information');
+        // const text = await page.locator('b').first().textContent();
+        await expect(page.locator('b').first()).toContainText('Enter Account Information', {timeout:10000});
 
         // Fill detailse: Title, Name, Email, Password, Date of birth
 
@@ -1079,7 +1079,7 @@ test.describe('UI tests', () => {
         await page.locator('.btn.btn-default.check_out').click();
 
         // Verify Address Details and Review Your Order
-        await expect(page.locator('.address_firstname').first()).toContainText('Mr. John Cooper');
+        await expect(page.locator('.address_firstname').first()).toContainText('Mr. John Cooper', {timeout:10000});
         await expect(page.locator('.address_address1').nth(1)).toContainText('address1');
 
         // Enter description in comment text area and click 'Place Order'

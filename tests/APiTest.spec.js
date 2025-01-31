@@ -39,7 +39,7 @@ test('Fetch products list via API', async ({ request }) => {
     // const apiContext = await request.newContext();
 
     // Perform the GET request
-    const response = await request.get('${process.env.BASE_URL}/api/productsList');
+    const response = await request.get(`${process.env.BASE_URL}/api/productsList`);
 
     // Check if the response status code is 200
     expect(response.status()).toBe(200);
@@ -64,7 +64,7 @@ test('Fetch products list via API', async ({ request }) => {
 
 test('Verify POST request returns 405 Method Not Allowed', async ({ request }) => {
     // Send a POST request to the API URL
-    const response = await request.post('${process.env.BASE_URL}/api/productsList');
+    const response = await request.post(`${process.env.BASE_URL}/api/productsList`);
 
     // Verify the response code is 405 (Method Not Allowd)
     // await expect(response.status()).toBe(405);
@@ -76,7 +76,7 @@ test('Verify POST request returns 405 Method Not Allowed', async ({ request }) =
 });
 
 test('Fetch all brands list', async ({ request }) => {
-    const response = await request.get('${process.env.BASE_URL}/api/brandsList');
+    const response = await request.get(`${process.env.BASE_URL}/api/brandsList`);
 
     // Check if the response status code is 200
     expect(response.status()).toBe(200);
@@ -98,7 +98,7 @@ test('Fetch all brands list', async ({ request }) => {
 
 test('Verify PUT request returns 405 Method Not allowed', async ({ request }) => {
     // Send a PUT request to the API endpoint
-    const response = await request.put('${process.env.BASE_URL}/api/brandsList');
+    const response = await request.put(`${process.env.BASE_URL}/api/brandsList`);
 
      // Verify the response body contains the expected response code and message
     const responseBody = await response.json();
@@ -113,7 +113,7 @@ test('Verify POST to SearchProduct request', async ({ request }) => {
     };
 
     // Send a POST request to the API endpoint
-    const response = await request.post('${process.env.BASE_URL}/api/searchProduct', {
+    const response = await request.post(`${process.env.BASE_URL}/api/searchProduct`, {
         headers: {
             'Content-Type': 'application/json', // Ensure the correct content type
         },
@@ -121,17 +121,17 @@ test('Verify POST to SearchProduct request', async ({ request }) => {
     });
 
     // Check if the response status code is 200
-    await expect(response.status()).toBe(200);
+    expect(response.status()).toBe(200);
 
     // Parse the response body as Json
     const responseBody = await response.json();
 
     // Verify that response searched products
-    console.log('Response Json', responseBody);
+    // console.log('Response Json', responseBody);
 });
 
 test('POST To Search Product without search_product parameter', async ({ request }) => {
-    const response = await request.post('${process.env.BASE_URL}/api/searchProduct');
+    const response = await request.post(`${process.env.BASE_URL}/api/searchProduct`);
     const responseBody = await response.json();
 
     // Verify the error message in the response body
@@ -147,7 +147,7 @@ test('Verify POST to verifyLogin request with unvalid credentials', async ({ req
     };
 
     // Send the POST request
-    const response = await request.post('${process.env.BASE_URL}/api/verifyLogin', {
+    const response = await request.post(`${process.env.BASE_URL}/api/verifyLogin`, {
         headers: {
             'Content-Type': 'application/json', // Ensure the correct content type
         },
@@ -163,7 +163,7 @@ test('Verify POST to verifyLogin request with unvalid credentials', async ({ req
 });
 
 test('Verify DELETE method returns 405 Metgod not allowed', async ({ request }) => {
-    const response = await request.delete('${process.env.BASE_URL}/api/verifyLogin')
+    const response = await request.delete(`${process.env.BASE_URL}/api/verifyLogin`)
     const responseBody = await response.json();
 
 

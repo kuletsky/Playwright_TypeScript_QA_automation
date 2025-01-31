@@ -52,7 +52,7 @@ Before(async function () {
     // Add request interception
     await this.page.route('**/*', (route) => {
         if (route.request().url().includes('google')) {
-            console.log(`Blocking request: ${route.request().url()}`);
+            // console.log(`Blocking request: ${route.request().url()}`);
             route.abort(); // Block requests to Google
         } else {
             route.continue();

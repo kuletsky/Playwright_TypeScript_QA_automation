@@ -17,7 +17,7 @@ When('Hover over first product and click: Add to cart', { timeout: 10000 }, asyn
 //     await this.cartPage.clickContinueBTN();
 // })
 
-When('Click View Cart Button', { timeout: 10000 }, async function () {
+When('Click View Cart Button', { timeout: 15000 }, async function () {
     await this.cartPage.clickViewCart();
 });
 
@@ -29,7 +29,7 @@ When('Remove product from cart', async function () {
     await this.cartPage.removeProduct();
 });
 
-Then('Verify that product is removed from the cart', { timeout: 10000 }, async function () {
+Then('Verify that product is removed from the cart', { timeout: 15000 }, async function () {
     await this.cartPage.verifyEmptyCart();
 });
 

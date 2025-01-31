@@ -17,9 +17,9 @@ module.exports = defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 1,
+  retries: process.env.CI ? 1 : 1,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : 1,
+  workers: process.env.CI ? 3 : 3,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
 
@@ -28,12 +28,13 @@ module.exports = defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
-
+    actionTimeout: 10000, // 10 seconds for actions like click
+    navigationTimeout: 15000, // 15 seconds for navigation
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     // trace: 'on',
     browserName: 'chromium',
-    headless: process.env.CI ? false : false, // Use headed mode in CI
+    headless: process.env.CI ? true : true, // Use headed mode in CI
     viewport: { width: 1920, height: 1080 },
     // headless: false,
     // viewport: null,
