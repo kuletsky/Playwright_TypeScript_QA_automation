@@ -28,9 +28,16 @@ jobs:
 
     - name: Run Playwright tests in headed mode
       run: | 
-        xvfb-run --auto-servernum --server-args='-screen 0 1920x1080x24' npx playwright test
+        xvfb-run --auto-servernum --server-args='-screen 0 1920x1080x24' npm run test:playwright:all
       env:
           BASE_URL: ${{ secrets.BASE_URL }}  # Access the secret in the workflow
+
+    - name: Run Cucumber Tests
+      run: |
+        xvfb-run --auto-servernum --server-args='-screen 0 1920x1080x24' npm run test:cucumber:all
+      env:
+        BASE_URL: ${{ secrets.BASE_URL }}
+
     # - name: Run Playwright tests
     #   run: npx playwright test
     - name: Upload Playwright Report
@@ -39,4 +46,12 @@ jobs:
       with:
         name: playwright-report
         path: playwright-report/
+        retention-days: 30
+
+    - name: Upload Cucumber Report
+      uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        name: cucumber-report
+        path: cucumber-report.html
         retention-days: 30

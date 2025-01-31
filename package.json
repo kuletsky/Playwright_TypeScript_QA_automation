@@ -7,8 +7,24 @@
     "test": "tests"
   },
   "scripts": {
-    "playwright tests": "npx playwright test",
-    "cucumber": "npx cucumber-js --retry 1 --parallel 3 --exit --format html:cucumber-report.html"
+    "test:playwright": "npx playwright test",
+    "test:cucumber": "npx cucumber-js --retry 1 --parallel 3 --exit --format html:cucumber-report.html",
+    
+    "test:all": "npm run test:playwright && npm run test:cucumber",
+    
+    "test:playwright:chrome": "npx playwright test --project=chromium",
+    "test:playwright:firefox": "npx playwright test --project=firefox",
+    "test:playwright:webkit": "npx playwright test --project=webkit",
+    
+    "test:cucumber:chrome": "npx cucumber-js --world-parameters '{\"browser\":\"chromium\"}' --retry 1 --parallel 3 --exit --format html:cucumber-report.html",
+    "test:cucumber:firefox": "npx cucumber-js --world-parameters '{\"browser\":\"firefox\"}' --retry 1 --parallel 3 --exit --format html:cucumber-report.html",
+    "test:cucumber:webkit": "npx cucumber-js --world-parameters '{\"browser\":\"webkit\"}' --retry 1 --parallel 3 --exit --format html:cucumber-report.html",
+
+    "test:playwright:all": "npm run test:playwright:chrome && npm run test:playwright:firefox && npm run test:playwright:webkit",
+
+    "test:cucumber:all": "npm run test:cucumber:chrome && npm run test:cucumber:firefox && npm run test:cucumber:webkit",
+
+    "test:all:all": "npm run test:playwright:all && npm run test:cucumber:all || echo 'Cucumber tests failed'"
   },
   "repository": {
     "type": "git",
