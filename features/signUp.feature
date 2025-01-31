@@ -7,7 +7,7 @@ Feature: SignUp tests
     Scenario: Verify user can successfuly SignUp with valid credentials
         When Click the Signup/Login menu
         Then Verify SignUp page is opened
-        When Enter "example" and "example@amail.com"
+        When Enter "example" and "example@cmail.com"
         Then Verify that ENTER ACCOUNT INFORMATION is visible
         When Fill detailse: Title, Name, Email, Password, Date of birth
         Then Verify that Account created! is visible

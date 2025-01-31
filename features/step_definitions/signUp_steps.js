@@ -14,7 +14,7 @@ Then('Verify that ENTER ACCOUNT INFORMATION is visible', {timeout:10000}, async 
     await this.signUpPage.verifyFormEnterAccount();
 });
 
-When('Fill detailse: Title, Name, Email, Password, Date of birth', async function () {
+When('Fill detailse: Title, Name, Email, Password, Date of birth',  {timeout:10000}, async function () {
     await this.signUpPage.fillFormAccount();
 });
 

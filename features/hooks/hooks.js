@@ -44,8 +44,8 @@ const { POManager } = require("../../pages/POManager");
 
 Before(async function () {
     // Launch the browser and initialize context before each scenario
-    this.browser = await playwright.chromium.launch({ headless: false });
-    // this.browser = await playwright.chromium.launch();
+    // this.browser = await playwright.chromium.launch({ headless: false });
+    this.browser = await playwright.chromium.launch();
     this.context = await this.browser.newContext();
     this.page = await this.context.newPage();
 
