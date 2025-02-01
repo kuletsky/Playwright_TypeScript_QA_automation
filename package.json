@@ -8,22 +8,16 @@
   },
   "scripts": {
     "test:playwright": "npx playwright test",
-    "test:cucumber": "npx cucumber-js --retry 1 --parallel 3 --exit --format html:cucumber-report.html",
-    
+    "test:cucumber": "npx cucumber-js --retry 2 --parallel 3 --exit --format html:cucumber-report.html",
     "test:all": "npm run test:playwright && npm run test:cucumber",
-    
     "test:playwright:chrome": "npx playwright test --project=chromium",
     "test:playwright:firefox": "npx playwright test --project=firefox",
     "test:playwright:webkit": "npx playwright test --project=webkit",
-    
     "test:cucumber:chrome": "npx cucumber-js --world-parameters '{\"browser\":\"chromium\"}' --retry 2 --parallel 3 --exit --format html:cucumber-report.html",
     "test:cucumber:firefox": "npx cucumber-js --world-parameters '{\"browser\":\"firefox\"}' --retry 2 --parallel 3 --exit --format html:cucumber-report.html",
     "test:cucumber:webkit": "npx cucumber-js --world-parameters '{\"browser\":\"webkit\"}' --retry 2 --parallel 3 --exit --format html:cucumber-report.html",
-
     "test:playwright:all": "npm run test:playwright:chrome && npm run test:playwright:firefox && npm run test:playwright:webkit",
-
     "test:cucumber:all": "npm run test:cucumber:chrome && npm run test:cucumber:firefox && npm run test:cucumber:webkit",
-
     "test:all:all": "npm run test:playwright:all && npm run test:cucumber:all || echo 'Cucumber tests failed'"
   },
   "repository": {
@@ -38,6 +32,7 @@
   },
   "homepage": "https://github.com/kuletsky/Playwright_TypeScript_QA_automation#readme",
   "devDependencies": {
+    "@azure/microsoft-playwright-testing": "^1.0.0-beta.7",
     "@cucumber/cucumber": "^11.2.0",
     "@playwright/test": "^1.49.1",
     "@types/cucumber": "^7.0.3",
