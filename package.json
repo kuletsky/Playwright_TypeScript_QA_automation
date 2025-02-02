@@ -19,6 +19,7 @@
     "test:playwright:all": "npm run test:playwright:chrome && npm run test:playwright:firefox && npm run test:playwright:webkit",
     "test:cucumber:all": "npm run test:cucumber:chrome && npm run test:cucumber:firefox && npm run test:cucumber:webkit",
     "test:all:all": "npm run test:playwright:all && npm run test:cucumber:all || echo 'Cucumber tests failed'"
+
   },
   "repository": {
     "type": "git",

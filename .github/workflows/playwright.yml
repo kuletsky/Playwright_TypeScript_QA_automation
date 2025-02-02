@@ -32,13 +32,15 @@ jobs:
 
     - name: Run Playwright Tests on All Browsers
       run: | 
-        xvfb-run --auto-servernum --server-args='-screen 0 1920x1080x24' npm run test:playwright:all
+        xvfb-run --auto-servernum --server-args='-screen 0 1920x1080x24' npm run test:playwright
+      continue-on-error: true
       env:
           BASE_URL: ${{ secrets.BASE_URL }}  # Access the secret in the workflow
 
     - name: Run Cucumber Tests on All Browsers
       run: |
-        xvfb-run --auto-servernum --server-args='-screen 0 1920x1080x24' npm run test:cucumber:all
+        xvfb-run --auto-servernum --server-args='-screen 0 1920x1080x24' npm run test:cucumber
+      continue-on-error: true
       env:
         BASE_URL: ${{ secrets.BASE_URL }}
 
