@@ -32,6 +32,8 @@ module.exports = defineConfig({
     navigationTimeout: 15000, // 15 seconds for navigation
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'retain-on-failure',
+    video: 'retain-on-failure',
+    screenshot: 'on',
     // trace: 'on',
     browserName: 'chromium',
     headless: process.env.CI ? true : true, // Use headed mode in CI
@@ -43,7 +45,7 @@ module.exports = defineConfig({
     },
 
   },
-  
+
   /* Global visual comparison settings for toHaveScreenshot */
   expect: {
     toHaveScreenshot: {
