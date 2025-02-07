@@ -18,39 +18,58 @@ pipeline {
             steps {
                 sh '''
                     export NVM_DIR="$HOME/.nvm"
-                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-                    nvm use lts/* || nvm install lts/*
+                    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+                    nvm install --lts
+                    nvm use --lts
+                    node -v
+                    npm -v
                 '''
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm ci'
+                sh '''
+                    export NVM_DIR="$HOME/.nvm"
+                    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+                    npm ci
+                '''
             }
         }
 
         stage('Install Playwright Browsers') {
             steps {
-                sh 'npx playwright install --with-deps'
+                sh '''
+                    export NVM_DIR="$HOME/.nvm"
+                    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+                    npx playwright install --with-deps
+                '''
             }
         }
 
         stage('Install xvfb (Headless Display)') {
             steps {
-                sh 'sudo apt-get install xvfb'
+                sh 'sudo apt-get install xvfb -y'
             }
         }
 
         stage('Run Playwright Tests') {
             steps {
-                sh 'xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" npm run test:playwright'
+                sh '''
+                    export NVM_DIR="$HOME/.nvm"
+                    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+                    xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" npm run test:playwright
+                '''
             }
         }
 
         stage('Run Cucumber Tests') {
             steps {
-                sh 'xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" npm run test:cucumber'
+                sh '''
+                    export NVM_DIR="$HOME/.nvm"
+                    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+                    xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" npm run test:cucumber
+                '''
             }
         }
 
