@@ -16,7 +16,11 @@ pipeline {
 
         stage('Setup Node.js') {
             steps {
-                sh 'nvm use lts/* || nvm install lts/*' // Using Node.js LTS version
+                sh '''
+                    export NVM_DIR="$HOME/.nvm"
+                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                    nvm use lts/* || nvm install lts/*
+                '''
             }
         }
 
