@@ -32,7 +32,7 @@ pipeline {
             steps {
                 sh '''
                     export NVM_DIR="$HOME/.nvm"
-                    [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                     npm ci
                 '''
             }
@@ -42,7 +42,7 @@ pipeline {
             steps {
                 sh '''
                     export NVM_DIR="$HOME/.nvm"
-                    [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                     npx playwright install --with-deps
                 '''
             }
@@ -58,7 +58,7 @@ pipeline {
             steps {
                 sh '''
                     export NVM_DIR="$HOME/.nvm"
-                    [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                     xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" npm run test:playwright
                 '''
             }
@@ -68,7 +68,7 @@ pipeline {
             steps {
                 sh '''
                     export NVM_DIR="$HOME/.nvm"
-                    [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                     xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" npm run test:cucumber
                 '''
             }
