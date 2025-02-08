@@ -46,9 +46,11 @@ pipeline {
                     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                     
                     # Ensure required system dependencies are installed
+                    sudo apt-get update
+                    sudo apt-get install -y libx11-xcb1 libxcomposite1 libxrandr2 libgbm-dev libnss3 libatk-bridge2.0-0 libatk1.0-0 libxss1 libgtk-3-0
 
                     # Install Playwright dependencies
-                    npx playwright install --with-deps
+                    sudo npx playwright install --with-deps
                 '''
             }
         }
