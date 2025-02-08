@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         BASE_URL = credentials('BASE_URL')  // Use Jenkins credentials for secrets
-        NVM_DIR = "$HOME/.nvm"
+        NVM_DIR = "/var/lib/jenkins/.nvm"  // Ensure it's the correct Jenkins home directory
     }
 
     stages {
@@ -18,8 +18,8 @@ pipeline {
         stage('Setup Node.js') {
             steps {
                 sh '''
-                    export NVM_DIR="$HOME/.nvm"
-                    [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+                    export NVM_DIR="/var/lib/jenkins/.nvm"
+                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                     nvm install --lts
                     nvm use --lts
                     node -v
@@ -31,8 +31,8 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh '''
-                    export NVM_DIR="$HOME/.nvm"
-                    [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+                    export NVM_DIR="/var/lib/jenkins/.nvm"
+                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                     npm ci
                 '''
             }
@@ -41,8 +41,8 @@ pipeline {
         stage('Install Playwright Browsers') {
             steps {
                 sh '''
-                    export NVM_DIR="$HOME/.nvm"
-                    [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+                    export NVM_DIR="/var/lib/jenkins/.nvm"
+                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                     npx playwright install
                 '''
             }
@@ -51,8 +51,8 @@ pipeline {
         stage('Run Playwright Tests') {
             steps {
                 sh '''
-                    export NVM_DIR="$HOME/.nvm"
-                    [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+                    export NVM_DIR="/var/lib/jenkins/.nvm"
+                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                     xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" npm run test:playwright
                 '''
             }
@@ -61,8 +61,8 @@ pipeline {
         stage('Run Cucumber Tests') {
             steps {
                 sh '''
-                    export NVM_DIR="$HOME/.nvm"
-                    [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+                    export NVM_DIR="/var/lib/jenkins/.nvm"
+                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                     xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" npm run test:cucumber
                 '''
             }
