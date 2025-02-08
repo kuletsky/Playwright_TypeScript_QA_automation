@@ -55,15 +55,15 @@ pipeline {
             }
         }
 
-        stage('Install Xvfb (Headless Display)') {
-            steps {
-                sh '''
-                    sudo apt-get update
-                    sudo apt-get install -y xvfb
-                    which xvfb-run  # Verify that xvfb-run is installed
-                '''
-            }
-        }
+        // stage('Install Xvfb (Headless Display)') {
+        //     steps {
+        //         sh '''
+        //             sudo apt-get update
+        //             sudo apt-get install -y xvfb
+        //             which xvfb-run  # Verify that xvfb-run is installed
+        //         '''
+        //     }
+        // }
 
         stage('Run Playwright Tests') {
             steps {
@@ -74,7 +74,7 @@ pipeline {
                     # Verify Xvfb is available
                     which xvfb-run || { echo "Error: xvfb-run not found"; exit 1; }
 
-                    xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" npm run test:playwright
+                    npm run test:playwright
                 '''
             }
         }
@@ -85,7 +85,7 @@ pipeline {
                     export NVM_DIR="/var/lib/jenkins/.nvm"
                     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
-                    xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" npm run test:cucumber
+                    npm run test:cucumber
                 '''
             }
         }
