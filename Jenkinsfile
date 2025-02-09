@@ -55,15 +55,15 @@ pipeline {
             }
         }
 
-        // stage('Install Xvfb (Headless Display)') {
-        //     steps {
-        //         sh '''
-        //             sudo apt-get update
-        //             sudo apt-get install -y xvfb
-        //             which xvfb-run  # Verify that xvfb-run is installed
-        //         '''
-        //     }
-        // }
+        stage('Install Xvfb (Headless Display)') {
+            steps {
+                sh '''
+                    sudo apt-get update
+                    sudo apt-get install -y xvfb
+                    which xvfb-run  # Verify that xvfb-run is installed
+                '''
+            }
+        }
 
         stage('Run Playwright Tests') {
             steps {
