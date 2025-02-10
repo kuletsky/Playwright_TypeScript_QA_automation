@@ -19,13 +19,13 @@ jobs:
           scriptType: 'pscore'
           scriptLocation: 'inlineScript'
           inlineScript: |
-            npx playwright test --config=playwright.service.config.js --workers=3          
+            npx playwright test          
           addSpnToEnvironment: true
           
  
       - task: PublishPipelineArtifact@1
         displayName: Upload Playwright report
         inputs:
-          targetPath: tests/playwright-report/ # update accordingly
+          targetPath: playwright-report
           artifact: 'Playwright tests'
           publishLocation: 'pipeline'
