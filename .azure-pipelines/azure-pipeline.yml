@@ -19,7 +19,7 @@ jobs:
           scriptType: 'pscore'
           scriptLocation: 'inlineScript'
           inlineScript: |
-            npx playwright test --project=all         
+            npm run test:playwright         
           addSpnToEnvironment: true
           
  
