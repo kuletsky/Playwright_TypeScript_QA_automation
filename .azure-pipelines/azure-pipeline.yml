@@ -9,6 +9,9 @@ jobs:
           script: 'npm ci'
           workingDirectory: tests/ # update accordingly
  
+      - script: npx playwright install --with-deps
+        displayName: "Install Playwright Browsers"
+ 
       - task: AzureCLI@2
         displayName: Run Playwright Test
         env:
