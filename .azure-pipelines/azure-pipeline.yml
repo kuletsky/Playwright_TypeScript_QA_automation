@@ -13,7 +13,7 @@ jobs:
         displayName: "Install Playwright Browsers"
  
       - task: AzureCLI@2
-        displayName: Run Playwright Test
+        displayName: Run Playwright Tests on All Browsers
         env:
           PLAYWRIGHT_SERVICE_URL: $(PLAYWRIGHT_SERVICE_URL)
           PLAYWRIGHT_SERVICE_RUN_ID: $(Build.DefinitionName) - $(Build.BuildNumber) - $(System.JobAttempt)
@@ -22,13 +22,18 @@ jobs:
           scriptType: 'pscore'
           scriptLocation: 'inlineScript'
           inlineScript: |
-            npm run test:playwright         
+            npm run test:playwright:all         
           addSpnToEnvironment: true
+
+      - script: |
+          npm run test:cucumber:all
+        displayName: "Run Cucumber Tests on All Browsers"
+        continueOnError: true
           
  
       - task: PublishPipelineArtifact@1
         displayName: Upload Playwright report
         inputs:
-          targetPath: playwright-report
+          targetPath: test/playwright-report
           artifact: 'Playwright tests'
           publishLocation: 'pipeline'
