@@ -34,6 +34,14 @@ jobs:
       - task: PublishPipelineArtifact@1
         displayName: Upload Playwright report
         inputs:
-          targetPath: test/playwright-report
+          targetPath: playwright-report
           artifact: 'Playwright tests'
+          publishLocation: 'pipeline'
+
+      - task: PublishPipelineArtifact@1
+        displayName: Upload Cucumber Report
+        condition: succeededOrFailed() # Ensures upload even if tests fail
+        inputs:
+          targetPath: cucumber-report.html
+          artifact: 'Cucumber Report'
           publishLocation: 'pipeline'
